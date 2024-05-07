@@ -129,7 +129,7 @@ const technologies: Technology[] = [
   },
 ];
 
-interface Experience {
+export interface Experience {
   title: string;
   company_name: string;
   icon: string;
