@@ -3,8 +3,8 @@ import { motion } from "framer-motion";
 import { styles } from "../styles";
 import { staggerContainer } from "../motion";
 
-const SectionWrapper: React.FC = (Component: React.FC, idName: string) => {
-  function HOC() {
+const SectionWrapper = (Component: React.FC, idName: string) => {
+  const HOC: React.FC = () => {
     return (
       <motion.section
         variants={staggerContainer()}
@@ -18,7 +18,7 @@ const SectionWrapper: React.FC = (Component: React.FC, idName: string) => {
         <Component />
       </motion.section>
     );
-  }
+  };
 
   return HOC;
 };
