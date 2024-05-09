@@ -20,11 +20,13 @@ const App: FC = () => {
           <Navbar />
           <Hero />
         </div>
-        <About />
-        <Experience />
-        <Tech />
-        <Works />
-        <Feedbacks />
+        <div>
+          <About />
+          <Experience />
+          <Tech />
+          <Works />
+          <Feedbacks />
+        </div>
         <div className="relative z-0">
           <Contact />
           <StarsCanvas />
