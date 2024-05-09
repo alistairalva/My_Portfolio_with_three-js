@@ -227,7 +227,7 @@ const testimonials: Testimonial[] = [
   },
 ];
 
-interface Project {
+export interface Project {
   name: string;
   description: string;
   tags: { name: string; color: string }[];
