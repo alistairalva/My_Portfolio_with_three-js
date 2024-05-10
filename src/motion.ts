@@ -1,6 +1,6 @@
 type Direction = "left" | "right" | "up" | "down" | "";
 type TransitionType = "spring" | "tween" | "inertia" | "";
-export const textVariant = (delay: number) => {
+export const textVariant = (delay?: number) => {
   return {
     hidden: {
       y: -50,

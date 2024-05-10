@@ -192,7 +192,7 @@ const experiences: Experience[] = [
   },
 ];
 
-interface Testimonial {
+export interface Testimonial {
   testimonial: string;
   name: string;
   designation: string;
