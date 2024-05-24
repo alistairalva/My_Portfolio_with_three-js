@@ -51,7 +51,11 @@ const Feedbacks: React.FC = () => {
       </div>
       <div className={`${styles.padding} -mt-20 pb-14 flex flex-wrap gap-7`}>
         {testimonials.map((testimonial, index) => (
-          <FeedbackCard index={index} testimonial={testimonial} />
+          <FeedbackCard
+            key={testimonial.name}
+            index={index}
+            testimonial={testimonial}
+          />
         ))}
       </div>
     </div>

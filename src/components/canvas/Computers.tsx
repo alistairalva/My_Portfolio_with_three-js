@@ -1,6 +1,6 @@
 import { Suspense, useState, useEffect, FC } from "react";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, useGLTF } from "@react-three/drei";
+import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 
 import CanvasLoader from "../Loader";
@@ -26,7 +26,7 @@ const Computers: FC<ComputersProps> = ({ isMobile }) => {
       />
       <primitive
         object={computer.scene}
-        scale={isMobile ? 0.5 : 0.75}
+        scale={isMobile ? 0.5 : 0.65}
         position={isMobile ? [0, -3.5, -2.0] : [0, -3.25, -1.5]}
         rotation={[-0.01, -0.02, -0.1]}
       />
@@ -64,7 +64,7 @@ const ComputersCanvas: FC = () => {
           maxPolarAngle={Math.PI / 2}
           minPolarAngle={Math.PI / 2}
         />
-        {/* <Preload all /> */}
+        <Preload all />
         <Computers isMobile={isMobile} />
       </Suspense>
     </Canvas>

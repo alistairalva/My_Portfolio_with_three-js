@@ -5,7 +5,7 @@ import ComputersCanvas from "./canvas/Computers";
 
 const Hero: React.FC = () => {
   return (
-    <section className="relative w-full h-screen mx-auto">
+    <section className={`relative w-full h-screen mx-auto`}>
       <div
         className={`${styles.paddingX} absolute inset-0 top-[120px] max-w-7xl mx-auto flex 
         flex-row items-start gap-5`}
@@ -21,14 +21,12 @@ const Hero: React.FC = () => {
             <span className="text-[#915eff]"> Alistair</span>
           </h1>
           <p className={`${styles.heroSubText} mt-2 text-white-100`}>
-            I am a full stack developer that specializes in backend development
-            for web, mobile, and desktop apps. I create software with a
-            pragmatic approach, focusing on performance and user experience.
+            I am a full stack developer <br className="sm:block hidden" />
           </p>
         </div>
       </div>
       <ComputersCanvas />
-      <div className="absolute xs:bottom-10 bottom032 w-full  flex justify-center items-center">
+      <div className="absolute xs:bottom-10 bottom-32 w-full  flex justify-center items-center">
         <a href="#about">
           <div className="w-[35px] h-[64px] rounded-3xl border-4 border-secondary flex justify-center iems-start p-2">
             <motion.div

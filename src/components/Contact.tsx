@@ -1,11 +1,11 @@
 import React, { useState, useRef } from "react";
 import { motion } from "framer-motion";
-import email from "@emailjs/browser";
-
+// import email from "@emailjs/browser";
 import { styles } from "../styles";
 import { EarthCanvas } from "./canvas";
 import { SectionWrapper } from "../hoc";
 import { slideIn } from "../motion";
+// import Earth from "./canvas/Earth";
 
 const Contact: React.FC = () => {
   const formRef = useRef<HTMLFormElement>(null);
@@ -17,7 +17,9 @@ const Contact: React.FC = () => {
   });
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
@@ -97,7 +99,12 @@ const Contact: React.FC = () => {
           </button>
         </form>
       </motion.div>
-      <motion.div variants={slideIn("left", "tween", 0.2, 0.1)}></motion.div>
+      <motion.div
+        variants={slideIn("left", "tween", 0.2, 0.1)}
+        className="xl:flex-1 xl:h-auto md:h-[550px] h-[350px]"
+      >
+        <EarthCanvas />
+      </motion.div>
     </div>
   );
 };
