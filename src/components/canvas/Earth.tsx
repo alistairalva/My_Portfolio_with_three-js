@@ -1,31 +1,61 @@
-import React, { Suspense, FC } from "react";
+import { Suspense, useState, useEffect, FC } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 
 import CanvasLoader from "../Loader";
 
-const Earth: FC = () => {
+type EarthProps = {
+  isMobile: boolean;
+};
+
+const Earth: FC<EarthProps> = ({ isMobile }) => {
   const earth: GLTF = useGLTF("./planet/scene.gltf");
 
   return (
-    <primitive object={earth.scene} scale={2.5} position-y={0} rotation={0} />
+    <mesh>
+      <hemisphereLight intensity={1} groundColor="black" />
+      <pointLight intensity={1} />
+      <spotLight
+        position={[-20, -50, 10]}
+        angle={0.12}
+        penumbra={1}
+        intensity={1}
+        castShadow
+        shadow-mapSize={1024}
+      />
+      <primitive
+        object={earth.scene}
+        scale={isMobile ? 1.5 : 2.5}
+        position-y={0}
+        rotation-y={0}
+      />
+    </mesh>
   );
 };
 
-const EarthCanvas: React.FC = () => {
+const EarthCanvas: FC = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 500px)");
+    setIsMobile(mediaQuery.matches);
+
+    const handleMediaQueryChange = (e: MediaQueryListEvent) => {
+      setIsMobile(e.matches);
+    };
+    mediaQuery.addEventListener("change", handleMediaQueryChange);
+
+    return () => {
+      mediaQuery.removeEventListener("change", handleMediaQueryChange);
+    };
+  }, []);
   return (
     <Canvas
-      shadows
       frameloop="demand"
+      camera={{ position: [-4, 3, 6], fov: 45, near: 0.1, far: 200 }}
       dpr={[1, 2]}
       gl={{ preserveDrawingBuffer: true }}
-      camera={{
-        fov: 45,
-        near: 0.1,
-        far: 200,
-        position: [-4, 3, 6],
-      }}
     >
       <Suspense fallback={<CanvasLoader />}>
         <OrbitControls
@@ -35,7 +65,7 @@ const EarthCanvas: React.FC = () => {
           minPolarAngle={Math.PI / 2}
         />
         <Preload all />
-        <Earth />
+        <Earth isMobile={isMobile} />
       </Suspense>
     </Canvas>
   );
