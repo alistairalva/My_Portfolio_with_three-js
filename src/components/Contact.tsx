@@ -1,11 +1,11 @@
 import React, { useState, useRef } from "react";
 import { motion } from "framer-motion";
-// import email from "@emailjs/browser";
+import email from "@emailjs/browser";
 import { styles } from "../styles";
 import { EarthCanvas } from "./canvas";
 import { SectionWrapper } from "../hoc";
 import { slideIn } from "../motion";
-// import Earth from "./canvas/Earth";
+import Earth from "./canvas/Earth";
 
 const Contact: React.FC = () => {
   const formRef = useRef<HTMLFormElement>(null);
