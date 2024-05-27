@@ -5,14 +5,13 @@ import { styles } from "../styles";
 import { EarthCanvas } from "./canvas";
 import { SectionWrapper } from "../hoc";
 import { slideIn } from "../motion";
-import Earth from "./canvas/Earth";
 
 const Contact: React.FC = () => {
   const formRef = useRef<HTMLFormElement>(null);
 
   const [form, setForm] = useState({
-    name: "",
-    email: "",
+    user_name: "",
+    user_email: "",
     message: "",
   });
   const [loading, setLoading] = useState(false);
@@ -26,23 +25,24 @@ const Contact: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
+    console.log(import.meta.env.VITE_APP_EMAILJS_SERVICE_ID);
+    try {
+      await email.sendForm(
+        import.meta.env.VITE_APP_EMAILJS_SERVICE_ID!,
+        import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID!,
+        formRef.current!,
+        import.meta.env.VITE_APP_EMAILJS_PUBLIC_API_KEY!
+      );
 
-    // try {
-    //   await email.send(
-    //     process.env.REACT_APP_EMAIL_SERVICE_ID!,
-    //     process.env.REACT_APP_EMAIL_TEMPLATE_ID!,
-    //     form,
-    //     process.env.REACT_APP_EMAIL_USER_ID!
-    //   );
-
-    //   setForm({ name: "", email: "", message: "" });
-    //   formRef.current?.reset();
-    //   alert("Message sent successfully!");
-    // } catch (error) {
-    //   alert("Failed to send message. Please try again later.");
-    // } finally {
-    //   setLoading(false);
-    // }
+      setForm({ user_name: "", user_email: "", message: "" });
+      formRef.current?.reset();
+      alert("Thank you, I will get back to you as soon as possible");
+    } catch (error) {
+      alert("Failed to send message. Please try again later.");
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   };
   return (
     <div className="xl:mt-12 xl:flex-row flex-col-reverse flex gap-10 overflow-hidden">
@@ -62,8 +62,8 @@ const Contact: React.FC = () => {
             <span className="text-white font-medium mb-4">Your Name</span>
             <input
               type="text"
-              name="name"
-              value={form.name}
+              name="user_name"
+              value={form.user_name}
               onChange={handleChange}
               placeholder="What's your name?"
               className="bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outlined-none border-none"
@@ -73,8 +73,8 @@ const Contact: React.FC = () => {
             <span className="text-white font-medium mb-4">Your Email</span>
             <input
               type="email"
-              name="email"
-              value={form.email}
+              name="user_email"
+              value={form.user_email}
               onChange={handleChange}
               placeholder="What's your email?"
               className="bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outlined-none border-none"
