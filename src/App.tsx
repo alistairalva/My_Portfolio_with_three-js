@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { BrowserRouter } from "react-router-dom";
 
 import {
@@ -12,6 +12,7 @@ import {
   Works,
   StarsCanvas,
 } from "./components";
+import { ToastContainer } from "react-toastify";
 const App: FC = () => {
   return (
     <BrowserRouter>
@@ -32,6 +33,7 @@ const App: FC = () => {
           <StarsCanvas />
         </div>
       </div>
+      <ToastContainer />
     </BrowserRouter>
   );
 };

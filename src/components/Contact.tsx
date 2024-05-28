@@ -1,10 +1,13 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
+import { toast } from "react-toastify";
 import email from "@emailjs/browser";
 import { styles } from "../styles";
 import { EarthCanvas } from "./canvas";
 import { SectionWrapper } from "../hoc";
 import { slideIn } from "../motion";
+
+import "react-toastify/dist/ReactToastify.css";
 
 const Contact: React.FC = () => {
   const formRef = useRef<HTMLFormElement>(null);
@@ -14,7 +17,43 @@ const Contact: React.FC = () => {
     user_email: "",
     message: "",
   });
+
   const [loading, setLoading] = useState(false);
+  const [alertText, setAlertText] = useState<string>("");
+
+  useEffect(() => {
+    switch (alertText) {
+      case "Please fill out all fields":
+        toast.error(alertText);
+        break;
+      case "Thank you, I will get back to you as soon as possible":
+        toast.success(alertText, {
+          position: "bottom-left",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+        break;
+      case "Failed to send message. Please try again later.":
+        toast.error(alertText, {
+          position: "bottom-left",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+        break;
+      default:
+        break;
+    }
+  }, [alertText]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -24,8 +63,12 @@ const Contact: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!form.user_name || !form.user_email || !form.message) {
+      setAlertText("Please fill out all fields");
+      setLoading(false);
+      return;
+    }
     setLoading(true);
-    console.log(import.meta.env.VITE_APP_EMAILJS_SERVICE_ID);
     try {
       await email.sendForm(
         import.meta.env.VITE_APP_EMAILJS_SERVICE_ID!,
@@ -36,9 +79,9 @@ const Contact: React.FC = () => {
 
       setForm({ user_name: "", user_email: "", message: "" });
       formRef.current?.reset();
-      alert("Thank you, I will get back to you as soon as possible");
+      setAlertText("Thank you, I will get back to you as soon as possible");
     } catch (error) {
-      alert("Failed to send message. Please try again later.");
+      setAlertText("Failed to send message. Please try again later.");
       console.log(error);
     } finally {
       setLoading(false);
