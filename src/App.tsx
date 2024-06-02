@@ -13,10 +13,13 @@ import {
 } from "./components";
 import { ToastContainer } from "react-toastify";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 const App: FC = () => {
   return (
     <BrowserRouter>
       <Analytics />
+      <SpeedInsights />
+
       <div className="relative z-0 bg-primary">
         <div className="bg-hero-pattern bg-cover bg-no-repeat bg-center">
           <Navbar />
