@@ -221,7 +221,7 @@ const projects: Project[] = [
   {
     name: "Restaurant Site Builder",
     description:
-      "Online platform to allow small restaurants, to build, launch and customize their website for free. Hosting is handled by us.Currently made private due to a security vulnerability.",
+      "Online platform to allow small restaurants, to build, launch and customize their website for free. Hosting is handled by us. Currently made private due to a security vulnerability.",
     tags: [
       {
         name: "ejs",
@@ -242,7 +242,7 @@ const projects: Project[] = [
   {
     name: "Dynamic Youtube data visualizer",
     description:
-      "A set of interactive charts using d3,js to visualize raw youtube data. Data is loadied from a CSV file. Currently under revision",
+      "A set of interactive charts using d3,js to visualize raw youtube data. Data is loaded from a CSV file. Currently under revision.",
     tags: [
       {
         name: "vanillajs",
