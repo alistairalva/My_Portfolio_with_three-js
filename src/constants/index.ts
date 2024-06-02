@@ -140,7 +140,7 @@ const experiences: Experience[] = [
     company_name: "GoodLife Fitness",
     icon: goodLife,
     iconBg: "#383E56",
-    date: "May 2024 - August 2024",
+    date: "May 2023 - August 2023",
     points: [
       "Responsible for re-architecting existing backend RESTful APIs to streamline the organizations microservice architecture.",
       "Part of the team that managed to save over $10,000 per month in cloud compute costs by redesigning existing services to be more efficient and deprecating unnecessary ones.",
