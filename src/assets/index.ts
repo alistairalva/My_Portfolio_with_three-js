@@ -7,28 +7,29 @@ import github from "./github.png";
 import menu from "./menu.svg";
 import close from "./close.svg";
 
-import css from "./tech/css.png";
+import linux from "./tech/linux.png";
 import docker from "./tech/docker.png";
-import figma from "./tech/figma.png";
 import git from "./tech/git.png";
-import html from "./tech/html.png";
+import azure from "./tech/azure.png";
 import javascript from "./tech/javascript.png";
-import mongodb from "./tech/mongodb.png";
+import firebase from "./tech/firebase.png";
 import nodejs from "./tech/nodejs.png";
 import reactjs from "./tech/reactjs.png";
-import redux from "./tech/redux.png";
+import java from "./tech/java.png";
+import dotnet from "./tech/dotnet.png";
 import tailwind from "./tech/tailwind.png";
 import typescript from "./tech/typescript.png";
-import threejs from "./tech/threejs.svg";
+import csharp from "./tech/c_sharp.png";
 
 import meta from "./company/meta.png";
 import shopify from "./company/shopify.png";
 import starbucks from "./company/starbucks.png";
+import goodLife from "./company/goodLife.png";
 import tesla from "./company/tesla.png";
 
-import carrent from "./carrent.png";
-import jobit from "./jobit.png";
-import tripguide from "./tripguide.png";
+import emergencyapp from "./emergencyapp.png";
+import restaurant from "./restaurant.png";
+import youtubecharts from "./youtubecharts.png";
 
 export {
   logo,
@@ -39,24 +40,25 @@ export {
   github,
   menu,
   close,
-  css,
+  linux,
   docker,
-  figma,
+  dotnet,
   git,
-  html,
+  azure,
   javascript,
-  mongodb,
+  firebase,
   nodejs,
   reactjs,
-  redux,
+  java,
   tailwind,
   typescript,
-  threejs,
+  csharp,
   meta,
   shopify,
   starbucks,
+  goodLife,
   tesla,
-  carrent,
-  jobit,
-  tripguide,
+  emergencyapp,
+  restaurant,
+  youtubecharts,
 };

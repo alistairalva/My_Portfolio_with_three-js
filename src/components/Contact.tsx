@@ -64,10 +64,12 @@ const Contact: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!form.user_name || !form.user_email || !form.message) {
-      setAlertText("Please fill out all fields");
+      setAlertText("");
+      setTimeout(() => setAlertText("Please fill out all fields"), 0);
       setLoading(false);
       return;
     }
+
     setLoading(true);
     try {
       await email.sendForm(

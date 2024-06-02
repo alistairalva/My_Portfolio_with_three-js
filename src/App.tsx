@@ -5,7 +5,6 @@ import {
   About,
   Contact,
   Experience,
-  Feedbacks,
   Hero,
   Navbar,
   Tech,
@@ -26,7 +25,7 @@ const App: FC = () => {
           <Experience />
           <Tech />
           <Works />
-          <Feedbacks />
+          {/* <Feedbacks /> */}
         </div>
         <div className="relative z-0">
           <Contact />

@@ -16,17 +16,9 @@ interface BallProps {
 
 const Ball: React.FC<BallProps> = ({ imgUrl }) => {
   const [decal] = useTexture([imgUrl]);
-  // const meshRef = useRef<MeshProps>(null!);
-
-  // useFrame(() => {
-  //   if (meshRef.current) {
-  //     meshRef.current.rotation.y += 0.01;
-  //     meshRef.current.rotation.x += 0.01;
-  //   }
-  // });
   return (
     <Float speed={1.75} rotationIntensity={1} floatIntensity={1}>
-      <ambientLight intensity={0.25} />
+      <ambientLight intensity={0.2} />
       <directionalLight position={[0, 0, 0.05]} />
       <mesh castShadow receiveShadow scale={2.75}>
         <icosahedronGeometry args={[1, 1]} />

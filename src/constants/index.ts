@@ -5,24 +5,21 @@ import {
   web,
   javascript,
   typescript,
-  html,
-  css,
+  azure,
+  linux,
   reactjs,
-  redux,
+  java,
   tailwind,
+  dotnet,
   nodejs,
-  mongodb,
+  firebase,
   git,
-  figma,
   docker,
-  meta,
-  starbucks,
-  tesla,
-  shopify,
-  carrent,
-  jobit,
-  tripguide,
-  threejs,
+  goodLife,
+  emergencyapp,
+  restaurant,
+  youtubecharts,
+  csharp,
 } from "../assets";
 
 interface NavLink {
@@ -52,19 +49,19 @@ interface ServiceLink {
 
 const services: ServiceLink[] = [
   {
-    title: "Web Developer",
+    title: "Web Development",
     icon: web,
   },
   {
-    title: "React Native Developer",
+    title: "Mobile Development",
     icon: mobile,
   },
   {
-    title: "Backend Developer",
+    title: "Backend Development",
     icon: backend,
   },
   {
-    title: "Content Creator",
+    title: "Graphic Design",
     icon: creator,
   },
 ];
@@ -76,16 +73,20 @@ interface Technology {
 
 const technologies: Technology[] = [
   {
-    name: "HTML 5",
-    icon: html,
+    name: "Linux",
+    icon: linux,
   },
   {
-    name: "CSS 3",
-    icon: css,
+    name: "Azure",
+    icon: azure,
   },
   {
     name: "JavaScript",
     icon: javascript,
+  },
+  {
+    name: "Java",
+    icon: java,
   },
   {
     name: "TypeScript",
@@ -96,8 +97,8 @@ const technologies: Technology[] = [
     icon: reactjs,
   },
   {
-    name: "Redux Toolkit",
-    icon: redux,
+    name: ".NET",
+    icon: dotnet,
   },
   {
     name: "Tailwind CSS",
@@ -108,20 +109,16 @@ const technologies: Technology[] = [
     icon: nodejs,
   },
   {
-    name: "MongoDB",
-    icon: mongodb,
+    name: "Firebase",
+    icon: firebase,
   },
   {
-    name: "Three JS",
-    icon: threejs,
+    name: "C Sharp",
+    icon: csharp,
   },
   {
     name: "git",
     icon: git,
-  },
-  {
-    name: "figma",
-    icon: figma,
   },
   {
     name: "docker",
@@ -139,55 +136,18 @@ export interface Experience {
 }
 const experiences: Experience[] = [
   {
-    title: "React.js Developer",
-    company_name: "Starbucks",
-    icon: starbucks,
+    title: "Software Developer",
+    company_name: "GoodLife Fitness",
+    icon: goodLife,
     iconBg: "#383E56",
-    date: "March 2020 - April 2021",
+    date: "May 2024 - August 2024",
     points: [
-      "Developing and maintaining web applications using React.js and other related technologies.",
-      "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-      "Implementing responsive design and ensuring cross-browser compatibility.",
-      "Participating in code reviews and providing constructive feedback to other developers.",
-    ],
-  },
-  {
-    title: "React Native Developer",
-    company_name: "Tesla",
-    icon: tesla,
-    iconBg: "#E6DEDD",
-    date: "Jan 2021 - Feb 2022",
-    points: [
-      "Developing and maintaining web applications using React.js and other related technologies.",
-      "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-      "Implementing responsive design and ensuring cross-browser compatibility.",
-      "Participating in code reviews and providing constructive feedback to other developers.",
-    ],
-  },
-  {
-    title: "Web Developer",
-    company_name: "Shopify",
-    icon: shopify,
-    iconBg: "#383E56",
-    date: "Jan 2022 - Jan 2023",
-    points: [
-      "Developing and maintaining web applications using React.js and other related technologies.",
-      "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-      "Implementing responsive design and ensuring cross-browser compatibility.",
-      "Participating in code reviews and providing constructive feedback to other developers.",
-    ],
-  },
-  {
-    title: "Full stack Developer",
-    company_name: "Meta",
-    icon: meta,
-    iconBg: "#E6DEDD",
-    date: "Jan 2023 - Present",
-    points: [
-      "Developing and maintaining web applications using React.js and other related technologies.",
-      "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-      "Implementing responsive design and ensuring cross-browser compatibility.",
-      "Participating in code reviews and providing constructive feedback to other developers.",
+      "Responsible for re-architecting existing backend RESTful APIs to streamline the organizations microservice architecture.",
+      "Part of the team that managed to save over $10,000 per month in cloud compute costs by redesigning existing services to be more efficient and deprecating unnecessary ones.",
+      "Managed to achieve a 40% improvement API performance and reduce unnecessary data fetching by 50% from external dependent services.",
+      "Leveraged techniques such as OOP, Dependency Injection, multi-layer abstraction, writing robust tests using XUnit and Moq & integrated logging and monitoring to create software that can easily be maintained and supported by future teams.",
+      "Created confluence documentation with visual diagrams to act as a containerized source for information for the team.",
+      "Participated in daily agile ceremonies such as stand ups, retrospectives, sprint planning, etc.",
     ],
   },
 ];
@@ -203,7 +163,7 @@ export interface Testimonial {
 const testimonials: Testimonial[] = [
   {
     testimonial:
-      "I thought it was impossible to make a website as beautiful as our product, but Rick proved me wrong.",
+      "I thought it was impossible to make a website as beautiful as our product, but Alistair proved me wrong.",
     name: "Sara Lee",
     designation: "CFO",
     company: "Acme Co",
@@ -211,7 +171,7 @@ const testimonials: Testimonial[] = [
   },
   {
     testimonial:
-      "I've never met a web developer who truly cares about their clients' success like Rick does.",
+      "I've never met a web developer who truly cares about their clients' success like Alistair does.",
     name: "Chris Brown",
     designation: "COO",
     company: "DEF Corp",
@@ -219,7 +179,7 @@ const testimonials: Testimonial[] = [
   },
   {
     testimonial:
-      "After Rick optimized our website, our traffic increased by 50%. We can't thank them enough!",
+      "After Alistair optimized our website, our traffic increased by 50%. We can't thank them enough!",
     name: "Lisa Wang",
     designation: "CTO",
     company: "456 Enterprises",
@@ -237,67 +197,69 @@ export interface Project {
 
 const projects: Project[] = [
   {
-    name: "Car Rent",
+    name: "Emergency Contact App",
     description:
-      "Web-based platform that allows users to search, book, and manage car rentals from various providers, providing a convenient and efficient solution for transportation needs.",
+      "A cross-platform mobile app to provide users with a reliable and efficient solution for sending emergency alerts to their selected contacts.",
     tags: [
       {
-        name: "react",
+        name: "react-native",
         color: "blue-text-gradient",
       },
       {
-        name: "mongodb",
+        name: "expo",
         color: "green-text-gradient",
       },
       {
-        name: "tailwind",
+        name: "firebase",
         color: "pink-text-gradient",
       },
     ],
-    image: carrent,
-    source_code_link: "https://github.com/",
+    image: emergencyapp,
+    source_code_link:
+      "https://github.com/alistairalva/Emergency_Contact_Application",
   },
   {
-    name: "Job IT",
+    name: "Restaurant Site Builder",
     description:
-      "Web application that enables users to search for job openings, view estimated salary ranges for positions, and locate available jobs based on their current location.",
+      "Online platform to allow small restaurants, to build, launch and customize their website for free. Hosting is handled by us.Currently made private due to a security vulnerability.",
     tags: [
       {
-        name: "react",
+        name: "ejs",
         color: "blue-text-gradient",
       },
       {
-        name: "restapi",
+        name: "nodejs",
         color: "green-text-gradient",
       },
       {
-        name: "scss",
+        name: "firebase",
         color: "pink-text-gradient",
       },
     ],
-    image: jobit,
-    source_code_link: "https://github.com/",
+    image: restaurant,
+    source_code_link: "https://github.com/alistairalva/ApplicationProject",
   },
   {
-    name: "Trip Guide",
+    name: "Dynamic Youtube data visualizer",
     description:
-      "A comprehensive travel booking platform that allows users to book flights, hotels, and rental cars, and offers curated recommendations for popular destinations.",
+      "A set of interactive charts using d3,js to visualize raw youtube data. Data is loadied from a CSV file. Currently under revision",
     tags: [
       {
-        name: "nextjs",
+        name: "vanillajs",
         color: "blue-text-gradient",
       },
       {
-        name: "supabase",
+        name: "d3.js",
         color: "green-text-gradient",
       },
       {
-        name: "css",
+        name: "html",
         color: "pink-text-gradient",
       },
     ],
-    image: tripguide,
-    source_code_link: "https://github.com/",
+    image: youtubecharts,
+    source_code_link:
+      "https://github.com/alistairalva/Data-Visualizations-For-Youtube-using-d3.js",
   },
 ];
 
