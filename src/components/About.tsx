@@ -51,7 +51,7 @@ const About: React.FC = () => {
       >
         I am a full stack developer that specializes in backend development for
         web, mobile, and desktop apps. I create software with a pragmatic
-        approach, focusing on performance and user experience. I am quick
+        approach, focusing on performance and user experience. I am a quick
         learner and I am always looking to learn new technologies and improve my
         skills. My current goal is to have a positive impact with my work and to
         be a part of a team that is passionate about creating great software. I
