@@ -10,13 +10,35 @@ const Navbar: React.FC = () => {
   const [toggle, setToggle] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
+  const sectionRefs = navLinks.reduce<{
+    [key: string]: React.RefObject<HTMLElement>;
+  }>((refs, link) => {
+    refs[link.id] = React.createRef();
+    return refs;
+  }, {});
+
   useEffect(() => {
     const handleScroll = () => {
-      const currentScroll = window.scrollY;
-      if (currentScroll > 100) {
+      const scrollTop = window.scrollY;
+      if (scrollTop > 100) {
         setScrolled(true);
       } else {
         setScrolled(false);
+      }
+
+      // Loop through each navLink
+      for (const link of navLinks) {
+        const ref = sectionRefs[link.id];
+
+        // If the section is in the viewport, update the active state
+        if (
+          ref.current && // Add null check here
+          ref.current.offsetTop <= scrollTop &&
+          ref.current.offsetTop + ref.current.offsetHeight > scrollTop
+        ) {
+          setActive(link.id);
+          break;
+        }
       }
     };
 
@@ -24,7 +46,7 @@ const Navbar: React.FC = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [sectionRefs]);
 
   return (
     <nav
@@ -47,22 +69,19 @@ const Navbar: React.FC = () => {
           </p>
         </Link>
         <ul className="list-none hidden sm:flex flex-row gap-10">
-          {navLinks.map((link) => (
-            <li key={link.id}>
-              <Link
-                to={`#${link.id}`}
-                className={`${active === link.id ? "text-white" : "text-secondary"} 
-                hover:text-white cursor-pointer text-[18px] font-medium`}
-                onClick={() => {
-                  setActive(link.id);
-                  window.scrollTo(0, 0);
-                }}
-              >
-                {link.title}
-              </Link>
+          {navLinks.map((nav) => (
+            <li
+              key={nav.id}
+              className={`${
+                active === nav.title ? "text-white" : "text-secondary"
+              } hover:text-white text-[18px] font-medium cursor-pointer`}
+              onClick={() => setActive(nav.title)}
+            >
+              <a href={`#${nav.id}`}>{nav.title}</a>
             </li>
           ))}
         </ul>
+
         <div className="sm:hidden flex flex-1 justify-end items-center">
           <img
             src={toggle ? close : menu}
@@ -81,9 +100,13 @@ const Navbar: React.FC = () => {
                   key={nav.id}
                   className={`${active === nav.title ? "text-white" : "text-secondary"} 
                 font-poppins font-medium cursor-pointer text-[16px]`}
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.preventDefault();
                     setToggle(!toggle);
                     setActive(nav.title);
+                    document
+                      .getElementById(nav.id)
+                      ?.scrollIntoView({ behavior: "smooth" });
                   }}
                 >
                   <a href={`${nav.id}`}>{nav.title}</a>
