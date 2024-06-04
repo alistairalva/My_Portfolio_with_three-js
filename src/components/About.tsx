@@ -54,10 +54,8 @@ const About: React.FC = () => {
         approach, focusing on performance and user experience. I am a quick
         learner and I am always looking to learn new technologies and improve my
         skills. My current goal is to have a positive impact with my work and to
-        be a part of a team that is passionate about creating great software. I
-        would love to lend my services for free to any non-profit/charity
-        organization that is in need of a software developer. Let's work
-        together!🚀
+        be a part of a team that is passionate about creating great software.
+        Let's work together!🚀
       </motion.p>
       <div className="mt-20 flex flex-wrap gap-10">
         {services.map((service, index) => (
