@@ -1,4 +1,4 @@
-import React, { useRef, Suspense } from "react";
+import React, { useRef, Suspense, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Points, PointMaterial, Preload } from "@react-three/drei";
 import * as random from "maath/random/dist/maath-random.esm";
@@ -10,12 +10,15 @@ interface StarsProps {
 
 const Stars: React.FC<StarsProps> = (props) => {
   const ref = useRef<THREE.Points>(null!);
-  const sphere = random.inSphere(new Float32Array(5000), { radius: 1.2 });
+  const [sphere] = useState(() =>
+    random.inSphere(new Float32Array(5000), { radius: 1.2 })
+  );
 
-  useFrame(({ clock }) => {
-    const delta = clock.getDelta();
-    ref.current.rotation.x += delta * 10;
-    ref.current.rotation.y += delta * 20;
+  useFrame((_, delta) => {
+    if (ref.current) {
+      ref.current.rotation.x -= delta / 10;
+      ref.current.rotation.y -= delta / 15;
+    }
   });
 
   return (
@@ -25,7 +28,7 @@ const Stars: React.FC<StarsProps> = (props) => {
           transparent
           color="#f272c8"
           size={0.002}
-          sizeAttentuation={true}
+          sizeAttenuation={true}
           depthWrite={false}
         />
       </Points>
