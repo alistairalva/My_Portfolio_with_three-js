@@ -24,7 +24,16 @@ const Contact: React.FC = () => {
   useEffect(() => {
     switch (alertText) {
       case "Please fill out all fields":
-        toast.error(alertText);
+        toast.warn(alertText, {
+          position: "bottom-left",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
         break;
       case "Thank you, I will get back to you as soon as possible":
         toast.success(alertText, {
