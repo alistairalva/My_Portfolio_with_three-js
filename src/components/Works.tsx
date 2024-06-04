@@ -1,7 +1,7 @@
 import React from "react";
 import { Tilt } from "react-tilt";
 import { styles } from "../styles";
-import { motion, useTransform, useScroll } from "framer-motion";
+import { motion } from "framer-motion";
 import { github } from "../assets";
 import { SectionWrapper } from "../hoc";
 import { projects } from "../constants";
