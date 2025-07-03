@@ -22,6 +22,7 @@ import typescript from "./tech/typescript.png";
 import csharp from "./tech/c_sharp.png";
 
 import goodLife from "./company/goodLife.png";
+import krachi_space from "./company/krachi_space.png";
 
 import emergencyapp from "./emergencyapp.png";
 import restaurant from "./restaurant.png";
@@ -50,6 +51,7 @@ export {
   typescript,
   csharp,
   goodLife,
+  krachi_space,
   emergencyapp,
   restaurant,
   youtubecharts,

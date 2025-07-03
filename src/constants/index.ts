@@ -16,6 +16,8 @@ import {
   git,
   docker,
   goodLife,
+  krachi_space,
+  logo,
   emergencyapp,
   restaurant,
   youtubecharts,
@@ -136,18 +138,58 @@ export interface Experience {
 }
 const experiences: Experience[] = [
   {
+    title: "Technology Consultant & Software Developer",
+    company_name: "Freelance",
+    icon: logo, // Replace with your actual icon variable
+    iconBg: "#1E2A38",
+    date: "July 2024 – Present",
+    points: [
+      "Provided end-to-end consulting for startups and small businesses in FinTech, education, and local services sectors.",
+      "Improved client productivity by 30% through sales funnel optimization, custom SOP design, and technical tooling.",
+      "Architected and delivered an MVP for a cross-border payments platform using Node.js, PostgreSQL, and React.",
+      "Led talent acquisition for roles including tech sales, software development, and operations management.",
+      "Connected small business founders with early-stage investors to support fundraising and product development.",
+    ],
+  },
+  {
+    title: "Backend Engineer (Volunteer)",
+    company_name: "Krachi Space Technologies",
+    icon: krachi_space, // Replace with your actual icon variable
+    iconBg: "#2E3A59",
+    date: "January 2024 – Present",
+    points: [
+      "Built and scaled a backend system for an AI-powered real estate matching platform using Node.js, TypeScript, and AWS Lambda.",
+      "Developed services that handled over 100,000 concurrent requests with sub-20ms latency using Redis and event-driven architecture.",
+      "Designed and implemented a custom authentication and authorization system using JWT and RBAC.",
+      "Collaborated with a fully remote team across time zones using GitHub, Trello, and Slack for coordination and code reviews.",
+    ],
+  },
+  {
+    title: "Computer Science Tutor",
+    company_name: "Freelance",
+    icon: logo, // Replace with your actual icon variable
+    iconBg: "#5A607F",
+    date: "November 2024 – Present",
+    points: [
+      "Provided one-on-one and small group tutoring to IGCSE, IB, and A-Level students in Python, databases, and algorithms.",
+      "Taught core software engineering principles including DRY, SOLID, and clean code practices.",
+      "Created an interactive digital curriculum using tools like Replit and Jupyter to improve student engagement.",
+      "Helped 90% of students improve their grades by one level or more within two months.",
+    ],
+  },
+  {
     title: "Software Developer",
     company_name: "GoodLife Fitness",
     icon: goodLife,
     iconBg: "#383E56",
-    date: "May 2023 - August 2023",
+    date: "May 2023 – August 2023",
     points: [
-      "Responsible for re-architecting existing backend RESTful APIs to streamline the organizations microservice architecture.",
-      "Part of the team that managed to save over $10,000 per month in cloud compute costs by redesigning existing services to be more efficient and deprecating unnecessary ones.",
-      "Managed to achieve a 40% improvement API performance and reduce unnecessary data fetching by 50% from external dependent services.",
-      "Leveraged techniques such as OOP, Dependency Injection, multi-layer abstraction, writing robust tests using XUnit and Moq & integrated logging and monitoring to create software that can easily be maintained and supported by future teams.",
-      "Created confluence documentation with visual diagrams to act as a containerized source for information for the team.",
-      "Participated in daily agile ceremonies such as stand ups, retrospectives, sprint planning, etc.",
+      "Re-architected backend RESTful APIs as part of an organization-wide microservice modernization effort.",
+      "Contributed to cloud cost reductions exceeding $10,000/month by streamlining compute-intensive services.",
+      "Improved API performance by 40% and cut redundant external service calls by 50%.",
+      "Used techniques such as OOP, Dependency Injection, layered architecture, and unit testing (XUnit, Moq) to ensure code quality.",
+      "Created detailed documentation and architecture diagrams in Confluence to support team onboarding and maintenance.",
+      "Actively participated in Agile ceremonies including standups, retrospectives, and sprint planning.",
     ],
   },
 ];
