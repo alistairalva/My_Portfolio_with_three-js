@@ -49,13 +49,18 @@ const About: React.FC = () => {
         variants={fadeIn("", "", 0.1, 1)}
         className="mt-4 text-secondary text-[17px] mx-w-3xl leading-[30px]"
       >
-        I am a full stack developer that specializes in backend development for
-        web, mobile, and desktop apps. I create software with a pragmatic
-        approach, focusing on performance and user experience. I am a quick
-        learner and I am always looking to learn new technologies and improve my
-        skills. My current goal is to have a positive impact with my work and to
-        be a part of a team that is passionate about creating great software.
-        Let's work together!🚀
+        I'm a full-stack developer with a strong focus on backend architecture
+        for web, mobile, and desktop applications. I specialize in building
+        scalable, high-performance systems with clean APIs and strong data
+        integrity. Over the past few years, I've worked with startups and
+        enterprises across industries like FinTech, real estate, and fitness,
+        delivering everything from MVPs to enterprise-grade infrastructure. I've
+        also consulted on business operations and helped teams improve
+        efficiency, reduce costs, and build strong technical foundations. I'm a
+        quick learner, passionate about clean code, and always exploring new
+        technologies. My goal is to build meaningful software that drives
+        results — and to collaborate with teams that care about impact and
+        craftsmanship. Let's build something great together! 🚀
       </motion.p>
       <div className="mt-20 flex flex-wrap gap-10">
         {services.map((service, index) => (
