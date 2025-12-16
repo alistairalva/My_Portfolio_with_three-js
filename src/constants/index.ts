@@ -15,6 +15,7 @@ import {
   firebase,
   git,
   docker,
+  redding_designs,
   goodLife,
   krachi_space,
   logo,
@@ -138,43 +139,56 @@ export interface Experience {
 }
 const experiences: Experience[] = [
   {
+    title: "Web Developer",
+    company_name: "Redding Designs",
+    icon: redding_designs,
+    iconBg: "#FFF",
+    date: "July 2024 – October 2025",
+    points: [
+      "Developed and maintained full-stack web applications for various clients across healthcare, finance, and e-commerce sectors using WordPress, PHP, Laravel and MySQL, ensuring robust functionality and seamless user experiences.",
+      "Improved application performance and search engine visibility by 35% through comprehensive SEO optimization strategies, implementing caching mechanisms, and optimizing database queries for faster load times.",
+      "Reduced turnaround time for website updates by over 50% by streamlining deployment processes and implementing efficient version control workflows.",
+      "Collaborated with cross-functional teams including designers, project managers, and stakeholders to gather requirements, define project scope, and deliver tailored solutions on time and within budget.",
+    ],
+  },
+  {
     title: "Technology Consultant & Software Developer",
     company_name: "Freelance",
-    icon: logo, // Replace with your actual icon variable
+    icon: logo,
     iconBg: "#1E2A38",
     date: "July 2024 – Present",
     points: [
-      "Provided end-to-end consulting for startups and small businesses in FinTech, education, and local services sectors.",
-      "Improved client productivity by 30% through sales funnel optimization, custom SOP design, and technical tooling.",
-      "Architected and delivered an MVP for a cross-border payments platform using Node.js, PostgreSQL, and React.",
-      "Led talent acquisition for roles including tech sales, software development, and operations management.",
-      "Connected small business founders with early-stage investors to support fundraising and product development.",
+      "Provided end-to-end consulting services for startups and small businesses in FinTech, education, and local services sectors, delivering strategic technology roadmaps and implementation plans.",
+      "Improved client productivity by 30% through sales funnel optimization, custom Standard Operating Procedure (SOP) design, and implementation of technical tooling that automated repetitive tasks.",
+      "Architected and delivered a fully functional MVP for a cross-border payments platform using Node.js, PostgreSQL, and React, incorporating secure payment processing and real-time transaction tracking.",
+      "Led talent acquisition initiatives for roles including tech sales, software development, and operations management, conducting technical interviews and evaluating candidate fit.",
+      "Connected small business founders with early-stage investors, facilitating introductions and providing pitch deck support to help secure funding for product development and market expansion.",
     ],
   },
   {
     title: "Backend Engineer (Volunteer)",
     company_name: "Krachi Space Technologies",
-    icon: krachi_space, // Replace with your actual icon variable
+    icon: krachi_space,
     iconBg: "#2E3A59",
     date: "January 2024 – Present",
     points: [
-      "Built and scaled a backend system for an AI-powered real estate matching platform using Node.js, TypeScript, and AWS Lambda.",
-      "Developed services that handled over 100,000 concurrent requests with sub-20ms latency using Redis and event-driven architecture.",
-      "Designed and implemented a custom authentication and authorization system using JWT and RBAC.",
-      "Collaborated with a fully remote team across time zones using GitHub, Trello, and Slack for coordination and code reviews.",
+      "Built and scaled a distributed backend system for an AI-powered real estate matching platform using Node.js, TypeScript, and AWS Lambda, handling complex matching algorithms and user preference processing.",
+      "Developed high-performance microservices that handled over 100,000 concurrent requests with sub-20ms latency by implementing Redis caching strategies and event-driven architecture patterns.",
+      "Designed and implemented a comprehensive authentication and authorization system using JWT tokens and Role-Based Access Control (RBAC), ensuring secure access to sensitive real estate data.",
+      "Collaborated effectively with a fully remote team across multiple time zones using GitHub for version control, Trello for project management, and Slack for real-time communication and code reviews.",
     ],
   },
   {
     title: "Computer Science Tutor",
     company_name: "Freelance",
-    icon: logo, // Replace with your actual icon variable
+    icon: logo,
     iconBg: "#5A607F",
     date: "November 2024 – Present",
     points: [
-      "Provided one-on-one and small group tutoring to IGCSE, IB, and A-Level students in Python, databases, and algorithms.",
-      "Taught core software engineering principles including DRY, SOLID, and clean code practices.",
-      "Created an interactive digital curriculum using tools like Replit and Jupyter to improve student engagement.",
-      "Helped 90% of students improve their grades by one level or more within two months.",
+      "Provided personalized one-on-one and small group tutoring sessions to IGCSE, IB, and A-Level students covering Python programming, database design, data structures, and algorithmic problem-solving.",
+      "Taught fundamental software engineering principles including DRY (Don't Repeat Yourself), SOLID design patterns, and clean code practices to build strong programming foundations.",
+      "Created an interactive digital curriculum using educational tools like Replit and Jupyter Notebooks to improve student engagement, facilitate hands-on practice, and enable real-time code collaboration.",
+      "Helped 90% of students improve their grades by one level or more within two months through customized lesson plans, regular assessments, and targeted feedback on coding assignments.",
     ],
   },
   {
@@ -184,8 +198,8 @@ const experiences: Experience[] = [
     iconBg: "#383E56",
     date: "May 2023 – August 2023",
     points: [
-      "Re-architected backend RESTful APIs as part of an organization-wide microservice modernization effort.",
-      "Contributed to cloud cost reductions exceeding $10,000/month by streamlining compute-intensive services.",
+      "Re-architected legacy backend RESTful APIs as part of an organization-wide microservice modernization effort, decomposing monolithic services into scalable, maintainable components.",
+      "Contributed to cloud infrastructure cost reductions exceeding $10,000/month by identifying and streamlining compute-intensive services, optimizing resource allocation, and eliminating redundant processes.",
       "Improved API performance by 40% and cut redundant external service calls by 50%.",
       "Used techniques such as OOP, Dependency Injection, layered architecture, and unit testing (XUnit, Moq) to ensure code quality.",
       "Created detailed documentation and architecture diagrams in Confluence to support team onboarding and maintenance.",

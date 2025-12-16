@@ -21,6 +21,7 @@ import tailwind from "./tech/tailwind.png";
 import typescript from "./tech/typescript.png";
 import csharp from "./tech/c_sharp.png";
 
+import redding_designs from "./company/redding_designs.svg";
 import goodLife from "./company/goodLife.png";
 import krachi_space from "./company/krachi_space.png";
 
@@ -50,6 +51,7 @@ export {
   tailwind,
   typescript,
   csharp,
+  redding_designs,
   goodLife,
   krachi_space,
   emergencyapp,
