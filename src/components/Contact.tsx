@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { toast } from "react-toastify";
 import email from "@emailjs/browser";
@@ -11,6 +11,16 @@ import "react-toastify/dist/ReactToastify.css";
 
 const Contact: React.FC = () => {
   const formRef = useRef<HTMLFormElement>(null);
+  const toastOptions = {
+    position: "bottom-left" as const,
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "colored" as const,
+  };
 
   const [form, setForm] = useState({
     user_name: "",
@@ -19,53 +29,9 @@ const Contact: React.FC = () => {
   });
 
   const [loading, setLoading] = useState(false);
-  const [alertText, setAlertText] = useState<string>("");
-
-  useEffect(() => {
-    switch (alertText) {
-      case "Please fill out all fields":
-        toast.warn(alertText, {
-          position: "bottom-left",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-        });
-        break;
-      case "Thank you, I will get back to you as soon as possible":
-        toast.success(alertText, {
-          position: "bottom-left",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-        });
-        break;
-      case "Failed to send message. Please try again later.":
-        toast.error(alertText, {
-          position: "bottom-left",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-        });
-        break;
-      default:
-        break;
-    }
-  }, [alertText]);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -73,8 +39,7 @@ const Contact: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!form.user_name || !form.user_email || !form.message) {
-      setAlertText("");
-      setTimeout(() => setAlertText("Please fill out all fields"), 0);
+      toast.warn("Please fill out all fields", toastOptions);
       setLoading(false);
       return;
     }
@@ -85,14 +50,20 @@ const Contact: React.FC = () => {
         import.meta.env.VITE_APP_EMAILJS_SERVICE_ID!,
         import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID!,
         formRef.current!,
-        import.meta.env.VITE_APP_EMAILJS_PUBLIC_API_KEY!
+        import.meta.env.VITE_APP_EMAILJS_PUBLIC_API_KEY!,
       );
 
       setForm({ user_name: "", user_email: "", message: "" });
       formRef.current?.reset();
-      setAlertText("Thank you, I will get back to you as soon as possible");
+      toast.success(
+        "Thank you, I will get back to you as soon as possible",
+        toastOptions,
+      );
     } catch (error) {
-      setAlertText("Failed to send message. Please try again later.");
+      toast.error(
+        "Failed to send message. Please try again later.",
+        toastOptions,
+      );
       console.log(error);
     } finally {
       setLoading(false);

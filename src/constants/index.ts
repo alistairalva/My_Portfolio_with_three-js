@@ -143,7 +143,7 @@ const experiences: Experience[] = [
     company_name: "Redding Designs",
     icon: redding_designs,
     iconBg: "#FFF",
-    date: "July 2024 – October 2025",
+    date: "November 2025 – Present",
     points: [
       "Developed and maintained full-stack web applications for various clients across healthcare, finance, and e-commerce sectors using WordPress, PHP, Laravel and MySQL, ensuring robust functionality and seamless user experiences.",
       "Improved application performance and search engine visibility by 35% through comprehensive SEO optimization strategies, implementing caching mechanisms, and optimizing database queries for faster load times.",
@@ -170,7 +170,7 @@ const experiences: Experience[] = [
     company_name: "Krachi Space Technologies",
     icon: krachi_space,
     iconBg: "#2E3A59",
-    date: "January 2024 – Present",
+    date: "January 2025 – May 2025",
     points: [
       "Built and scaled a distributed backend system for an AI-powered real estate matching platform using Node.js, TypeScript, and AWS Lambda, handling complex matching algorithms and user preference processing.",
       "Developed high-performance microservices that handled over 100,000 concurrent requests with sub-20ms latency by implementing Redis caching strategies and event-driven architecture patterns.",
@@ -183,7 +183,7 @@ const experiences: Experience[] = [
     company_name: "Freelance",
     icon: logo,
     iconBg: "#5A607F",
-    date: "November 2024 – Present",
+    date: "November 2024 – May 2025",
     points: [
       "Provided personalized one-on-one and small group tutoring sessions to IGCSE, IB, and A-Level students covering Python programming, database design, data structures, and algorithmic problem-solving.",
       "Taught fundamental software engineering principles including DRY (Don't Repeat Yourself), SOLID design patterns, and clean code practices to build strong programming foundations.",
