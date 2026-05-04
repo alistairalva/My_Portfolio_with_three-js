@@ -17,7 +17,7 @@ type RouteMeta = {
 
 const routeMeta: Record<string, RouteMeta> = {
   "/": {
-    title: "Alistair Alva | Full-Stack Developer Portfolio",
+    title: "Alistair Alva | Technology Consultant & Software Developer",
     description:
       "Explore Alistair Alva's portfolio, software engineering experience, and featured projects across web, backend, and cloud systems.",
   },
@@ -126,7 +126,7 @@ const RouteMetadata: FC = () => {
       "@type": "Person",
       name: "Alistair Alva",
       url: window.location.origin,
-      jobTitle: "Full-Stack Developer",
+      jobTitle: "Technology Consultant & Software Developer",
       knowsAbout: [
         "Backend Development",
         "Web Development",
