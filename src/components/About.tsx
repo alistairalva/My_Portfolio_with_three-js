@@ -28,6 +28,8 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ index, title, icon }) => {
             src={icon}
             alt={title}
             className="w-16 h-16 object contain mb-4"
+            loading="lazy"
+            decoding="async"
           />
           <h3 className="text-white text-[20px] font-bold text-center">
             {title}

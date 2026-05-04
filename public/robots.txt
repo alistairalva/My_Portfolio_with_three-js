@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://alistairalva.com/sitemap.xml

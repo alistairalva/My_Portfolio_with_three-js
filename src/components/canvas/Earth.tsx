@@ -1,6 +1,6 @@
 import { Suspense, useState, useEffect, FC } from "react";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
+import { OrbitControls, useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 
 import CanvasLoader from "../Loader";
@@ -54,8 +54,8 @@ const EarthCanvas: FC = () => {
     <Canvas
       frameloop="demand"
       camera={{ position: [-4, 3, 6], fov: 45, near: 0.1, far: 200 }}
-      dpr={[1, 2]}
-      gl={{ preserveDrawingBuffer: true }}
+      dpr={[1, 1.5]}
+      gl={{ antialias: false, powerPreference: "high-performance" }}
     >
       <Suspense fallback={<CanvasLoader />}>
         <OrbitControls
@@ -64,7 +64,6 @@ const EarthCanvas: FC = () => {
           maxPolarAngle={Math.PI / 2}
           minPolarAngle={Math.PI / 2}
         />
-        <Preload all />
         <Earth isMobile={isMobile} />
       </Suspense>
     </Canvas>

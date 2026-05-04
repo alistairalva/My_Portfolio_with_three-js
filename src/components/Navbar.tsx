@@ -1,12 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { styles } from "../styles";
 import { navLinks } from "../constants";
 import { logo, menu, close } from "../assets";
 
+let homePagePrefetchPromise: Promise<unknown> | null = null;
+
+const prefetchHomePage = () => {
+  if (!homePagePrefetchPromise) {
+    homePagePrefetchPromise = import("../pages/HomePage");
+  }
+
+  return homePagePrefetchPromise;
+};
+
 const Navbar: React.FC = () => {
-  const { pathname } = useLocation();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { pathname } = location;
   const isHomeRoute = pathname === "/";
   const [active, setActive] = useState("");
   const [toggle, setToggle] = useState(false);
@@ -62,25 +74,43 @@ const Navbar: React.FC = () => {
     setToggle(false);
   }, [pathname]);
 
+  useEffect(() => {
+    const targetSection = (location.state as { targetSection?: string } | null)
+      ?.targetSection;
+
+    if (!isHomeRoute || !targetSection) {
+      return;
+    }
+
+    requestAnimationFrame(() => {
+      document
+        .getElementById(targetSection)
+        ?.scrollIntoView({ behavior: "smooth" });
+    });
+
+    navigate(pathname, { replace: true, state: null });
+  }, [isHomeRoute, location.state, navigate, pathname]);
+
   const handleBrandClick = () => {
+    prefetchHomePage();
     setActive("");
     setToggle(false);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const handleSectionClick = (
-    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
-    sectionId: string,
-  ) => {
+  const handleSectionNavigation = (sectionId: string) => {
+    prefetchHomePage();
     setActive(sectionId);
     setToggle(false);
 
-    if (!isHomeRoute) {
+    if (isHomeRoute) {
+      document
+        .getElementById(sectionId)
+        ?.scrollIntoView({ behavior: "smooth" });
       return;
     }
 
-    e.preventDefault();
-    document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
+    navigate("/", { state: { targetSection: sectionId } });
   };
 
   const handleAuditClick = () => {
@@ -90,6 +120,7 @@ const Navbar: React.FC = () => {
 
   return (
     <nav
+      aria-label="Primary navigation"
       className={`${styles.paddingX} w-full flex items-center py-5 fixed top-0 z-20 
       ${scrolled ? "bg-primary" : "bg-transparent"}`}
     >
@@ -98,6 +129,9 @@ const Navbar: React.FC = () => {
           to="/"
           className="flex items-center gap-2"
           onClick={handleBrandClick}
+          onMouseEnter={prefetchHomePage}
+          onFocus={prefetchHomePage}
+          onTouchStart={prefetchHomePage}
         >
           <img src={logo} alt="logo" className="w-9 h-9 object-contain" />
           <p className="text-white text-[18px] font-bold cursor-pointer flex">
@@ -124,12 +158,16 @@ const Navbar: React.FC = () => {
                   active === nav.id ? "text-white" : "text-secondary"
                 } hover:text-white text-[18px] font-medium cursor-pointer`}
               >
-                <a
-                  href={isHomeRoute ? `#${nav.id}` : `/#${nav.id}`}
-                  onClick={(e) => handleSectionClick(e, nav.id)}
+                <button
+                  type="button"
+                  onClick={() => handleSectionNavigation(nav.id)}
+                  onMouseEnter={prefetchHomePage}
+                  onFocus={prefetchHomePage}
+                  onTouchStart={prefetchHomePage}
+                  className="text-inherit"
                 >
                   {nav.title}
-                </a>
+                </button>
               </li>
             </React.Fragment>
           ))}
@@ -141,6 +179,9 @@ const Navbar: React.FC = () => {
             alt="menu"
             className="w-[28px] h-[28px] object-contain"
             onClick={() => setToggle(!toggle)}
+            role="button"
+            aria-label={toggle ? "Close menu" : "Open menu"}
+            aria-expanded={toggle}
           />
 
           <div
@@ -165,12 +206,16 @@ const Navbar: React.FC = () => {
                     className={`${active === nav.id ? "text-white" : "text-secondary"} 
                 font-poppins font-medium cursor-pointer text-[16px]`}
                   >
-                    <a
-                      href={isHomeRoute ? `#${nav.id}` : `/#${nav.id}`}
-                      onClick={(e) => handleSectionClick(e, nav.id)}
+                    <button
+                      type="button"
+                      onClick={() => handleSectionNavigation(nav.id)}
+                      onMouseEnter={prefetchHomePage}
+                      onFocus={prefetchHomePage}
+                      onTouchStart={prefetchHomePage}
+                      className="text-inherit"
                     >
                       {nav.title}
-                    </a>
+                    </button>
                   </li>
                 </React.Fragment>
               ))}

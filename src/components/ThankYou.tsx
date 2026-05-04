@@ -12,7 +12,11 @@ const ThankYou: React.FC = () => {
   }, []);
 
   return (
-    <div className="relative z-0 bg-primary min-h-screen">
+    <main
+      id="main-content"
+      className="relative z-0 bg-primary min-h-screen"
+      aria-label="Thank you page"
+    >
       <div className={`${styles.paddingX} pt-28 pb-16`}>
         <motion.div
           variants={fadeIn("", "tween", 0.2, 0.6)}
@@ -21,7 +25,7 @@ const ThankYou: React.FC = () => {
           className="mx-auto w-full max-w-3xl bg-black-100 p-8 sm:p-10 rounded-2xl text-center"
         >
           <p className={styles.sectionSubText}>Request Received</p>
-          <h3 className={styles.sectionHeadText}>Thank You.</h3>
+          <h1 className={styles.sectionHeadText}>Thank You.</h1>
           <p className="mt-4 text-secondary text-[16px] leading-[28px]">
             Your free SEO and site audit request has been submitted. I will
             review your details and reach out with next steps.
@@ -43,7 +47,7 @@ const ThankYou: React.FC = () => {
           </div>
         </motion.div>
       </div>
-    </div>
+    </main>
   );
 };
 

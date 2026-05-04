@@ -185,7 +185,11 @@ const SeoAudit: React.FC = () => {
   };
 
   return (
-    <div className="relative z-0 bg-primary min-h-screen">
+    <main
+      id="main-content"
+      className="relative z-0 bg-primary min-h-screen"
+      aria-label="Free SEO audit form"
+    >
       <div className="relative z-10">
         <div className={`${styles.paddingX} pt-28 pb-16`}>
           <motion.div
@@ -195,7 +199,7 @@ const SeoAudit: React.FC = () => {
             className="mx-auto w-full max-w-5xl bg-black-100 p-6 sm:p-8 rounded-2xl"
           >
             <p className={styles.sectionSubText}>Free SEO and Site Audit</p>
-            <h3 className={styles.sectionHeadText}>Tell Me About Your Site.</h3>
+            <h1 className={styles.sectionHeadText}>Tell Me About Your Site.</h1>
             <p className="mt-4 text-secondary text-[16px] leading-[28px]">
               Share your current website details and goals. You will receive a
               practical audit focused on technical SEO, content opportunities,
@@ -419,7 +423,7 @@ const SeoAudit: React.FC = () => {
         </div>
       </div>
       <StarsCanvas />
-    </div>
+    </main>
   );
 };
 
