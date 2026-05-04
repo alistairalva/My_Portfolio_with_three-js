@@ -1,6 +1,7 @@
 # SEO Audit Google Sheets Backend Setup
 
-This project sends SEO audit submissions to `VITE_AUDIT_API_URL`.
+This project sends SEO audit submissions to `/api/audit-requests`.
+The Vercel API route forwards requests to Google Apps Script.
 To store submissions in Google Sheets, deploy the Apps Script endpoint in [google-apps-script/audit-requests.gs](../google-apps-script/audit-requests.gs).
 
 ## 1) Create the destination sheet
@@ -19,15 +20,21 @@ To store submissions in Google Sheets, deploy the Apps Script endpoint in [googl
 6. Who has access: `Anyone`.
 7. Deploy and copy the `Web app URL` ending with `/exec`.
 
-## 3) Configure this frontend
+## 3) Configure Vercel environment variables
 
-Add the URL to your local `.env` file:
+In Vercel project settings, add:
 
 ```env
-VITE_AUDIT_API_URL=https://script.google.com/macros/s/REPLACE_WITH_DEPLOYMENT_ID/exec
+AUDIT_APPS_SCRIPT_URL=https://script.google.com/macros/s/REPLACE_WITH_DEPLOYMENT_ID/exec
+AUDIT_ALLOWED_ORIGINS=https://your-domain.com,https://www.your-domain.com
 ```
 
-Then restart your dev server.
+Then redeploy.
+
+Local development options:
+
+- Preferred: use `vercel dev` so `/api/audit-requests` runs locally.
+- Optional fallback: set `AUDIT_APPS_SCRIPT_URL` only in local `.env` for direct testing with `npm run dev`.
 
 ## 4) Test submission
 
@@ -37,10 +44,11 @@ Then restart your dev server.
 
 ## Notes
 
-- The frontend sends plain JSON text to avoid unnecessary CORS preflight for Apps Script deployments.
+- The frontend no longer calls Apps Script directly in production; it uses the same-origin Vercel API route.
 - Required field validation is performed on the client and repeated in the Apps Script endpoint.
 - Anti-spam protections are now enforced both client-side and server-side:
   - Honeypot trap (`website`)
   - Minimum completion-time gate
   - Duplicate submission cooldown (10 minutes) based on email + website URL
+- The Vercel API route also enforces origin checks and rate limiting before forwarding.
 - Every Apps Script change requires a new Apps Script deployment version before it is live.

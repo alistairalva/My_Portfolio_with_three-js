@@ -1,6 +1,6 @@
 # Vercel Deployment Guide (Portfolio + SEO Audit Form)
 
-This app is deployed as a Vite static site on Vercel, while SEO audit submissions are stored via a Google Apps Script endpoint.
+This app is deployed as a Vite static site on Vercel, while SEO audit submissions are relayed through a Vercel API route to a Google Apps Script endpoint.
 
 ## 1) Prerequisites
 
@@ -21,13 +21,20 @@ Use these defaults in Vercel:
 
 In `Project Settings -> Environment Variables`, add:
 
-- `VITE_AUDIT_API_URL`: your Google Apps Script `.../exec` URL
+- `AUDIT_APPS_SCRIPT_URL`: your Google Apps Script `.../exec` URL
+- `AUDIT_ALLOWED_ORIGINS`: comma-separated trusted origins (for example `https://your-domain.com,https://www.your-domain.com`)
 - `VITE_APP_EMAILJS_SERVICE_ID`
 - `VITE_APP_EMAILJS_TEMPLATE_ID`
 - `VITE_APP_EMAILJS_PUBLIC_API_KEY`
 - `VITE_APP_EMAIL`
 
 After changing env vars, redeploy.
+
+Notes:
+
+- Do not expose the Apps Script URL in a `VITE_` variable in production.
+- The frontend posts to `/api/audit-requests` and the Vercel function forwards to Apps Script.
+- Optional for local development: set `AUDIT_APPS_SCRIPT_URL` only in local `.env` if you are using `npm run dev` instead of `vercel dev`.
 
 ## 4) Client-side route support
 
@@ -48,14 +55,16 @@ This repo includes [vercel.json](../vercel.json) with SPA rewrites so direct vis
 2. Submit a valid form and confirm redirect to `/thank-you`.
 3. Verify a new row appears in your Google Sheet.
 4. Submit rapidly or duplicate quickly and confirm anti-spam rejection.
-5. Check Vercel Analytics events for:
+5. Confirm `/api/audit-requests` returns `405` for `GET` (route is active and method-protected).
+6. Check Vercel Analytics events for:
    - `SEO Audit Form Submitted`
    - `SEO Audit Thank You Viewed`
 
 ## 7) Troubleshooting
 
 - If form submission fails immediately:
-  - Confirm `VITE_AUDIT_API_URL` ends with `/exec`.
+  - Confirm `AUDIT_APPS_SCRIPT_URL` ends with `/exec`.
+  - Confirm `AUDIT_ALLOWED_ORIGINS` includes your deployed domain.
   - Ensure Apps Script deployment access is `Anyone`.
   - Redeploy Vercel after updating env vars.
 - If Google Sheet is not receiving rows:

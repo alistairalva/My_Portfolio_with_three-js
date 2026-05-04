@@ -129,7 +129,10 @@ const SeoAudit: React.FC = () => {
     setLoading(true);
 
     try {
-      const endpoint = import.meta.env.VITE_AUDIT_API_URL || "/audit-requests";
+      const endpoint =
+        import.meta.env.DEV && import.meta.env.AUDIT_APPS_SCRIPT_URL
+          ? import.meta.env.AUDIT_APPS_SCRIPT_URL
+          : "/api/audit-requests";
       const payload = {
         ...form,
         website,
@@ -137,15 +140,12 @@ const SeoAudit: React.FC = () => {
         source: "portfolio-seo-audit",
         submittedAt: new Date().toISOString(),
       };
-      const isRelativeEndpoint = endpoint.startsWith("/");
 
       const response = await fetch(endpoint, {
         method: "POST",
-        headers: isRelativeEndpoint
-          ? {
-              "Content-Type": "application/json",
-            }
-          : undefined,
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(payload),
       });
 

@@ -31,7 +31,8 @@ export default {
 
 ## SEO Audit Form Backend
 
-The `/free-seo-audit` page posts submissions to `VITE_AUDIT_API_URL`.
+The `/free-seo-audit` page posts submissions to `/api/audit-requests`.
+That Vercel API route forwards requests to your Google Apps Script endpoint configured by `AUDIT_APPS_SCRIPT_URL`.
 
 For Google Sheets storage using Google Apps Script, follow:
 
