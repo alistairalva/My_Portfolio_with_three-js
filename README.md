@@ -17,14 +17,26 @@ If you are developing a production application, we recommend updating the config
 export default {
   // other rules...
   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
+    ecmaVersion: "latest",
+    sourceType: "module",
+    project: ["./tsconfig.json", "./tsconfig.node.json"],
     tsconfigRootDir: __dirname,
   },
-}
+};
 ```
 
 - Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
 - Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
 - Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+
+## SEO Audit Form Backend
+
+The `/free-seo-audit` page posts submissions to `VITE_AUDIT_API_URL`.
+
+For Google Sheets storage using Google Apps Script, follow:
+
+- [docs/seo-audit-google-sheet-setup.md](docs/seo-audit-google-sheet-setup.md)
+
+For Vercel deployment details (including route rewrites and environment variables), follow:
+
+- [docs/vercel-deployment-guide.md](docs/vercel-deployment-guide.md)

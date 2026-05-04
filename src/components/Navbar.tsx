@@ -1,52 +1,92 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import { styles } from "../styles";
 import { navLinks } from "../constants";
 import { logo, menu, close } from "../assets";
 
 const Navbar: React.FC = () => {
+  const { pathname } = useLocation();
+  const isHomeRoute = pathname === "/";
   const [active, setActive] = useState("");
   const [toggle, setToggle] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  const sectionRefs = navLinks.reduce<{
-    [key: string]: React.RefObject<HTMLElement>;
-  }>((refs, link) => {
-    refs[link.id] = React.createRef();
-    return refs;
-  }, {});
+  useEffect(() => {
+    if (pathname === "/free-seo-audit") {
+      setActive("seo-audit");
+      return;
+    }
+
+    if (pathname === "/thank-you") {
+      setActive("");
+    }
+  }, [pathname]);
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
-      if (scrollTop > 100) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
+      setScrolled(scrollTop > 100);
+
+      if (!isHomeRoute) {
+        return;
       }
 
-      // Loop through each navLink
+      let activeSection = "";
       for (const link of navLinks) {
-        const ref = sectionRefs[link.id];
+        const section = document.getElementById(link.id);
+        if (!section) {
+          continue;
+        }
 
-        // If the section is in the viewport, update the active state
-        if (
-          ref.current && // Add null check here
-          ref.current.offsetTop <= scrollTop &&
-          ref.current.offsetTop + ref.current.offsetHeight > scrollTop
-        ) {
-          setActive(link.id);
+        const sectionTop = section.offsetTop - 120;
+        const sectionBottom = sectionTop + section.offsetHeight;
+
+        if (scrollTop >= sectionTop && scrollTop < sectionBottom) {
+          activeSection = link.id;
           break;
         }
       }
+
+      setActive(activeSection);
     };
 
+    handleScroll();
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [sectionRefs]);
+  }, [isHomeRoute]);
+
+  useEffect(() => {
+    setToggle(false);
+  }, [pathname]);
+
+  const handleBrandClick = () => {
+    setActive("");
+    setToggle(false);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleSectionClick = (
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+    sectionId: string,
+  ) => {
+    setActive(sectionId);
+    setToggle(false);
+
+    if (!isHomeRoute) {
+      return;
+    }
+
+    e.preventDefault();
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const handleAuditClick = () => {
+    setActive("seo-audit");
+    setToggle(false);
+  };
 
   return (
     <nav
@@ -57,10 +97,7 @@ const Navbar: React.FC = () => {
         <Link
           to="/"
           className="flex items-center gap-2"
-          onClick={() => {
-            setActive("");
-            window.scrollTo(0, 0);
-          }}
+          onClick={handleBrandClick}
         >
           <img src={logo} alt="logo" className="w-9 h-9 object-contain" />
           <p className="text-white text-[18px] font-bold cursor-pointer flex">
@@ -70,15 +107,31 @@ const Navbar: React.FC = () => {
         </Link>
         <ul className="list-none hidden sm:flex flex-row gap-10">
           {navLinks.map((nav) => (
-            <li
-              key={nav.id}
-              className={`${
-                active === nav.title ? "text-white" : "text-secondary"
-              } hover:text-white text-[18px] font-medium cursor-pointer`}
-              onClick={() => setActive(nav.title)}
-            >
-              <a href={`#${nav.id}`}>{nav.title}</a>
-            </li>
+            <React.Fragment key={nav.id}>
+              {nav.id === "contact" && (
+                <li
+                  className={`${
+                    active === "seo-audit" ? "text-white" : "text-secondary"
+                  } hover:text-white text-[18px] font-medium cursor-pointer`}
+                >
+                  <Link to="/free-seo-audit" onClick={handleAuditClick}>
+                    Free SEO Audit
+                  </Link>
+                </li>
+              )}
+              <li
+                className={`${
+                  active === nav.id ? "text-white" : "text-secondary"
+                } hover:text-white text-[18px] font-medium cursor-pointer`}
+              >
+                <a
+                  href={isHomeRoute ? `#${nav.id}` : `/#${nav.id}`}
+                  onClick={(e) => handleSectionClick(e, nav.id)}
+                >
+                  {nav.title}
+                </a>
+              </li>
+            </React.Fragment>
           ))}
         </ul>
 
@@ -96,21 +149,30 @@ const Navbar: React.FC = () => {
           >
             <ul className="list-none flex justify-end items-start flex-col gap-4">
               {navLinks.map((nav) => (
-                <li
-                  key={nav.id}
-                  className={`${active === nav.title ? "text-white" : "text-secondary"} 
+                <React.Fragment key={nav.id}>
+                  {nav.id === "contact" && (
+                    <li
+                      className={`${
+                        active === "seo-audit" ? "text-white" : "text-secondary"
+                      } font-poppins font-medium cursor-pointer text-[16px]`}
+                    >
+                      <Link to="/free-seo-audit" onClick={handleAuditClick}>
+                        Free SEO Audit
+                      </Link>
+                    </li>
+                  )}
+                  <li
+                    className={`${active === nav.id ? "text-white" : "text-secondary"} 
                 font-poppins font-medium cursor-pointer text-[16px]`}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setToggle(!toggle);
-                    setActive(nav.title);
-                    document
-                      .getElementById(nav.id)
-                      ?.scrollIntoView({ behavior: "smooth" });
-                  }}
-                >
-                  <a href={`${nav.id}`}>{nav.title}</a>
-                </li>
+                  >
+                    <a
+                      href={isHomeRoute ? `#${nav.id}` : `/#${nav.id}`}
+                      onClick={(e) => handleSectionClick(e, nav.id)}
+                    >
+                      {nav.title}
+                    </a>
+                  </li>
+                </React.Fragment>
               ))}
             </ul>
           </div>
