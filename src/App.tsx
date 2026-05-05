@@ -14,6 +14,8 @@ type RouteMeta = {
   title: string;
   description: string;
   socialImage: string;
+  socialImageAlt: string;
+  keywords: string;
 };
 
 type FaqItem = {
@@ -26,19 +28,28 @@ const routeMeta: Record<string, RouteMeta> = {
     title: "Alistair Alva | Technology Consultant & Software Developer",
     description:
       "Explore Alistair Alva's portfolio, software engineering experience, and featured projects across web, backend, and cloud systems.",
-    socialImage: "/logo.svg",
+    socialImage: "/og/home.svg",
+    socialImageAlt:
+      "Alistair Alva technology consultant and software developer portfolio",
+    keywords:
+      "technology consultant, software developer, backend engineer, cloud architecture, full stack developer, portfolio",
   },
   "/free-seo-audit": {
     title: "Free SEO and Site Audit | Alistair Alva",
     description:
       "Request a free SEO and website audit to identify technical issues, growth opportunities, and practical next steps.",
-    socialImage: "/logo.svg",
+    socialImage: "/og/seo-audit.svg",
+    socialImageAlt: "Free SEO and site audit service page by Alistair Alva",
+    keywords:
+      "free seo audit, technical seo, seo consultant, site audit, search optimization, geo optimization",
   },
   "/thank-you": {
     title: "Thank You | SEO Audit Request Received",
     description:
       "Your SEO and site audit request has been received. Alistair will review your details and follow up with next steps.",
-    socialImage: "/logo.svg",
+    socialImage: "/og/thank-you.svg",
+    socialImageAlt: "Thank you page confirming SEO audit request submission",
+    keywords: "seo audit request confirmation, thank you page",
   },
 };
 
@@ -94,6 +105,13 @@ const RouteMetadata: FC = () => {
       "description",
       selectedMeta.description,
     );
+    upsertMetaTag(
+      'meta[name="keywords"]',
+      "name",
+      "keywords",
+      selectedMeta.keywords,
+    );
+    upsertMetaTag('meta[name="author"]', "name", "author", "Alistair Alva");
     upsertMetaTag('meta[name="robots"]', "name", "robots", robotsDirective);
     upsertMetaTag('meta[property="og:type"]', "property", "og:type", "website");
     upsertMetaTag(
@@ -127,6 +145,18 @@ const RouteMetadata: FC = () => {
       `${baseUrl}${selectedMeta.socialImage}`,
     );
     upsertMetaTag(
+      'meta[property="og:image:alt"]',
+      "property",
+      "og:image:alt",
+      selectedMeta.socialImageAlt,
+    );
+    upsertMetaTag(
+      'meta[property="og:locale"]',
+      "property",
+      "og:locale",
+      "en_US",
+    );
+    upsertMetaTag(
       'meta[name="twitter:card"]',
       "name",
       "twitter:card",
@@ -149,6 +179,12 @@ const RouteMetadata: FC = () => {
       "name",
       "twitter:image",
       `${baseUrl}${selectedMeta.socialImage}`,
+    );
+    upsertMetaTag(
+      'meta[name="twitter:image:alt"]',
+      "name",
+      "twitter:image:alt",
+      selectedMeta.socialImageAlt,
     );
 
     let canonicalTag = document.querySelector(
@@ -193,6 +229,9 @@ const RouteMetadata: FC = () => {
       description:
         "Technology consultant and software developer focused on backend systems, cloud architecture, and growth-oriented web delivery.",
       image: `${baseUrl}/logo.svg`,
+      mainEntityOfPage: {
+        "@id": `${canonicalUrl}#webpage`,
+      },
       knowsAbout: [
         "Backend Development",
         "Web Development",
