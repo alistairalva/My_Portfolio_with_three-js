@@ -76,11 +76,14 @@ const Contact: React.FC = () => {
         className="flex-[0.75] bg-black-100 p-8 rounded-2xl"
       >
         <p className={styles.sectionSubText}>Get in Touch</p>
-        <h2 className={styles.sectionHeadText}>Contact.</h2>
+        <h2 id="contact-form-heading" className={styles.sectionHeadText}>
+          Contact.
+        </h2>
 
         <form
           ref={formRef}
           onSubmit={handleSubmit}
+          aria-labelledby="contact-form-heading"
           className="mt-12 flex flex-col gap-8"
         >
           <label className="flex flex-col">
@@ -91,7 +94,7 @@ const Contact: React.FC = () => {
               value={form.user_name}
               onChange={handleChange}
               placeholder="What's your name?"
-              className="bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outlined-none border-none"
+              className="bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none focus-visible:ring-2 focus-visible:ring-[#915eff]"
             />
           </label>
           <label className="flex flex-col">
@@ -102,7 +105,7 @@ const Contact: React.FC = () => {
               value={form.user_email}
               onChange={handleChange}
               placeholder="What's your email?"
-              className="bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outlined-none border-none"
+              className="bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none focus-visible:ring-2 focus-visible:ring-[#915eff]"
             />
           </label>
           <label className="flex flex-col">
@@ -113,12 +116,12 @@ const Contact: React.FC = () => {
               value={form.message}
               onChange={handleChange}
               placeholder="What do you want to say?"
-              className="bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outlined-none border-none"
+              className="bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none focus-visible:ring-2 focus-visible:ring-[#915eff]"
             />
           </label>
           <button
             type="submit"
-            className="bg-tertiary py-3 px-8 outline-none w-fit text-white font-bold shadow-md shadow-primary rounded-xl"
+            className="bg-tertiary py-3 px-8 outline-none w-fit text-white font-bold shadow-md shadow-primary rounded-xl focus-visible:ring-2 focus-visible:ring-[#915eff]"
           >
             {loading ? "Sending..." : "Send"}
           </button>

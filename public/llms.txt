@@ -1,0 +1,25 @@
+# Alistair Alva Portfolio
+
+> Official website for Alistair Alva, technology consultant and software developer.
+
+## Canonical site
+- https://alistairalva.com/
+
+## Key pages
+- Home: https://alistairalva.com/
+- Free SEO Audit: https://alistairalva.com/free-seo-audit
+
+## Focus areas
+- Backend architecture
+- Full-stack web engineering
+- Cloud systems
+- SEO and technical growth strategy
+
+## Contact and engagement
+- Contact section on homepage: https://alistairalva.com/#contact
+- SEO audit request form: https://alistairalva.com/free-seo-audit
+
+## Machine-readable sources
+- Sitemap: https://alistairalva.com/sitemap.xml
+- Robots: https://alistairalva.com/robots.txt
+- Full context file: https://alistairalva.com/llms-full.txt

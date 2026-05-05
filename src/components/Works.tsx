@@ -90,11 +90,13 @@ const Works: React.FC = () => {
         </motion.p>
       </div>
 
-      <div className="mt-20 flex flex-wrap gap-7">
+      <ul className="mt-20 flex flex-wrap gap-7 list-none">
         {projects.map((project, index) => (
-          <ProjectCard key={index} index={index} project={project} />
+          <li key={project.name}>
+            <ProjectCard index={index} project={project} />
+          </li>
         ))}
-      </div>
+      </ul>
     </>
   );
 };

@@ -28,7 +28,12 @@ const Hero: React.FC = () => {
       </div>
       <ComputersCanvas />
       <div className="absolute xs:bottom-10 bottom-32 w-full  flex justify-center items-center">
-        <a href="#about">
+        <a
+          href="#about"
+          aria-label="Scroll to About section"
+          className="rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#915eff] focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
+        >
+          <span className="sr-only">Scroll to About section</span>
           <div className="w-[35px] h-[64px] rounded-3xl border-4 border-secondary flex justify-center iems-start p-2">
             <motion.div
               animate={{

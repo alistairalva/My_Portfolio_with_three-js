@@ -64,11 +64,13 @@ const About: React.FC = () => {
         software that drives results — and to collaborate with teams that care
         about impact and craftsmanship. Let's build something great together! 🚀
       </motion.p>
-      <div className="mt-20 flex flex-wrap gap-10">
+      <ul className="mt-20 flex flex-wrap gap-10 list-none">
         {services.map((service, index) => (
-          <ServiceCard key={service.title} index={index} {...service} />
+          <li key={service.title}>
+            <ServiceCard index={index} {...service} />
+          </li>
         ))}
-      </div>
+      </ul>
     </>
   );
 };

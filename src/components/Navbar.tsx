@@ -127,19 +127,19 @@ const Navbar: React.FC = () => {
       <div className="w-full flex justify-between items-center max-w-7xl mx-auto">
         <Link
           to="/"
-          className="flex items-center gap-2"
+          className="flex items-center gap-2 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#915eff] focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
           onClick={handleBrandClick}
           onMouseEnter={prefetchHomePage}
           onFocus={prefetchHomePage}
           onTouchStart={prefetchHomePage}
         >
           <img src={logo} alt="logo" className="w-9 h-9 object-contain" />
-          <p className="text-white text-[18px] font-bold cursor-pointer flex">
+          <span className="text-white text-[18px] font-bold cursor-pointer flex">
             Alistair Alva &nbsp;
             <span className="sm:block hidden">
               | Technology & Software Solutions
             </span>
-          </p>
+          </span>
         </Link>
         <ul className="list-none hidden sm:flex flex-row gap-10">
           {navLinks.map((nav) => (
@@ -150,7 +150,11 @@ const Navbar: React.FC = () => {
                     active === "seo-audit" ? "text-white" : "text-secondary"
                   } hover:text-white text-[18px] font-medium cursor-pointer`}
                 >
-                  <Link to="/free-seo-audit" onClick={handleAuditClick}>
+                  <Link
+                    to="/free-seo-audit"
+                    onClick={handleAuditClick}
+                    className="rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#915eff] focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
+                  >
                     Free SEO Audit
                   </Link>
                 </li>
@@ -166,7 +170,7 @@ const Navbar: React.FC = () => {
                   onMouseEnter={prefetchHomePage}
                   onFocus={prefetchHomePage}
                   onTouchStart={prefetchHomePage}
-                  className="text-inherit"
+                  className="text-inherit rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#915eff] focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
                 >
                   {nav.title}
                 </button>
@@ -176,17 +180,25 @@ const Navbar: React.FC = () => {
         </ul>
 
         <div className="sm:hidden flex flex-1 justify-end items-center">
-          <img
-            src={toggle ? close : menu}
-            alt="menu"
-            className="w-[28px] h-[28px] object-contain"
+          <button
+            type="button"
             onClick={() => setToggle(!toggle)}
-            role="button"
+            className="w-[28px] h-[28px] rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#915eff] focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
             aria-label={toggle ? "Close menu" : "Open menu"}
             aria-expanded={toggle}
-          />
+            aria-controls="mobile-navigation-menu"
+          >
+            <img
+              src={toggle ? close : menu}
+              alt=""
+              aria-hidden="true"
+              className="w-[28px] h-[28px] object-contain"
+            />
+          </button>
 
-          <div
+          <nav
+            id="mobile-navigation-menu"
+            aria-label="Mobile navigation"
             className={`${!toggle ? "hidden" : "flex"} p-6 black-gradient absolute top-20 
           right-0 mx-4 my-2 min-w-[140px] z-10 rounded-xl`}
           >
@@ -199,7 +211,11 @@ const Navbar: React.FC = () => {
                         active === "seo-audit" ? "text-white" : "text-secondary"
                       } font-poppins font-medium cursor-pointer text-[16px]`}
                     >
-                      <Link to="/free-seo-audit" onClick={handleAuditClick}>
+                      <Link
+                        to="/free-seo-audit"
+                        onClick={handleAuditClick}
+                        className="rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#915eff] focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
+                      >
                         Free SEO Audit
                       </Link>
                     </li>
@@ -214,7 +230,7 @@ const Navbar: React.FC = () => {
                       onMouseEnter={prefetchHomePage}
                       onFocus={prefetchHomePage}
                       onTouchStart={prefetchHomePage}
-                      className="text-inherit"
+                      className="text-inherit rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#915eff] focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
                     >
                       {nav.title}
                     </button>
@@ -222,7 +238,7 @@ const Navbar: React.FC = () => {
                 </React.Fragment>
               ))}
             </ul>
-          </div>
+          </nav>
         </div>
       </div>
     </nav>

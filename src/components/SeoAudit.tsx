@@ -39,7 +39,7 @@ const initialForm: SeoAuditForm = {
 };
 
 const inputClassName =
-  "bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none";
+  "bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none focus-visible:ring-2 focus-visible:ring-[#915eff]";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
 const MIN_FORM_COMPLETION_MS = 3000;
@@ -206,7 +206,9 @@ const SeoAudit: React.FC = () => {
             className="mx-auto w-full max-w-5xl bg-black-100 p-6 sm:p-8 rounded-2xl"
           >
             <p className={styles.sectionSubText}>Free SEO and Site Audit</p>
-            <h1 className={styles.sectionHeadText}>Tell Me About Your Site.</h1>
+            <h1 id="seo-audit-heading" className={styles.sectionHeadText}>
+              Tell Me About Your Site.
+            </h1>
             <p className="mt-4 text-secondary text-[16px] leading-[28px]">
               Share your current website details and goals. You will receive a
               practical audit focused on technical SEO, content opportunities,
@@ -215,10 +217,14 @@ const SeoAudit: React.FC = () => {
 
             <form
               onSubmit={handleSubmit}
+              aria-labelledby="seo-audit-heading"
               className="mt-10 flex flex-col gap-6"
               noValidate
             >
-              <div className="absolute -left-[9999px] top-auto w-px h-px overflow-hidden">
+              <div
+                aria-hidden="true"
+                className="absolute -left-[9999px] top-auto w-px h-px overflow-hidden"
+              >
                 <label htmlFor="website">Website</label>
                 <input
                   id="website"
@@ -419,7 +425,7 @@ const SeoAudit: React.FC = () => {
 
               <button
                 type="submit"
-                className="bg-tertiary py-3 px-8 outline-none w-fit text-white font-bold shadow-md shadow-primary rounded-xl"
+                className="bg-tertiary py-3 px-8 outline-none w-fit text-white font-bold shadow-md shadow-primary rounded-xl focus-visible:ring-2 focus-visible:ring-[#915eff]"
                 disabled={loading}
               >
                 {loading ? "Submitting..." : "Submit"}

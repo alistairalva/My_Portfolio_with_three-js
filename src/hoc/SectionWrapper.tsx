@@ -14,13 +14,8 @@ const SectionWrapper = (Component: React.FC, idName: string) => {
         variants={staggerContainer()}
         initial="hidden"
         animate="show"
-        className={`${styles.padding} max-w-7xl mx-auto relative z-0`}
+        className={`${styles.padding} scroll-mt-24 max-w-7xl mx-auto relative z-0`}
       >
-        {sectionId ? (
-          <span className="hash-span" id={sectionId} aria-hidden="true">
-            &nbsp;
-          </span>
-        ) : null}
         <Component />
       </motion.section>
     );

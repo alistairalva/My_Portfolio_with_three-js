@@ -10,16 +10,16 @@ const Tech: React.FC = () => {
     <>
       <p className={styles.sectionSubText}>Tools and Platforms</p>
       <h2 className={styles.sectionHeadText}>Tech Stack.</h2>
-      <div
-        className="mt-10 flex flex-row flex-wrap justify-center gap-10"
+      <ul
+        className="mt-10 flex flex-row flex-wrap justify-center gap-10 list-none"
         aria-label="Technology icons"
       >
         {technologies.map((technology) => (
-          <div className="w-28 h-28" key={technology.name}>
+          <li className="w-28 h-28" key={technology.name}>
             <BallCanvas icon={technology.icon} />
-          </div>
+          </li>
         ))}
-      </div>
+      </ul>
     </>
   );
 };
