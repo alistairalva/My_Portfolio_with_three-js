@@ -411,7 +411,6 @@ const SeoAudit: React.FC = () => {
                   >
                     <option value="">Select a contact method</option>
                     <option value="email">Email</option>
-                    <option value="phone">Phone</option>
                     <option value="whatsapp">WhatsApp</option>
                     <option value="zoom">Zoom</option>
                   </select>
