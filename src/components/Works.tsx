@@ -25,13 +25,21 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ index, project }) => {
           className="bg-tertiary p-5 rounded-2xl sm:w-[360px] w-full"
         >
           <div className="relative w-full h-[230px]">
-            <img
-              src={project.image}
-              alt={project.name}
-              className="w-full h-full object-cover rounded-2xl"
-              loading="lazy"
-              decoding="async"
-            />
+            <picture>
+              {project.imageMobile ? (
+                <source
+                  media="(max-width: 768px)"
+                  srcSet={project.imageMobile}
+                />
+              ) : null}
+              <img
+                src={project.image}
+                alt={project.name}
+                className="w-full h-full object-cover rounded-2xl"
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
             <div className="absolute inset-0 flex justify-end m-3 card-img_hover">
               <a
                 href={project.source_code_link}

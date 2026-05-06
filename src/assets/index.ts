@@ -22,12 +22,15 @@ import typescript from "./tech/typescript.png";
 import csharp from "./tech/c_sharp.png";
 
 import redding_designs from "./company/redding_designs.svg";
-import goodLife from "./company/goodLife.png";
+import goodLife from "./company/goodLife.webp";
 import krachi_space from "./company/krachi_space.png";
 
-import emergencyapp from "./emergencyapp.png";
-import restaurant from "./restaurant.png";
-import youtubecharts from "./youtubecharts.png";
+import emergencyapp from "./emergencyapp.webp";
+import emergencyappMobile from "./emergencyapp-mobile.webp";
+import restaurant from "./restaurant.webp";
+import restaurantMobile from "./restaurant-mobile.webp";
+import youtubecharts from "./youtubecharts.webp";
+import youtubechartsMobile from "./youtubecharts-mobile.webp";
 
 export {
   logo,
@@ -55,6 +58,9 @@ export {
   goodLife,
   krachi_space,
   emergencyapp,
+  emergencyappMobile,
   restaurant,
+  restaurantMobile,
   youtubecharts,
+  youtubechartsMobile,
 };

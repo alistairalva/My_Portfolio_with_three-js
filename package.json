@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "optimize:images": "node scripts/optimize-images.mjs",
+    "optimize:model": "gltf-transform optimize public/desktop_pc/scene.gltf public/desktop_pc/scene.optimized.glb --compress draco --texture-compress webp --texture-size 1024 --meshopt-level high"
   },
   "dependencies": {
     "@emailjs/browser": "^4.3.3",
@@ -37,6 +39,7 @@
     "typewriter-effect": "^2.21.0"
   },
   "devDependencies": {
+    "@gltf-transform/cli": "^4.3.0",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "@types/react-vertical-timeline-component": "^3.3.6",
@@ -52,6 +55,7 @@
     "eslint-plugin-react-refresh": "^0.4.6",
     "postcss": "^8.4.38",
     "prettier": "^3.2.5",
+    "sharp": "^0.34.5",
     "tailwindcss": "^3.4.3",
     "typescript": "^5.2.2",
     "vite": "^5.2.0"

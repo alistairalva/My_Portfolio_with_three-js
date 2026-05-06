@@ -1,9 +1,60 @@
-import React from "react";
+import React, { lazy, Suspense, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { styles } from "../styles";
-import ComputersCanvas from "./canvas/Computers";
+
+const ComputersCanvas = lazy(() => import("./canvas/Computers"));
+
+type NavigatorConnection = {
+  saveData?: boolean;
+  effectiveType?: string;
+};
+
+type WindowWithIdle = Window & {
+  requestIdleCallback?: (
+    callback: IdleRequestCallback,
+    options?: IdleRequestOptions,
+  ) => number;
+  cancelIdleCallback?: (handle: number) => void;
+};
 
 const Hero: React.FC = () => {
+  const [shouldRenderCanvas, setShouldRenderCanvas] = useState(false);
+
+  useEffect(() => {
+    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const mobileQuery = window.matchMedia("(max-width: 768px)");
+    const connection = (
+      navigator as Navigator & {
+        connection?: NavigatorConnection;
+      }
+    ).connection;
+
+    const isLowPerfDevice =
+      motionQuery.matches ||
+      mobileQuery.matches ||
+      Boolean(connection?.saveData) ||
+      connection?.effectiveType === "slow-2g" ||
+      connection?.effectiveType === "2g";
+
+    if (isLowPerfDevice) {
+      return;
+    }
+
+    const scheduleRender = () => setShouldRenderCanvas(true);
+    const idleWindow = window as WindowWithIdle;
+
+    if (idleWindow.requestIdleCallback) {
+      const idleId = idleWindow.requestIdleCallback(scheduleRender, {
+        timeout: 1200,
+      });
+
+      return () => idleWindow.cancelIdleCallback?.(idleId);
+    }
+
+    const timeoutId = setTimeout(scheduleRender, 600);
+    return () => clearTimeout(timeoutId);
+  }, []);
+
   return (
     <section className={`relative w-full h-screen mx-auto`}>
       <div
@@ -26,7 +77,11 @@ const Hero: React.FC = () => {
           </p>
         </div>
       </div>
-      <ComputersCanvas />
+      {shouldRenderCanvas ? (
+        <Suspense fallback={null}>
+          <ComputersCanvas />
+        </Suspense>
+      ) : null}
       <div className="absolute xs:bottom-10 bottom-32 w-full  flex justify-center items-center">
         <a
           href="#about"

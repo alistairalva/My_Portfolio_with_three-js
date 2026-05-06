@@ -1,13 +1,14 @@
-import React, { useState, useRef } from "react";
+import React, { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { toast } from "react-toastify";
 import email from "@emailjs/browser";
 import { styles } from "../styles";
-import { EarthCanvas } from "./canvas";
 import { SectionWrapper } from "../hoc";
 import { slideIn } from "../motion";
 
 import "react-toastify/dist/ReactToastify.css";
+
+const EarthCanvas = lazy(() => import("./canvas/Earth"));
 
 const Contact: React.FC = () => {
   const formRef = useRef<HTMLFormElement>(null);
@@ -29,6 +30,31 @@ const Contact: React.FC = () => {
   });
 
   const [loading, setLoading] = useState(false);
+  const [shouldRenderEarth, setShouldRenderEarth] = useState(false);
+  const earthContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const target = earthContainerRef.current;
+    if (!target || shouldRenderEarth) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        if (entry?.isIntersecting) {
+          setShouldRenderEarth(true);
+          observer.disconnect();
+        }
+      },
+      {
+        rootMargin: "200px",
+      },
+    );
+
+    observer.observe(target);
+    return () => observer.disconnect();
+  }, [shouldRenderEarth]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -128,10 +154,15 @@ const Contact: React.FC = () => {
         </form>
       </motion.div>
       <motion.div
+        ref={earthContainerRef}
         variants={slideIn("left", "tween", 0.2, 0.1)}
         className="xl:flex-1 xl:h-auto md:h-[550px] h-[350px]"
       >
-        <EarthCanvas />
+        {shouldRenderEarth ? (
+          <Suspense fallback={null}>
+            <EarthCanvas />
+          </Suspense>
+        ) : null}
       </motion.div>
     </div>
   );

@@ -20,8 +20,11 @@ import {
   krachi_space,
   logo,
   emergencyapp,
+  emergencyappMobile,
   restaurant,
+  restaurantMobile,
   youtubecharts,
+  youtubechartsMobile,
   csharp,
 } from "../assets";
 
@@ -248,6 +251,7 @@ export interface Project {
   description: string;
   tags: { name: string; color: string }[];
   image: string;
+  imageMobile?: string;
   source_code_link: string;
 }
 
@@ -271,6 +275,7 @@ const projects: Project[] = [
       },
     ],
     image: emergencyapp,
+    imageMobile: emergencyappMobile,
     source_code_link:
       "https://github.com/alistairalva/Emergency_Contact_Application",
   },
@@ -293,6 +298,7 @@ const projects: Project[] = [
       },
     ],
     image: restaurant,
+    imageMobile: restaurantMobile,
     source_code_link: "https://github.com/alistairalva/ApplicationProject",
   },
   {
@@ -314,6 +320,7 @@ const projects: Project[] = [
       },
     ],
     image: youtubecharts,
+    imageMobile: youtubechartsMobile,
     source_code_link:
       "https://github.com/alistairalva/Data-Visualizations-For-Youtube-using-d3.js",
   },

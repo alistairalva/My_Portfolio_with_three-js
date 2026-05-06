@@ -6,7 +6,7 @@ import { track } from "@vercel/analytics";
 
 import { styles } from "../styles";
 import { slideIn } from "../motion";
-import { StarsCanvas } from "./canvas";
+import StarsCanvas from "./canvas/Stars";
 
 type SeoAuditForm = {
   fullName: string;

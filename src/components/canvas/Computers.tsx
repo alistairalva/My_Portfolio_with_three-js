@@ -1,6 +1,6 @@
 import { Suspense, useState, useEffect, FC } from "react";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, useGLTF } from "@react-three/drei";
+import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 
 import CanvasLoader from "../Loader";
@@ -9,8 +9,10 @@ type ComputersProps = {
   isMobile: boolean;
 };
 
+const MODEL_PATH = "/desktop_pc/scene.optimized.glb";
+
 const Computers: FC<ComputersProps> = ({ isMobile }) => {
-  const computer: GLTF = useGLTF("./desktop_pc/scene.gltf");
+  const computer: GLTF = useGLTF(MODEL_PATH);
 
   return (
     <mesh>
@@ -20,9 +22,7 @@ const Computers: FC<ComputersProps> = ({ isMobile }) => {
         position={[-20, -50, 10]}
         angle={0.12}
         penumbra={1}
-        intensity={1}
-        castShadow
-        shadow-mapSize={1024}
+        intensity={0.75}
       />
       <primitive
         object={computer.scene}
@@ -53,21 +53,17 @@ const ComputersCanvas: FC = () => {
   return (
     <Canvas
       frameloop="demand"
-      shadows
       camera={{ position: [20, 3, 5], fov: 25 }}
-      dpr={[1, 1.5]}
+      dpr={[1, 1.25]}
       gl={{ antialias: false, powerPreference: "high-performance" }}
     >
       <Suspense fallback={<CanvasLoader />}>
-        <OrbitControls
-          enableZoom={false}
-          maxPolarAngle={Math.PI / 2}
-          minPolarAngle={Math.PI / 2}
-        />
         <Computers isMobile={isMobile} />
       </Suspense>
     </Canvas>
   );
 };
+
+useGLTF.preload(MODEL_PATH);
 
 export default ComputersCanvas;
