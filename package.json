@@ -9,7 +9,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "optimize:images": "node scripts/optimize-images.mjs",
-    "optimize:model": "gltf-transform optimize public/desktop_pc/scene.gltf public/desktop_pc/scene.optimized.glb --compress draco --texture-compress webp --texture-size 1024 --meshopt-level high"
+    "optimize:model": "gltf-transform optimize tools/model-source/desktop_pc/scene.gltf public/desktop_pc/scene.optimized.glb --compress draco --texture-compress webp --texture-size 1024 --meshopt-level high"
   },
   "dependencies": {
     "@emailjs/browser": "^4.3.3",

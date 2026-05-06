@@ -1,6 +1,6 @@
 import { Suspense, useState, useEffect, FC } from "react";
 import { Canvas } from "@react-three/fiber";
-import { useGLTF } from "@react-three/drei";
+import { OrbitControls, useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 
 import CanvasLoader from "../Loader";
@@ -58,6 +58,11 @@ const ComputersCanvas: FC = () => {
       gl={{ antialias: false, powerPreference: "high-performance" }}
     >
       <Suspense fallback={<CanvasLoader />}>
+        <OrbitControls
+          enableZoom={false}
+          maxPolarAngle={Math.PI / 2}
+          minPolarAngle={Math.PI / 2}
+        />
         <Computers isMobile={isMobile} />
       </Suspense>
     </Canvas>

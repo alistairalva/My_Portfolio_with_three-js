@@ -56,10 +56,10 @@ const Hero: React.FC = () => {
   }, []);
 
   return (
-    <section className={`relative w-full h-screen mx-auto`}>
+    <section className={`relative w-full mx-auto md:h-screen`}>
       <div
-        className={`${styles.paddingX} absolute inset-0 top-[120px] max-w-7xl mx-auto flex 
-        flex-row items-start gap-5`}
+        className={`${styles.paddingX} relative z-10 pt-[120px] pb-10 max-w-7xl mx-auto flex 
+        flex-row items-start gap-5 md:absolute md:inset-0 md:top-[120px] md:pt-0 md:pb-0`}
       >
         <div className="flex flex-col justify-center items-center mt-5">
           <div className="w-5 h-5 rounded-full bg-[#915eff]" />
@@ -82,7 +82,7 @@ const Hero: React.FC = () => {
           <ComputersCanvas />
         </Suspense>
       ) : null}
-      <div className="absolute xs:bottom-10 bottom-32 w-full  flex justify-center items-center">
+      <div className="hidden md:flex absolute xs:bottom-10 bottom-32 w-full justify-center items-center">
         <a
           href="#about"
           aria-label="Scroll to About section"
