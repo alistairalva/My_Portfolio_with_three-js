@@ -27,6 +27,7 @@
 - Sitemap: https://alistairalva.com/sitemap.xml
 - Robots: https://alistairalva.com/robots.txt
 - Full context file: https://alistairalva.com/llms-full.txt
+- Static content index: https://alistairalva.com/content-index.md
 
 ## Metadata notes
 - Route metadata is updated dynamically for title, description, canonical, Open Graph, Twitter, and JSON-LD.

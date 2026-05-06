@@ -7,6 +7,7 @@ import { track } from "@vercel/analytics";
 import { styles } from "../styles";
 import { slideIn } from "../motion";
 import StarsCanvas from "./canvas/Stars";
+import { seoAuditFaq } from "../constants/seo";
 
 type SeoAuditForm = {
   fullName: string;
@@ -431,6 +432,30 @@ const SeoAudit: React.FC = () => {
                 {loading ? "Submitting..." : "Submit"}
               </button>
             </form>
+
+            <section className="mt-12" aria-labelledby="seo-audit-faq-heading">
+              <h2
+                id="seo-audit-faq-heading"
+                className="text-white font-bold text-[28px]"
+              >
+                Frequently Asked Questions
+              </h2>
+              <dl className="mt-6 space-y-5">
+                {seoAuditFaq.map((item) => (
+                  <div
+                    key={item.question}
+                    className="bg-tertiary rounded-lg p-5"
+                  >
+                    <dt className="text-white font-semibold text-[17px]">
+                      {item.question}
+                    </dt>
+                    <dd className="mt-2 text-secondary leading-[28px]">
+                      {item.answer}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </section>
           </motion.div>
         </div>
       </div>

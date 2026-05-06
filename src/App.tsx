@@ -5,6 +5,8 @@ import Navbar from "./components/Navbar";
 import { ToastContainer } from "react-toastify";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
+import { projects } from "./constants";
+import { seoAuditFaq } from "./constants/seo";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
 const SeoAudit = lazy(() => import("./components/SeoAudit"));
@@ -16,11 +18,6 @@ type RouteMeta = {
   socialImage: string;
   socialImageAlt: string;
   keywords: string;
-};
-
-type FaqItem = {
-  question: string;
-  answer: string;
 };
 
 const routeMeta: Record<string, RouteMeta> = {
@@ -52,24 +49,6 @@ const routeMeta: Record<string, RouteMeta> = {
     keywords: "seo audit request confirmation, thank you page",
   },
 };
-
-const seoAuditFaq: FaqItem[] = [
-  {
-    question: "What do I get in the free SEO audit?",
-    answer:
-      "You get a practical review of technical SEO, content opportunities, and prioritized next steps for growth.",
-  },
-  {
-    question: "How long does the SEO audit take?",
-    answer:
-      "Audit delivery times depend on website size and complexity, but requests are typically reviewed promptly after submission.",
-  },
-  {
-    question: "Who is this SEO audit for?",
-    answer:
-      "It is designed for startups, local businesses, and growing brands that want clear SEO improvements and faster execution.",
-  },
-];
 
 const upsertMetaTag = (
   selector: string,
@@ -113,6 +92,12 @@ const RouteMetadata: FC = () => {
     );
     upsertMetaTag('meta[name="author"]', "name", "author", "Alistair Alva");
     upsertMetaTag('meta[name="robots"]', "name", "robots", robotsDirective);
+    upsertMetaTag(
+      'meta[name="googlebot"]',
+      "name",
+      "googlebot",
+      robotsDirective,
+    );
     upsertMetaTag('meta[property="og:type"]', "property", "og:type", "website");
     upsertMetaTag(
       'meta[property="og:site_name"]',
@@ -143,6 +128,24 @@ const RouteMetadata: FC = () => {
       "property",
       "og:image",
       `${baseUrl}${selectedMeta.socialImage}`,
+    );
+    upsertMetaTag(
+      'meta[property="og:image:type"]',
+      "property",
+      "og:image:type",
+      "image/svg+xml",
+    );
+    upsertMetaTag(
+      'meta[property="og:image:width"]',
+      "property",
+      "og:image:width",
+      "1200",
+    );
+    upsertMetaTag(
+      'meta[property="og:image:height"]',
+      "property",
+      "og:image:height",
+      "630",
     );
     upsertMetaTag(
       'meta[property="og:image:alt"]',
@@ -186,6 +189,12 @@ const RouteMetadata: FC = () => {
       "twitter:image:alt",
       selectedMeta.socialImageAlt,
     );
+    upsertMetaTag(
+      'meta[name="twitter:url"]',
+      "name",
+      "twitter:url",
+      canonicalUrl,
+    );
 
     let canonicalTag = document.querySelector(
       'link[rel="canonical"]',
@@ -206,6 +215,10 @@ const RouteMetadata: FC = () => {
       description:
         "Technology consultant and software developer portfolio with engineering case studies and SEO audit services.",
       inLanguage: "en",
+      potentialAction: {
+        "@type": "ReadAction",
+        target: [`${baseUrl}/`, `${baseUrl}/free-seo-audit`],
+      },
     };
 
     const webPageSchema = {
@@ -218,6 +231,7 @@ const RouteMetadata: FC = () => {
         "@id": `${baseUrl}/#website`,
       },
       inLanguage: "en",
+      primaryImageOfPage: `${baseUrl}${selectedMeta.socialImage}`,
     };
 
     const personSchema = {
@@ -229,6 +243,7 @@ const RouteMetadata: FC = () => {
       description:
         "Technology consultant and software developer focused on backend systems, cloud architecture, and growth-oriented web delivery.",
       image: `${baseUrl}/logo.svg`,
+      sameAs: ["https://github.com/alistairalva"],
       mainEntityOfPage: {
         "@id": `${canonicalUrl}#webpage`,
       },
@@ -254,6 +269,80 @@ const RouteMetadata: FC = () => {
       url: `${baseUrl}/free-seo-audit`,
     };
 
+    const breadcrumbItems =
+      pathname === "/"
+        ? [
+            {
+              "@type": "ListItem",
+              position: 1,
+              name: "Home",
+              item: `${baseUrl}/`,
+            },
+          ]
+        : pathname === "/free-seo-audit"
+          ? [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: "Home",
+                item: `${baseUrl}/`,
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: "Free SEO Audit",
+                item: `${baseUrl}/free-seo-audit`,
+              },
+            ]
+          : [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: "Home",
+                item: `${baseUrl}/`,
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: "Free SEO Audit",
+                item: `${baseUrl}/free-seo-audit`,
+              },
+              {
+                "@type": "ListItem",
+                position: 3,
+                name: "Thank You",
+                item: `${baseUrl}/thank-you`,
+              },
+            ];
+
+    const breadcrumbSchema = {
+      "@type": "BreadcrumbList",
+      "@id": `${canonicalUrl}#breadcrumb`,
+      itemListElement: breadcrumbItems,
+    };
+
+    const projectListSchema = {
+      "@type": "ItemList",
+      "@id": `${baseUrl}/#projects`,
+      name: "Featured Projects",
+      itemListOrder: "https://schema.org/ItemListOrderAscending",
+      numberOfItems: projects.length,
+      itemListElement: projects.map((project, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        item: {
+          "@type": "SoftwareSourceCode",
+          name: project.name,
+          description: project.description,
+          codeRepository: project.source_code_link,
+          keywords: project.tags.map((tag) => tag.name).join(", "),
+          author: {
+            "@id": `${baseUrl}/#person`,
+          },
+        },
+      })),
+    };
+
     const faqSchema = {
       "@type": "FAQPage",
       "@id": `${baseUrl}/free-seo-audit#faq`,
@@ -268,9 +357,24 @@ const RouteMetadata: FC = () => {
     };
 
     const graph =
-      pathname === "/free-seo-audit"
-        ? [websiteSchema, webPageSchema, personSchema, serviceSchema, faqSchema]
-        : [websiteSchema, webPageSchema, personSchema];
+      pathname === "/"
+        ? [
+            websiteSchema,
+            webPageSchema,
+            personSchema,
+            breadcrumbSchema,
+            projectListSchema,
+          ]
+        : pathname === "/free-seo-audit"
+          ? [
+              websiteSchema,
+              webPageSchema,
+              personSchema,
+              breadcrumbSchema,
+              serviceSchema,
+              faqSchema,
+            ]
+          : [websiteSchema, webPageSchema, personSchema, breadcrumbSchema];
 
     const structuredData = {
       "@context": "https://schema.org",

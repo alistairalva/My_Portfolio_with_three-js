@@ -41,6 +41,7 @@ Alistair Alva is a technology consultant and software developer focused on backe
 ## Freshness pointers
 - Sitemap: https://alistairalva.com/sitemap.xml
 - Robots policy: https://alistairalva.com/robots.txt
+- Static content index: https://alistairalva.com/content-index.md
 
 ## Contact path
 - Homepage contact section: https://alistairalva.com/#contact
