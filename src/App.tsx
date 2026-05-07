@@ -1,5 +1,5 @@
 import { FC, Suspense, lazy, useEffect } from "react";
-import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
 import { ToastContainer } from "react-toastify";
@@ -398,7 +398,7 @@ const RouteMetadata: FC = () => {
 
 const App: FC = () => {
   return (
-    <BrowserRouter>
+    <>
       <Analytics />
       <SpeedInsights />
       <RouteMetadata />
@@ -421,7 +421,7 @@ const App: FC = () => {
         </Routes>
       </Suspense>
       <ToastContainer />
-    </BrowserRouter>
+    </>
   );
 };
 

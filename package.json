@@ -5,9 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:ssr": "node server.mjs",
     "build": "tsc && vite build",
+    "build:ssr": "tsc && vite build --outDir dist/client && vite build --ssr src/entry-server.tsx --outDir dist/server",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
+    "preview:ssr": "node server.mjs",
     "optimize:images": "node scripts/optimize-images.mjs",
     "optimize:model": "gltf-transform optimize tools/model-source/desktop_pc/scene.gltf public/desktop_pc/scene.optimized.glb --compress draco --texture-compress webp --texture-size 1024 --meshopt-level high"
   },
@@ -25,6 +28,7 @@
     "emailjs": "^4.0.3",
     "framer-motion": "^11.1.7",
     "maath": "^0.10.7",
+    "express": "^4.21.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-horizontal-scrolling-menu": "^7.1.0",
