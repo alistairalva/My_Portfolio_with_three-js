@@ -1,6 +1,8 @@
 import React, { lazy, Suspense, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { styles } from "../styles";
+import heroBg from "../assets/herobg.webp";
+import heroBgMobile from "../assets/herobg-mobile.webp";
 
 const ComputersCanvas = lazy(() => import("./canvas/Computers"));
 
@@ -57,6 +59,24 @@ const Hero: React.FC = () => {
 
   return (
     <section className={`relative w-full mx-auto md:h-screen`}>
+      <picture className="absolute inset-0 z-0">
+        <source media="(max-width: 768px)" srcSet={heroBgMobile} />
+        <img
+          src={heroBg}
+          alt=""
+          aria-hidden="true"
+          fetchPriority="high"
+          loading="eager"
+          decoding="async"
+          width={1920}
+          height={1080}
+          className="h-full w-full object-cover"
+        />
+      </picture>
+      <div
+        className="absolute inset-0 z-[1] bg-primary/20"
+        aria-hidden="true"
+      />
       <div
         className={`${styles.paddingX} pointer-events-none relative z-10 pt-[120px] pb-10 max-w-7xl mx-auto flex 
         flex-row items-start gap-5 md:absolute md:inset-0 md:top-[120px] md:pt-0 md:pb-0`}

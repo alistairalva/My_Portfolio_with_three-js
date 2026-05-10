@@ -70,9 +70,7 @@ const DeferredSection: FC<DeferredSectionProps> = ({
 const HomePage: FC = () => {
   return (
     <main id="main-content" className="relative z-0 bg-primary">
-      <div className="bg-hero-pattern-mobile md:bg-hero-pattern bg-cover bg-no-repeat bg-center">
-        <Hero />
-      </div>
+      <Hero />
       <About />
       <DeferredSection placeholderClassName="h-24" rootMargin="300px">
         <Experience />
