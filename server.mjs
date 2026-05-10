@@ -6,9 +6,69 @@ import { createServer as createViteServer } from "vite";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const resolvePath = (...parts) => path.resolve(__dirname, ...parts);
+const HERO_DESKTOP_DEV_PATH = "/src/assets/herobg.webp";
+const HERO_MOBILE_DEV_PATH = "/src/assets/herobg-mobile.webp";
 
 const isProd = process.env.NODE_ENV === "production";
 const app = express();
+
+let cachedProdHeroAssets = null;
+
+const isHomeRoute = (url) => {
+  const pathname = new URL(url, "http://localhost").pathname;
+  return pathname === "/";
+};
+
+const buildHeroPreloadTags = ({ desktopPath, mobilePath }) => {
+  return [
+    `<link rel="preload" as="image" href="${mobilePath}" media="(max-width: 768px)" type="image/webp" fetchpriority="high" data-hero-lcp="mobile" />`,
+    `<link rel="preload" as="image" href="${desktopPath}" media="(min-width: 769px)" type="image/webp" fetchpriority="high" data-hero-lcp="desktop" />`,
+  ].join("\n    ");
+};
+
+const injectHeadTags = (template, headTags) => {
+  if (!headTags || template.includes("data-hero-lcp")) {
+    return template;
+  }
+
+  return template.replace("</head>", `    ${headTags}\n  </head>`);
+};
+
+const resolveProdHeroAssets = async () => {
+  if (cachedProdHeroAssets) {
+    return cachedProdHeroAssets;
+  }
+
+  const assetsDir = resolvePath("dist/client/assets");
+
+  try {
+    const files = await fs.readdir(assetsDir);
+    const desktopFile = files.find(
+      (fileName) =>
+        fileName.startsWith("herobg-") &&
+        !fileName.startsWith("herobg-mobile-") &&
+        fileName.endsWith(".webp"),
+    );
+    const mobileFile = files.find(
+      (fileName) =>
+        fileName.startsWith("herobg-mobile-") && fileName.endsWith(".webp"),
+    );
+
+    cachedProdHeroAssets = {
+      desktopPath: desktopFile
+        ? `/assets/${desktopFile}`
+        : HERO_DESKTOP_DEV_PATH,
+      mobilePath: mobileFile ? `/assets/${mobileFile}` : HERO_MOBILE_DEV_PATH,
+    };
+  } catch {
+    cachedProdHeroAssets = {
+      desktopPath: HERO_DESKTOP_DEV_PATH,
+      mobilePath: HERO_MOBILE_DEV_PATH,
+    };
+  }
+
+  return cachedProdHeroAssets;
+};
 
 let vite;
 if (!isProd) {
@@ -46,7 +106,22 @@ app.use("*", async (req, res, next) => {
     }
 
     const { appHtml } = await render(url);
-    const html = template.replace("<!--app-html-->", appHtml);
+
+    let heroPreloadTags = "";
+    if (isHomeRoute(url)) {
+      const heroAssets = isProd
+        ? await resolveProdHeroAssets()
+        : {
+            desktopPath: HERO_DESKTOP_DEV_PATH,
+            mobilePath: HERO_MOBILE_DEV_PATH,
+          };
+      heroPreloadTags = buildHeroPreloadTags(heroAssets);
+    }
+
+    const html = injectHeadTags(
+      template.replace("<!--app-html-->", appHtml),
+      heroPreloadTags,
+    );
 
     res.status(200).set({ "Content-Type": "text/html" }).end(html);
   } catch (error) {
