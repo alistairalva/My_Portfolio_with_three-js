@@ -44,21 +44,42 @@ const Hero: React.FC = () => {
 
     const scheduleRender = () => setShouldRenderCanvas(true);
     const idleWindow = window as WindowWithIdle;
+    let timeoutId: ReturnType<typeof setTimeout> | undefined;
+    let idleId: number | undefined;
 
-    if (idleWindow.requestIdleCallback) {
-      const idleId = idleWindow.requestIdleCallback(scheduleRender, {
-        timeout: 1200,
-      });
+    const startDeferredRender = () => {
+      // Defer 3D import until after load + idle to reduce main-thread contention.
+      if (idleWindow.requestIdleCallback) {
+        idleId = idleWindow.requestIdleCallback(scheduleRender, {
+          timeout: 2600,
+        });
+        return;
+      }
 
-      return () => idleWindow.cancelIdleCallback?.(idleId);
+      timeoutId = setTimeout(scheduleRender, 2200);
+    };
+
+    if (document.readyState === "complete") {
+      startDeferredRender();
+    } else {
+      window.addEventListener("load", startDeferredRender, { once: true });
     }
 
-    const timeoutId = setTimeout(scheduleRender, 600);
-    return () => clearTimeout(timeoutId);
+    return () => {
+      window.removeEventListener("load", startDeferredRender);
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+      if (idleId !== undefined) {
+        idleWindow.cancelIdleCallback?.(idleId);
+      }
+    };
   }, []);
 
   return (
-    <section className={`relative w-full mx-auto md:h-screen`}>
+    <section
+      className={`relative w-full mx-auto min-h-[72vh] md:h-screen overflow-hidden`}
+    >
       <picture className="absolute inset-0 z-0">
         <source media="(max-width: 768px)" srcSet={heroBgMobile} />
         <img
@@ -97,11 +118,13 @@ const Hero: React.FC = () => {
           </p>
         </div>
       </div>
-      {shouldRenderCanvas ? (
-        <Suspense fallback={null}>
-          <ComputersCanvas />
-        </Suspense>
-      ) : null}
+      <div className="absolute inset-0 z-[2]">
+        {shouldRenderCanvas ? (
+          <Suspense fallback={null}>
+            <ComputersCanvas />
+          </Suspense>
+        ) : null}
+      </div>
       <div className="hidden md:flex absolute z-20 xs:bottom-10 bottom-32 w-full justify-center items-center">
         <a
           href="#about"

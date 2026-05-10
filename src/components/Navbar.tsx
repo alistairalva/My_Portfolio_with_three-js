@@ -82,13 +82,35 @@ const Navbar: React.FC = () => {
       return;
     }
 
-    requestAnimationFrame(() => {
-      document
-        .getElementById(targetSection)
-        ?.scrollIntoView({ behavior: "smooth" });
-    });
+    let animationFrameId = 0;
+    let attempts = 0;
+    const maxAttempts = 45;
 
-    navigate(pathname, { replace: true, state: null });
+    const scrollToSectionWhenReady = () => {
+      const sectionElement = document.getElementById(targetSection);
+
+      if (sectionElement) {
+        sectionElement.scrollIntoView({ behavior: "smooth" });
+        navigate(pathname, { replace: true, state: null });
+        return;
+      }
+
+      attempts += 1;
+      if (attempts < maxAttempts) {
+        animationFrameId = window.requestAnimationFrame(
+          scrollToSectionWhenReady,
+        );
+        return;
+      }
+
+      navigate(pathname, { replace: true, state: null });
+    };
+
+    animationFrameId = window.requestAnimationFrame(scrollToSectionWhenReady);
+
+    return () => {
+      window.cancelAnimationFrame(animationFrameId);
+    };
   }, [isHomeRoute, location.state, navigate, pathname]);
 
   const handleBrandClick = () => {

@@ -7,6 +7,7 @@ import {
   useRef,
   useState,
 } from "react";
+import { useLocation } from "react-router-dom";
 
 import About from "../components/About";
 import Hero from "../components/Hero";
@@ -21,17 +22,24 @@ type DeferredSectionProps = {
   children: ReactNode;
   rootMargin?: string;
   placeholderClassName?: string;
+  forceRender?: boolean;
 };
 
 const DeferredSection: FC<DeferredSectionProps> = ({
   children,
   rootMargin = "250px",
   placeholderClassName = "h-16",
+  forceRender = false,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [shouldRender, setShouldRender] = useState(false);
 
   useEffect(() => {
+    if (forceRender) {
+      setShouldRender(true);
+      return;
+    }
+
     const target = containerRef.current;
     if (!target || shouldRender) {
       return;
@@ -50,7 +58,7 @@ const DeferredSection: FC<DeferredSectionProps> = ({
 
     observer.observe(target);
     return () => observer.disconnect();
-  }, [rootMargin, shouldRender]);
+  }, [forceRender, rootMargin, shouldRender]);
 
   return (
     <div ref={containerRef}>
@@ -68,25 +76,50 @@ const DeferredSection: FC<DeferredSectionProps> = ({
 };
 
 const HomePage: FC = () => {
+  const { state } = useLocation();
+  const targetSection = (state as { targetSection?: string } | null)
+    ?.targetSection;
+  const forceDeferredSections = Boolean(targetSection);
+
   return (
     <main id="main-content" className="relative z-0 bg-primary">
       <Hero />
       <About />
-      <DeferredSection placeholderClassName="h-24" rootMargin="300px">
+      <DeferredSection
+        placeholderClassName="h-24"
+        rootMargin="120px"
+        forceRender={forceDeferredSections}
+      >
         <Experience />
       </DeferredSection>
-      <DeferredSection placeholderClassName="h-24" rootMargin="300px">
+      <DeferredSection
+        placeholderClassName="h-24"
+        rootMargin="120px"
+        forceRender={forceDeferredSections}
+      >
         <Tech />
       </DeferredSection>
-      <DeferredSection placeholderClassName="h-24" rootMargin="300px">
+      <DeferredSection
+        placeholderClassName="h-24"
+        rootMargin="120px"
+        forceRender={forceDeferredSections}
+      >
         <Works />
       </DeferredSection>
       {/* <Feedbacks /> */}
       <div className="relative z-0">
-        <DeferredSection placeholderClassName="h-24" rootMargin="350px">
+        <DeferredSection
+          placeholderClassName="h-24"
+          rootMargin="180px"
+          forceRender={forceDeferredSections}
+        >
           <Contact />
         </DeferredSection>
-        <DeferredSection placeholderClassName="h-0" rootMargin="350px">
+        <DeferredSection
+          placeholderClassName="h-0"
+          rootMargin="180px"
+          forceRender={forceDeferredSections}
+        >
           <StarsCanvas />
         </DeferredSection>
       </div>
