@@ -198,6 +198,9 @@ const SeoAudit: React.FC = () => {
       className="relative z-0 bg-primary min-h-screen"
       aria-label="Free SEO audit form"
     >
+      <title>
+        Free SEO Audit Request Form - Get Your Website Analyzed for Free
+      </title>
       <div className="relative z-10">
         <div className={`${styles.paddingX} pt-28 pb-16`}>
           <motion.div
@@ -206,10 +209,10 @@ const SeoAudit: React.FC = () => {
             animate="show"
             className="mx-auto w-full max-w-5xl bg-black-100 p-6 sm:p-8 rounded-2xl"
           >
-            <p className={styles.sectionSubText}>Free SEO and Site Audit</p>
-            <h1 id="seo-audit-heading" className={styles.sectionHeadText}>
+            <h1 className={styles.sectionSubText}>Free SEO and Site Audit</h1>
+            <h2 id="seo-audit-heading" className={styles.sectionHeadText}>
               Tell Me About Your Site.
-            </h1>
+            </h2>
             <p className="mt-4 text-secondary text-[16px] leading-[28px]">
               Share your current website details and goals. You will receive a
               practical audit focused on technical SEO, content opportunities,
