@@ -1,32 +1,51 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import express from "express";
-import { createServer as createViteServer } from "vite";
+import express, {
+  type NextFunction,
+  type Request,
+  type Response,
+} from "express";
+import { createServer as createViteServer, type ViteDevServer } from "vite";
+
+type HeroAssets = {
+  desktopPath: string;
+  mobilePath: string;
+};
+
+type RenderResult = {
+  appHtml: string;
+};
+
+type RenderFn = (url: string) => Promise<RenderResult>;
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const resolvePath = (...parts) => path.resolve(__dirname, ...parts);
+const resolvePath = (...parts: string[]): string =>
+  path.resolve(__dirname, ...parts);
 const HERO_DESKTOP_DEV_PATH = "/src/assets/herobg.webp";
 const HERO_MOBILE_DEV_PATH = "/src/assets/herobg-mobile.webp";
 
 const isProd = process.env.NODE_ENV === "production";
 const app = express();
 
-let cachedProdHeroAssets = null;
+let cachedProdHeroAssets: HeroAssets | null = null;
 
-const isHomeRoute = (url) => {
+const isHomeRoute = (url: string): boolean => {
   const pathname = new URL(url, "http://localhost").pathname;
   return pathname === "/";
 };
 
-const buildHeroPreloadTags = ({ desktopPath, mobilePath }) => {
+const buildHeroPreloadTags = ({
+  desktopPath,
+  mobilePath,
+}: HeroAssets): string => {
   return [
     `<link rel="preload" as="image" href="${mobilePath}" media="(max-width: 768px)" type="image/webp" fetchpriority="high" data-hero-lcp="mobile" />`,
     `<link rel="preload" as="image" href="${desktopPath}" media="(min-width: 769px)" type="image/webp" fetchpriority="high" data-hero-lcp="desktop" />`,
   ].join("\n    ");
 };
 
-const injectHeadTags = (template, headTags) => {
+const injectHeadTags = (template: string, headTags: string): string => {
   if (!headTags || template.includes("data-hero-lcp")) {
     return template;
   }
@@ -34,7 +53,7 @@ const injectHeadTags = (template, headTags) => {
   return template.replace("</head>", `    ${headTags}\n  </head>`);
 };
 
-const resolveProdHeroAssets = async () => {
+const resolveProdHeroAssets = async (): Promise<HeroAssets> => {
   if (cachedProdHeroAssets) {
     return cachedProdHeroAssets;
   }
@@ -70,7 +89,7 @@ const resolveProdHeroAssets = async () => {
   return cachedProdHeroAssets;
 };
 
-let vite;
+let vite: ViteDevServer | undefined;
 if (!isProd) {
   vite = await createViteServer({
     server: { middlewareMode: true },
@@ -85,24 +104,30 @@ if (!isProd) {
   );
 }
 
-app.use("*", async (req, res, next) => {
+app.use("*", async (req: Request, res: Response, next: NextFunction) => {
   const url = req.originalUrl;
 
   try {
-    let template;
-    let render;
+    let template: string;
+    let render: RenderFn;
 
     if (!isProd) {
+      const viteServer = vite;
+      if (!viteServer) {
+        throw new Error("Vite dev server is not initialized");
+      }
+
       template = await fs.readFile(resolvePath("index.html"), "utf-8");
-      template = await vite.transformIndexHtml(url, template);
-      render = (await vite.ssrLoadModule("/src/entry-server.tsx")).render;
+      template = await viteServer.transformIndexHtml(url, template);
+      render = (await viteServer.ssrLoadModule("/src/entry-server.tsx"))
+        .render as RenderFn;
     } else {
       template = await fs.readFile(
         resolvePath("dist/client/index.html"),
         "utf-8",
       );
       render = (await import(resolvePath("dist/server/entry-server.js")))
-        .render;
+        .render as RenderFn;
     }
 
     const { appHtml } = await render(url);
@@ -124,13 +149,15 @@ app.use("*", async (req, res, next) => {
     );
 
     res.status(200).set({ "Content-Type": "text/html" }).end(html);
-  } catch (error) {
-    vite?.ssrFixStacktrace(error);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      vite?.ssrFixStacktrace(error);
+    }
     next(error);
   }
 });
 
-const port = Number(process.env.PORT) || 5173;
+const port: number = Number(process.env.PORT) || 5173;
 app.listen(port, () => {
   console.log(`SSR server running at http://localhost:${port}`);
 });
