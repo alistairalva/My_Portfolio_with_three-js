@@ -49,6 +49,8 @@ const normalizeOrigin = (value: string | null | undefined): string => {
 };
 
 const getAllowedOrigins = (request: Request): Set<string> => {
+  const requestOrigin = normalizeOrigin(new URL(request.url).origin);
+
   const configuredOrigins = String(
     import.meta.env.AUDIT_ALLOWED_ORIGINS ||
       process.env.AUDIT_ALLOWED_ORIGINS ||
@@ -57,6 +59,10 @@ const getAllowedOrigins = (request: Request): Set<string> => {
     .split(",")
     .map((entry) => normalizeOrigin(entry))
     .filter(Boolean);
+
+  if (requestOrigin) {
+    configuredOrigins.push(requestOrigin);
+  }
 
   const forwardedProto = request.headers.get("x-forwarded-proto");
   const host = request.headers.get("host");

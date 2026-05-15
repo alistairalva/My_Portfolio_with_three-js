@@ -1,7 +1,7 @@
-import { c as createComponent } from './astro-component_D2Nf2q6N.mjs';
+import { c as createComponent } from './astro-component_Gdpiq1Oo.mjs';
 import 'piccolore';
-import { r as renderComponent, t as renderTemplate, p as maybeRenderHead, j as addAttribute } from './entrypoint_CrvsPcLY.mjs';
-import { $ as $$BaseLayout, A as AstroNavbar, a as styles } from './AstroNavbar_0JLaRSFt.mjs';
+import { r as renderComponent, t as renderTemplate, p as maybeRenderHead, j as addAttribute } from './entrypoint_DzxMRv0R.mjs';
+import { $ as $$BaseLayout, A as AstroNavbar, a as styles } from './AstroNavbar_B75kH4Ct.mjs';
 import { useEffect } from 'react';
 import { track } from '@vercel/analytics';
 

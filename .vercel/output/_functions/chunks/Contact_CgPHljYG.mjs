@@ -3,8 +3,8 @@ import { lazy, useRef, useState, useEffect, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { toast } from 'react-toastify';
 import email from '@emailjs/browser';
-import { a as styles } from './AstroNavbar_0JLaRSFt.mjs';
-import { S as SectionWrapper } from './index_Bgaaulb2.mjs';
+import { a as styles } from './AstroNavbar_B75kH4Ct.mjs';
+import { S as SectionWrapper } from './index_DLbif0VB.mjs';
 import { s as slideIn } from './ToastHost_DnYxOdd8.mjs';
 
 const __vite_import_meta_env__ = {"ASSETS_PREFIX": undefined, "BASE_URL": "/", "DEV": false, "MODE": "production", "PROD": true, "SITE": "https://alistairalva.com", "SSR": true};

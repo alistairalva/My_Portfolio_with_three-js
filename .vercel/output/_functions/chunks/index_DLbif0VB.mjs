@@ -1,7 +1,7 @@
-import { c as createComponent } from './astro-component_D2Nf2q6N.mjs';
+import { c as createComponent } from './astro-component_Gdpiq1Oo.mjs';
 import 'piccolore';
-import { r as renderComponent, t as renderTemplate } from './entrypoint_CrvsPcLY.mjs';
-import { a as styles, s as services, p as projects, $ as $$BaseLayout, A as AstroNavbar } from './AstroNavbar_0JLaRSFt.mjs';
+import { r as renderComponent, t as renderTemplate } from './entrypoint_DzxMRv0R.mjs';
+import { a as styles, s as services, p as projects, $ as $$BaseLayout, A as AstroNavbar } from './AstroNavbar_B75kH4Ct.mjs';
 import { jsx, jsxs, Fragment } from 'react/jsx-runtime';
 import { lazy, useState, useEffect, Suspense, useRef } from 'react';
 import Tilt from 'react-parallax-tilt';
@@ -104,6 +104,23 @@ const heroBgMobile = new Proxy({"src":"/_astro/herobg-mobile.B6JNJd4l.webp","wid
 						}
 					});
 
+const toAssetUrl = (asset) => {
+  if (typeof asset === "string") {
+    return asset;
+  }
+  if (typeof asset?.src === "string") {
+    return asset.src;
+  }
+  if (typeof asset?.default === "string") {
+    return asset.default;
+  }
+  if (asset?.default && typeof asset.default === "object" && typeof asset.default.src === "string") {
+    return asset.default.src;
+  }
+  return "";
+};
+const heroBgUrl = toAssetUrl(heroBg);
+const heroBgMobileUrl = toAssetUrl(heroBgMobile);
 const ComputersCanvas = lazy(() => import('./Computers_DbvEGyR0.mjs'));
 const Hero = () => {
   const [shouldRenderCanvas, setShouldRenderCanvas] = useState(false);
@@ -149,11 +166,11 @@ const Hero = () => {
       className: `relative w-full mx-auto min-h-[72vh] md:h-screen overflow-hidden`,
       children: [
         /* @__PURE__ */ jsxs("picture", { className: "absolute inset-0 z-0", children: [
-          /* @__PURE__ */ jsx("source", { media: "(max-width: 768px)", srcSet: heroBgMobile }),
+          /* @__PURE__ */ jsx("source", { media: "(max-width: 768px)", srcSet: heroBgMobileUrl }),
           /* @__PURE__ */ jsx(
             "img",
             {
-              src: heroBg,
+              src: heroBgUrl,
               alt: "",
               "aria-hidden": "true",
               fetchPriority: "high",
@@ -227,10 +244,10 @@ const Hero = () => {
   );
 };
 
-const Experience = lazy(() => import('./Experience_1yOrcpcu.mjs'));
-const Tech = lazy(() => import('./Tech_BXQiYR0n.mjs'));
-const Works = lazy(() => import('./Works_Ch3vN2Km.mjs'));
-const Contact = lazy(() => import('./Contact_D3fRwoNn.mjs'));
+const Experience = lazy(() => import('./Experience_-VG0UnIe.mjs'));
+const Tech = lazy(() => import('./Tech_BT1A8Dsf.mjs'));
+const Works = lazy(() => import('./Works_s0Td-BAW.mjs'));
+const Contact = lazy(() => import('./Contact_CgPHljYG.mjs'));
 const StarsCanvas = lazy(() => import('./Stars_Cls4BoDU.mjs'));
 const DeferredSection = ({
   children,

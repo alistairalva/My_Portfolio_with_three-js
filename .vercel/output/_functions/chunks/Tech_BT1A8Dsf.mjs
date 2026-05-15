@@ -3,8 +3,8 @@ import { useState, useEffect, Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, useTexture, Float, Decal } from '@react-three/drei';
 import { L as Loader } from './Loader_I9TZdz-6.mjs';
-import { S as SectionWrapper } from './index_Bgaaulb2.mjs';
-import { a as styles, t as technologies } from './AstroNavbar_0JLaRSFt.mjs';
+import { S as SectionWrapper } from './index_DLbif0VB.mjs';
+import { a as styles, t as technologies } from './AstroNavbar_B75kH4Ct.mjs';
 
 const Ball = ({ imgUrl }) => {
   const [decal] = useTexture([imgUrl]);

@@ -1,6 +1,6 @@
-import { c as createComponent } from './astro-component_D2Nf2q6N.mjs';
+import { c as createComponent } from './astro-component_Gdpiq1Oo.mjs';
 import 'piccolore';
-import { j as addAttribute, t as renderTemplate, p as maybeRenderHead, x as unescapeHTML, q as renderHead, s as renderSlot, r as renderComponent, l as generateCspDigest, u as spreadAttributes } from './entrypoint_CrvsPcLY.mjs';
+import { j as addAttribute, t as renderTemplate, p as maybeRenderHead, x as unescapeHTML, q as renderHead, s as renderSlot, r as renderComponent, l as generateCspDigest, u as spreadAttributes } from './entrypoint_DzxMRv0R.mjs';
 import { jsxs, Fragment, jsx } from 'react/jsx-runtime';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
@@ -429,6 +429,52 @@ const youtubechartsMobile = new Proxy({"src":"/_astro/youtubecharts-mobile.SHAZS
 						}
 					});
 
+const toAssetUrl = (asset) => {
+  if (typeof asset === "string") {
+    return asset;
+  }
+  if (typeof asset?.src === "string") {
+    return asset.src;
+  }
+  if (typeof asset?.default === "string") {
+    return asset.default;
+  }
+  if (asset?.default && typeof asset.default === "object" && typeof asset.default.src === "string") {
+    return asset.default.src;
+  }
+  return "";
+};
+const logoSrc = toAssetUrl(logo);
+const backendSrc = toAssetUrl(backend);
+const creatorSrc = toAssetUrl(creator);
+const mobileSrc = toAssetUrl(mobile);
+const webSrc = toAssetUrl(web);
+const githubSrc = toAssetUrl(github);
+const menuSrc = toAssetUrl(menu);
+const closeSrc = toAssetUrl(close);
+const linuxSrc = toAssetUrl(linux);
+const dockerSrc = toAssetUrl(docker);
+const gitSrc = toAssetUrl(git);
+const azureSrc = toAssetUrl(azure);
+const javascriptSrc = toAssetUrl(javascript);
+const firebaseSrc = toAssetUrl(firebase);
+const nodejsSrc = toAssetUrl(nodejs);
+const reactjsSrc = toAssetUrl(reactjs);
+const javaSrc = toAssetUrl(java);
+const dotnetSrc = toAssetUrl(dotnet);
+const tailwindSrc = toAssetUrl(tailwind);
+const typescriptSrc = toAssetUrl(typescript);
+const csharpSrc = toAssetUrl(csharp);
+const reddingDesignsSrc = toAssetUrl(redding_designs);
+const goodLifeSrc = toAssetUrl(goodLife);
+const krachiSpaceSrc = toAssetUrl(krachi_space);
+const emergencyappSrc = toAssetUrl(emergencyapp);
+const emergencyappMobileSrc = toAssetUrl(emergencyappMobile);
+const restaurantSrc = toAssetUrl(restaurant);
+const restaurantMobileSrc = toAssetUrl(restaurantMobile);
+const youtubechartsSrc = toAssetUrl(youtubecharts);
+const youtubechartsMobileSrc = toAssetUrl(youtubechartsMobile);
+
 const navLinks = [
   {
     id: "about",
@@ -446,80 +492,80 @@ const navLinks = [
 const services = [
   {
     title: "Web Development",
-    icon: web
+    icon: webSrc
   },
   {
     title: "Mobile Development",
-    icon: mobile
+    icon: mobileSrc
   },
   {
     title: "Backend Development",
-    icon: backend
+    icon: backendSrc
   },
   {
     title: "Graphic Design",
-    icon: creator
+    icon: creatorSrc
   }
 ];
 const technologies = [
   {
     name: "Linux",
-    icon: linux
+    icon: linuxSrc
   },
   {
     name: "Azure",
-    icon: azure
+    icon: azureSrc
   },
   {
     name: "JavaScript",
-    icon: javascript
+    icon: javascriptSrc
   },
   {
     name: "Java",
-    icon: java
+    icon: javaSrc
   },
   {
     name: "TypeScript",
-    icon: typescript
+    icon: typescriptSrc
   },
   {
     name: "React JS",
-    icon: reactjs
+    icon: reactjsSrc
   },
   {
     name: ".NET",
-    icon: dotnet
+    icon: dotnetSrc
   },
   {
     name: "Tailwind CSS",
-    icon: tailwind
+    icon: tailwindSrc
   },
   {
     name: "Node JS",
-    icon: nodejs
+    icon: nodejsSrc
   },
   {
     name: "Firebase",
-    icon: firebase
+    icon: firebaseSrc
   },
   {
     name: "C Sharp",
-    icon: csharp
+    icon: csharpSrc
   },
   {
     name: "git",
-    icon: git
+    icon: gitSrc
   },
   {
     name: "docker",
-    icon: docker
+    icon: dockerSrc
   }
 ];
 const experiences = [
   {
     title: "Web Developer",
     company_name: "Redding Designs",
-    icon: redding_designs,
+    icon: reddingDesignsSrc,
     iconBg: "#FFF",
     date: "November 2025 – Present",
     points: [
@@ -532,7 +578,7 @@ const experiences = [
   {
     title: "Technology Consultant & Software Developer",
     company_name: "Freelance",
-    icon: logo,
+    icon: logoSrc,
     iconBg: "#1E2A38",
     date: "July 2024 – Present",
     points: [
@@ -546,7 +592,7 @@ const experiences = [
   {
     title: "Backend Engineer (Volunteer)",
     company_name: "Krachi Space Technologies",
-    icon: krachi_space,
+    icon: krachiSpaceSrc,
     iconBg: "#2E3A59",
     date: "January 2025 – May 2025",
     points: [
@@ -559,7 +605,7 @@ const experiences = [
   {
     title: "Computer Science Tutor",
     company_name: "Freelance",
-    icon: logo,
+    icon: logoSrc,
     iconBg: "#5A607F",
     date: "November 2024 – May 2025",
     points: [
@@ -572,7 +618,7 @@ const experiences = [
   {
     title: "Software Developer",
     company_name: "GoodLife Fitness",
-    icon: goodLife,
+    icon: goodLifeSrc,
     iconBg: "#383E56",
     date: "May 2023 – August 2023",
     points: [
@@ -603,8 +649,8 @@ const projects = [
         color: "pink-text-gradient"
       }
     ],
-    image: emergencyapp,
-    imageMobile: emergencyappMobile,
+    image: emergencyappSrc,
+    imageMobile: emergencyappMobileSrc,
     source_code_link: "https://github.com/alistairalva/Emergency_Contact_Application"
   },
   {
@@ -624,8 +670,8 @@ const projects = [
         color: "pink-text-gradient"
       }
     ],
-    image: restaurant,
-    imageMobile: restaurantMobile,
+    image: restaurantSrc,
+    imageMobile: restaurantMobileSrc,
     source_code_link: "https://github.com/alistairalva/ApplicationProject"
   },
   {
@@ -645,8 +691,8 @@ const projects = [
         color: "pink-text-gradient"
       }
     ],
-    image: youtubecharts,
-    imageMobile: youtubechartsMobile,
+    image: youtubechartsSrc,
+    imageMobile: youtubechartsMobileSrc,
     source_code_link: "https://github.com/alistairalva/Data-Visualizations-For-Youtube-using-d3.js"
   }
 ];
@@ -731,7 +777,7 @@ const AstroNavbar = () => {
             className: "flex items-center gap-2 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#915eff] focus-visible:ring-offset-2 focus-visible:ring-offset-primary",
             onClick: handleBrandClick,
             children: [
-              /* @__PURE__ */ jsx("img", { src: logo, alt: "logo", className: "w-9 h-9 object-contain" }),
+              /* @__PURE__ */ jsx("img", { src: logoSrc, alt: "logo", className: "w-9 h-9 object-contain" }),
               /* @__PURE__ */ jsxs("span", { className: "text-white text-[18px] font-bold cursor-pointer flex", children: [
                 "Alistair Alva  ",
                 /* @__PURE__ */ jsx("span", { className: "sm:block hidden", children: "| Technology & Software Solutions" })
@@ -784,7 +830,7 @@ const AstroNavbar = () => {
               children: /* @__PURE__ */ jsx(
                 "img",
                 {
-                  src: toggle ? close : menu,
+                  src: toggle ? closeSrc : menuSrc,
                   alt: "",
                   "aria-hidden": "true",
                   className: "w-[28px] h-[28px] object-contain"
@@ -838,4 +884,4 @@ const AstroNavbar = () => {
   );
 };
 
-export { $$BaseLayout as $, AstroNavbar as A, styles as a, experiences as e, github as g, projects as p, services as s, technologies as t };
+export { $$BaseLayout as $, AstroNavbar as A, styles as a, experiences as e, githubSrc as g, projects as p, services as s, technologies as t };
