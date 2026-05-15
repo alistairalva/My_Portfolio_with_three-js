@@ -9,7 +9,7 @@ let homePagePrefetchPromise: Promise<unknown> | null = null;
 
 const prefetchHomePage = () => {
   if (!homePagePrefetchPromise) {
-    homePagePrefetchPromise = import("../pages/HomePage");
+    homePagePrefetchPromise = import("../pages/_HomePage");
   }
 
   return homePagePrefetchPromise;

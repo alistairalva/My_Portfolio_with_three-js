@@ -8,7 +8,7 @@ import { SpeedInsights } from "@vercel/speed-insights/react";
 import { projects } from "./constants";
 import { seoAuditFaq } from "./constants/seo";
 
-const HomePage = lazy(() => import("./pages/HomePage"));
+const HomePage = lazy(() => import("./pages/_HomePage"));
 const SeoAudit = lazy(() => import("./components/SeoAudit"));
 const ThankYou = lazy(() => import("./components/ThankYou"));
 

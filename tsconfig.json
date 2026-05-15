@@ -5,6 +5,7 @@
     "jsx": "react-jsx",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
+    "verbatimModuleSyntax": false,
     "skipLibCheck": true,
 
     /* Linting */

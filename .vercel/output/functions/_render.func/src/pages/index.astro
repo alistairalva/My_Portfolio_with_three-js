@@ -1,0 +1,108 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import AstroNavbar from "../components/AstroNavbar";
+import HomeSections from "../components/HomeSections";
+import ToastHost from "../components/ToastHost";
+import { projects } from "../constants";
+
+const baseUrl = "https://alistairalva.com";
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${baseUrl}/#website`,
+      url: `${baseUrl}/`,
+      name: "Alistair Alva",
+      description:
+        "Technology consultant and software developer portfolio with engineering case studies and SEO audit services.",
+      inLanguage: "en",
+      potentialAction: {
+        "@type": "ReadAction",
+        target: [`${baseUrl}/`, `${baseUrl}/free-seo-audit`],
+      },
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${baseUrl}/#webpage`,
+      url: `${baseUrl}/`,
+      name: "Alistair Alva | Technology Consultant & Software Developer",
+      description:
+        "Explore Alistair Alva's portfolio, software engineering experience, and featured projects across web, backend, and cloud systems.",
+      isPartOf: {
+        "@id": `${baseUrl}/#website`,
+      },
+      inLanguage: "en",
+      primaryImageOfPage: `${baseUrl}/og/home.svg`,
+    },
+    {
+      "@type": "Person",
+      "@id": `${baseUrl}/#person`,
+      name: "Alistair Alva",
+      url: `${baseUrl}/`,
+      jobTitle: "Technology Consultant & Software Developer",
+      description:
+        "Technology consultant and software developer focused on backend systems, cloud architecture, and growth-oriented web delivery.",
+      image: `${baseUrl}/logo.svg`,
+      sameAs: ["https://github.com/alistairalva"],
+      mainEntityOfPage: {
+        "@id": `${baseUrl}/#webpage`,
+      },
+      knowsAbout: [
+        "Backend Development",
+        "Web Development",
+        "Cloud Architecture",
+        "SEO",
+      ],
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${baseUrl}/#breadcrumb`,
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: `${baseUrl}/`,
+        },
+      ],
+    },
+    {
+      "@type": "ItemList",
+      "@id": `${baseUrl}/#projects`,
+      name: "Featured Projects",
+      itemListOrder: "https://schema.org/ItemListOrderAscending",
+      numberOfItems: projects.length,
+      itemListElement: projects.map((project, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        item: {
+          "@type": "SoftwareSourceCode",
+          name: project.name,
+          description: project.description,
+          codeRepository: project.source_code_link,
+          keywords: project.tags.map((tag) => tag.name).join(", "),
+          author: {
+            "@id": `${baseUrl}/#person`,
+          },
+        },
+      })),
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title="Alistair Alva | Technology Consultant & Software Developer"
+  description="Explore Alistair Alva's portfolio, software engineering experience, and featured projects across web, backend, and cloud systems."
+  canonicalPath="/"
+  socialImage="/og/home.svg"
+  socialImageAlt="Alistair Alva technology consultant and software developer portfolio"
+  keywords="technology consultant, software developer, backend engineer, cloud architecture, full stack developer, portfolio"
+  structuredData={structuredData}
+>
+  <AstroNavbar client:load />
+  <HomeSections client:load />
+  <ToastHost client:load />
+</BaseLayout>
