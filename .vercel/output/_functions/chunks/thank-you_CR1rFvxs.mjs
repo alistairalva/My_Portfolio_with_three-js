@@ -1,7 +1,7 @@
-import { c as createComponent } from './astro-component_Bwc8rqar.mjs';
+import { c as createComponent } from './astro-component_BOELEfBs.mjs';
 import 'piccolore';
-import { r as renderComponent, t as renderTemplate, p as maybeRenderHead, j as addAttribute } from './entrypoint_BaruQOoW.mjs';
-import { $ as $$BaseLayout, A as AstroNavbar, a as styles } from './AstroNavbar_BSu_1M8D.mjs';
+import { r as renderComponent, t as renderTemplate, p as maybeRenderHead, j as addAttribute } from './entrypoint_DUfxweB1.mjs';
+import { $ as $$BaseLayout, A as AstroNavbar, a as styles } from './AstroNavbar_C3Ux8xkL.mjs';
 import { useEffect } from 'react';
 import { track } from '@vercel/analytics';
 
@@ -48,7 +48,7 @@ Your free SEO and site audit request has been submitted. I will review your deta
 Back to Home
 </a> <a href="/free-seo-audit" class="bg-black py-3 px-8 outline-none text-white font-bold shadow-md shadow-primary rounded-xl border border-white/20">
 Submit Another Request
-</a> </div> </section> </div> </main> ${renderComponent($$result2, "ThankYouTracker", ThankYouTracker, { "client:load": true, "client:component-hydration": "load", "client:component-path": "C:/Users/Alistair/source/PersonalPortfolio/My_Portfolio/src/components/ThankYouTracker", "client:component-export": "default" })} ` })}`;
+</a> </div> </section> </div> </main> ${renderComponent($$result2, "ThankYouTracker", ThankYouTracker, { "client:idle": true, "client:component-hydration": "idle", "client:component-path": "C:/Users/Alistair/source/PersonalPortfolio/My_Portfolio/src/components/ThankYouTracker", "client:component-export": "default" })} ` })}`;
 }, "C:/Users/Alistair/source/PersonalPortfolio/My_Portfolio/src/pages/thank-you.astro", void 0);
 
 const $$file = "C:/Users/Alistair/source/PersonalPortfolio/My_Portfolio/src/pages/thank-you.astro";

@@ -10,6 +10,12 @@ type Props = {
   socialImageAlt: string;
   keywords?: string;
   noIndex?: boolean;
+  preloadImages?: {
+    href: string;
+    media?: string;
+    type?: string;
+    fetchPriority?: "high" | "low" | "auto";
+  }[];
   structuredData?: Record<string, unknown> | Record<string, unknown>[];
 };
 
@@ -21,6 +27,7 @@ const {
   socialImageAlt,
   keywords,
   noIndex = false,
+  preloadImages = [],
   structuredData,
 } = Astro.props;
 
@@ -45,7 +52,9 @@ const structuredDataText = structuredData ? JSON.stringify(structuredData) : "";
     <meta name="robots" content={robotsDirective} />
     <meta name="googlebot" content={robotsDirective} />
     <meta name="theme-color" content="#050816" />
+    <meta name="format-detection" content="telephone=no" />
     <link rel="canonical" href={canonicalUrl} />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Alistair Alva Portfolio" />
@@ -65,6 +74,17 @@ const structuredDataText = structuredData ? JSON.stringify(structuredData) : "";
     <meta name="twitter:image" content={socialImageUrl} />
     <meta name="twitter:image:alt" content={socialImageAlt} />
     <meta name="twitter:url" content={canonicalUrl} />
+
+    {preloadImages.map((image) => (
+      <link
+        rel="preload"
+        as="image"
+        href={image.href}
+        media={image.media}
+        type={image.type}
+        fetchpriority={image.fetchPriority}
+      />
+    ))}
 
     <link rel="alternate" type="text/markdown" title="llms.txt" href="/llms.txt" />
     <link
@@ -114,6 +134,6 @@ const structuredDataText = structuredData ? JSON.stringify(structuredData) : "";
       Skip to main content
     </a>
     <slot />
-    <VercelInstrumentation client:load />
+    <VercelInstrumentation client:idle />
   </body>
 </html>

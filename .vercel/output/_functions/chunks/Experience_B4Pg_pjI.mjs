@@ -1,8 +1,8 @@
 import { jsxs, Fragment, jsx } from 'react/jsx-runtime';
 import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
 import { motion } from 'framer-motion';
-import { a as styles, e as experiences } from './AstroNavbar_BSu_1M8D.mjs';
-import { S as SectionWrapper } from './index_CexM5_QM.mjs';
+import { a as styles, e as experiences } from './AstroNavbar_C3Ux8xkL.mjs';
+import { S as SectionWrapper } from './index_SKvDXMQQ.mjs';
 import { t as textVariant } from './ToastHost_DnYxOdd8.mjs';
 
 const ExperienceCard = ({

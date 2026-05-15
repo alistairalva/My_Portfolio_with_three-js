@@ -1,7 +1,7 @@
-import { c as createComponent } from './astro-component_Bwc8rqar.mjs';
+import { c as createComponent } from './astro-component_BOELEfBs.mjs';
 import 'piccolore';
-import { r as renderComponent, t as renderTemplate } from './entrypoint_BaruQOoW.mjs';
-import { a as styles, $ as $$BaseLayout, A as AstroNavbar } from './AstroNavbar_BSu_1M8D.mjs';
+import { r as renderComponent, t as renderTemplate } from './entrypoint_DUfxweB1.mjs';
+import { a as styles, $ as $$BaseLayout, A as AstroNavbar } from './AstroNavbar_C3Ux8xkL.mjs';
 import { jsxs, jsx } from 'react/jsx-runtime';
 import { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
@@ -515,7 +515,7 @@ const $$FreeSeoAudit = createComponent(($$result, $$props, $$slots) => {
       }
     ]
   };
-  return renderTemplate`${renderComponent($$result, "BaseLayout", $$BaseLayout, { "title": "Free SEO and Site Audit | Alistair Alva", "description": "Request a free SEO and website audit to identify technical issues, growth opportunities, and practical next steps.", "canonicalPath": "/free-seo-audit", "socialImage": "/og/seo-audit.svg", "socialImageAlt": "Free SEO and site audit service page by Alistair Alva", "keywords": "free seo audit, technical seo, seo consultant, site audit, search optimization, geo optimization", "structuredData": structuredData }, { "default": ($$result2) => renderTemplate` ${renderComponent($$result2, "AstroNavbar", AstroNavbar, { "client:load": true, "client:component-hydration": "load", "client:component-path": "C:/Users/Alistair/source/PersonalPortfolio/My_Portfolio/src/components/AstroNavbar", "client:component-export": "default" })} ${renderComponent($$result2, "SeoAudit", SeoAudit, { "client:load": true, "client:component-hydration": "load", "client:component-path": "C:/Users/Alistair/source/PersonalPortfolio/My_Portfolio/src/components/SeoAudit", "client:component-export": "default" })} ${renderComponent($$result2, "ToastHost", ToastHost, { "client:load": true, "client:component-hydration": "load", "client:component-path": "C:/Users/Alistair/source/PersonalPortfolio/My_Portfolio/src/components/ToastHost", "client:component-export": "default" })} ` })}`;
+  return renderTemplate`${renderComponent($$result, "BaseLayout", $$BaseLayout, { "title": "Free SEO and Site Audit | Alistair Alva", "description": "Request a free SEO and website audit to identify technical issues, growth opportunities, and practical next steps.", "canonicalPath": "/free-seo-audit", "socialImage": "/og/seo-audit.svg", "socialImageAlt": "Free SEO and site audit service page by Alistair Alva", "keywords": "free seo audit, technical seo, seo consultant, site audit, search optimization, geo optimization", "structuredData": structuredData }, { "default": ($$result2) => renderTemplate` ${renderComponent($$result2, "AstroNavbar", AstroNavbar, { "client:load": true, "client:component-hydration": "load", "client:component-path": "C:/Users/Alistair/source/PersonalPortfolio/My_Portfolio/src/components/AstroNavbar", "client:component-export": "default" })} ${renderComponent($$result2, "SeoAudit", SeoAudit, { "client:load": true, "client:component-hydration": "load", "client:component-path": "C:/Users/Alistair/source/PersonalPortfolio/My_Portfolio/src/components/SeoAudit", "client:component-export": "default" })} ${renderComponent($$result2, "ToastHost", ToastHost, { "client:idle": true, "client:component-hydration": "idle", "client:component-path": "C:/Users/Alistair/source/PersonalPortfolio/My_Portfolio/src/components/ToastHost", "client:component-export": "default" })} ` })}`;
 }, "C:/Users/Alistair/source/PersonalPortfolio/My_Portfolio/src/pages/free-seo-audit.astro", void 0);
 
 const $$file = "C:/Users/Alistair/source/PersonalPortfolio/My_Portfolio/src/pages/free-seo-audit.astro";

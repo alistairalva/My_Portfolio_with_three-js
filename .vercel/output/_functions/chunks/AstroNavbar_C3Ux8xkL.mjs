@@ -1,6 +1,6 @@
-import { c as createComponent } from './astro-component_Bwc8rqar.mjs';
+import { c as createComponent } from './astro-component_BOELEfBs.mjs';
 import 'piccolore';
-import { j as addAttribute, t as renderTemplate, p as maybeRenderHead, x as unescapeHTML, q as renderHead, s as renderSlot, r as renderComponent, l as generateCspDigest, u as spreadAttributes } from './entrypoint_BaruQOoW.mjs';
+import { j as addAttribute, t as renderTemplate, p as maybeRenderHead, x as unescapeHTML, q as renderHead, s as renderSlot, r as renderComponent, l as generateCspDigest, u as spreadAttributes } from './entrypoint_DUfxweB1.mjs';
 import { jsxs, Fragment, jsx } from 'react/jsx-runtime';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
@@ -29,6 +29,7 @@ const $$BaseLayout = createComponent(($$result, $$props, $$slots) => {
     socialImageAlt,
     keywords,
     noIndex = false,
+    preloadImages = [],
     structuredData
   } = Astro2.props;
   const siteUrl = "https://alistairalva.com";
@@ -36,9 +37,9 @@ const $$BaseLayout = createComponent(($$result, $$props, $$slots) => {
   const socialImageUrl = socialImage.startsWith("http") ? socialImage : new URL(socialImage, siteUrl).toString();
   const robotsDirective = noIndex ? "noindex, nofollow" : "index, follow";
   const structuredDataText = structuredData ? JSON.stringify(structuredData) : "";
-  return renderTemplate`<html lang="en"> <head><meta charset="UTF-8"><link rel="icon" type="image/svg+xml" href="/logo.svg"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description"${addAttribute(description, "content")}>${keywords ? renderTemplate`<meta name="keywords"${addAttribute(keywords, "content")}>` : null}<meta name="author" content="Alistair Alva"><meta name="robots"${addAttribute(robotsDirective, "content")}><meta name="googlebot"${addAttribute(robotsDirective, "content")}><meta name="theme-color" content="#050816"><link rel="canonical"${addAttribute(canonicalUrl, "href")}><meta property="og:type" content="website"><meta property="og:site_name" content="Alistair Alva Portfolio"><meta property="og:title"${addAttribute(title, "content")}><meta property="og:description"${addAttribute(description, "content")}><meta property="og:url"${addAttribute(canonicalUrl, "content")}><meta property="og:image"${addAttribute(socialImageUrl, "content")}><meta property="og:image:type" content="image/svg+xml"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt"${addAttribute(socialImageAlt, "content")}><meta property="og:locale" content="en_US"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title"${addAttribute(title, "content")}><meta name="twitter:description"${addAttribute(description, "content")}><meta name="twitter:image"${addAttribute(socialImageUrl, "content")}><meta name="twitter:image:alt"${addAttribute(socialImageAlt, "content")}><meta name="twitter:url"${addAttribute(canonicalUrl, "content")}><link rel="alternate" type="text/markdown" title="llms.txt" href="/llms.txt"><link rel="alternate" type="text/markdown" title="llms-full.txt" href="/llms-full.txt"><link rel="alternate" type="text/markdown" title="content-index" href="/content-index.md"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" media="print" onload="this.media='all'">${maybeRenderHead()}<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"></noscript>${structuredDataText ? renderTemplate(_a || (_a = __template(['<script type="application/ld+json">', "<\/script>"])), unescapeHTML(structuredDataText)) : null}<title>${title}</title>${renderHead()}</head> <body> <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:top-4 focus:left-4 focus:px-4 focus:py-2 focus:bg-black focus:text-white">
+  return renderTemplate`<html lang="en"> <head><meta charset="UTF-8"><link rel="icon" type="image/svg+xml" href="/logo.svg"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description"${addAttribute(description, "content")}>${keywords ? renderTemplate`<meta name="keywords"${addAttribute(keywords, "content")}>` : null}<meta name="author" content="Alistair Alva"><meta name="robots"${addAttribute(robotsDirective, "content")}><meta name="googlebot"${addAttribute(robotsDirective, "content")}><meta name="theme-color" content="#050816"><meta name="format-detection" content="telephone=no"><link rel="canonical"${addAttribute(canonicalUrl, "href")}><link rel="sitemap" type="application/xml" href="/sitemap.xml"><meta property="og:type" content="website"><meta property="og:site_name" content="Alistair Alva Portfolio"><meta property="og:title"${addAttribute(title, "content")}><meta property="og:description"${addAttribute(description, "content")}><meta property="og:url"${addAttribute(canonicalUrl, "content")}><meta property="og:image"${addAttribute(socialImageUrl, "content")}><meta property="og:image:type" content="image/svg+xml"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt"${addAttribute(socialImageAlt, "content")}><meta property="og:locale" content="en_US"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title"${addAttribute(title, "content")}><meta name="twitter:description"${addAttribute(description, "content")}><meta name="twitter:image"${addAttribute(socialImageUrl, "content")}><meta name="twitter:image:alt"${addAttribute(socialImageAlt, "content")}><meta name="twitter:url"${addAttribute(canonicalUrl, "content")}>${preloadImages.map((image) => renderTemplate`<link rel="preload" as="image"${addAttribute(image.href, "href")}${addAttribute(image.media, "media")}${addAttribute(image.type, "type")}${addAttribute(image.fetchPriority, "fetchpriority")}>`)}<link rel="alternate" type="text/markdown" title="llms.txt" href="/llms.txt"><link rel="alternate" type="text/markdown" title="llms-full.txt" href="/llms-full.txt"><link rel="alternate" type="text/markdown" title="content-index" href="/content-index.md"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" media="print" onload="this.media='all'">${maybeRenderHead()}<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"></noscript>${structuredDataText ? renderTemplate(_a || (_a = __template(['<script type="application/ld+json">', "<\/script>"])), unescapeHTML(structuredDataText)) : null}<title>${title}</title>${renderHead()}</head> <body> <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:top-4 focus:left-4 focus:px-4 focus:py-2 focus:bg-black focus:text-white">
 Skip to main content
-</a> ${renderSlot($$result, $$slots["default"])} ${renderComponent($$result, "VercelInstrumentation", VercelInstrumentation, { "client:load": true, "client:component-hydration": "load", "client:component-path": "C:/Users/Alistair/source/PersonalPortfolio/My_Portfolio/src/components/VercelInstrumentation", "client:component-export": "default" })} </body></html>`;
+</a> ${renderSlot($$result, $$slots["default"])} ${renderComponent($$result, "VercelInstrumentation", VercelInstrumentation, { "client:idle": true, "client:component-hydration": "idle", "client:component-path": "C:/Users/Alistair/source/PersonalPortfolio/My_Portfolio/src/components/VercelInstrumentation", "client:component-export": "default" })} </body></html>`;
 }, "C:/Users/Alistair/source/PersonalPortfolio/My_Portfolio/src/layouts/BaseLayout.astro", void 0);
 
 const styles = {
@@ -724,6 +725,10 @@ const AstroNavbar = () => {
       if (!isHomeRoute) {
         return;
       }
+      if (scrollTop < 100) {
+        setActive("");
+        return;
+      }
       let activeSection = "";
       for (const link of navLinks) {
         const section = document.getElementById(link.id);
@@ -751,14 +756,26 @@ const AstroNavbar = () => {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
-  const handleSectionNavigation = (sectionId) => {
-    setActive(sectionId);
+  const handleSectionNavigation = (event, sectionId) => {
     setToggle(false);
     if (isHomeRoute) {
-      document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
+      event.preventDefault();
+      const sectionElement = document.getElementById(sectionId);
+      if (sectionElement) {
+        sectionElement.scrollIntoView({ behavior: "smooth" });
+        if (window.location.hash !== `#${sectionId}`) {
+          window.history.replaceState(null, "", `/#${sectionId}`);
+        }
+        return;
+      }
+      if (window.location.hash !== `#${sectionId}`) {
+        window.location.hash = sectionId;
+      } else {
+        window.dispatchEvent(new Event("hashchange"));
+      }
       return;
     }
-    window.location.assign(`/#${sectionId}`);
+    setActive(sectionId);
   };
   const handleAuditClick = () => {
     setActive("seo-audit");
@@ -806,10 +823,10 @@ const AstroNavbar = () => {
             {
               className: `${active === nav.id ? "text-white" : "text-secondary"} hover:text-white text-[18px] font-medium cursor-pointer`,
               children: /* @__PURE__ */ jsx(
-                "button",
+                "a",
                 {
-                  type: "button",
-                  onClick: () => handleSectionNavigation(nav.id),
+                  href: `/#${nav.id}`,
+                  onClick: (event) => handleSectionNavigation(event, nav.id),
                   className: "text-inherit rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#915eff] focus-visible:ring-offset-2 focus-visible:ring-offset-primary",
                   children: nav.title
                 }
@@ -865,10 +882,10 @@ const AstroNavbar = () => {
                   {
                     className: `${active === nav.id ? "text-white" : "text-secondary"} font-poppins font-medium cursor-pointer text-[16px]`,
                     children: /* @__PURE__ */ jsx(
-                      "button",
+                      "a",
                       {
-                        type: "button",
-                        onClick: () => handleSectionNavigation(nav.id),
+                        href: `/#${nav.id}`,
+                        onClick: (event) => handleSectionNavigation(event, nav.id),
                         className: "text-inherit rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#915eff] focus-visible:ring-offset-2 focus-visible:ring-offset-primary",
                         children: nav.title
                       }

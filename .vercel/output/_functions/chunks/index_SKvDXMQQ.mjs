@@ -1,7 +1,7 @@
-import { c as createComponent } from './astro-component_Bwc8rqar.mjs';
+import { c as createComponent } from './astro-component_BOELEfBs.mjs';
 import 'piccolore';
-import { r as renderComponent, t as renderTemplate } from './entrypoint_BaruQOoW.mjs';
-import { a as styles, s as services, p as projects, $ as $$BaseLayout, A as AstroNavbar } from './AstroNavbar_BSu_1M8D.mjs';
+import { r as renderComponent, t as renderTemplate } from './entrypoint_DUfxweB1.mjs';
+import { a as styles, s as services, p as projects, $ as $$BaseLayout, A as AstroNavbar } from './AstroNavbar_C3Ux8xkL.mjs';
 import { jsx, jsxs, Fragment } from 'react/jsx-runtime';
 import { lazy, useState, useEffect, Suspense, useRef } from 'react';
 import Tilt from 'react-parallax-tilt';
@@ -244,19 +244,24 @@ const Hero = () => {
   );
 };
 
-const Experience = lazy(() => import('./Experience_XIOaN_e9.mjs'));
-const Tech = lazy(() => import('./Tech_ZNElhYTA.mjs'));
-const Works = lazy(() => import('./Works_cFtOx2_k.mjs'));
-const Contact = lazy(() => import('./Contact_BqFg-gX9.mjs'));
+const Experience = lazy(() => import('./Experience_B4Pg_pjI.mjs'));
+const Tech = lazy(() => import('./Tech_CWsjBiy4.mjs'));
+const Works = lazy(() => import('./Works_ovown9zg.mjs'));
+const Contact = lazy(() => import('./Contact_Civx-kVg.mjs'));
 const StarsCanvas = lazy(() => import('./Stars_Cls4BoDU.mjs'));
 const DeferredSection = ({
   children,
   rootMargin = "250px",
-  placeholderClassName = "h-16"
+  placeholderClassName = "h-16",
+  forceRender = false
 }) => {
   const containerRef = useRef(null);
   const [shouldRender, setShouldRender] = useState(false);
   useEffect(() => {
+    if (forceRender) {
+      setShouldRender(true);
+      return;
+    }
     const target = containerRef.current;
     if (!target || shouldRender) {
       return;
@@ -273,7 +278,7 @@ const DeferredSection = ({
     );
     observer.observe(target);
     return () => observer.disconnect();
-  }, [rootMargin, shouldRender]);
+  }, [forceRender, rootMargin, shouldRender]);
   return /* @__PURE__ */ jsx("div", { ref: containerRef, children: shouldRender ? /* @__PURE__ */ jsx(
     Suspense,
     {
@@ -283,41 +288,96 @@ const DeferredSection = ({
   ) : /* @__PURE__ */ jsx("div", { className: placeholderClassName, "aria-hidden": "true" }) });
 };
 const HomeSections = () => {
+  const [hashTargetId, setHashTargetId] = useState("");
+  const [hashNavigationVersion, setHashNavigationVersion] = useState(0);
   useEffect(() => {
-    if (window.location.hash.length <= 1) {
+    const updateHashTarget = () => {
+      setHashTargetId(window.location.hash.replace("#", ""));
+      setHashNavigationVersion((currentVersion) => currentVersion + 1);
+    };
+    updateHashTarget();
+    window.addEventListener("hashchange", updateHashTarget);
+    return () => {
+      window.removeEventListener("hashchange", updateHashTarget);
+    };
+  }, []);
+  useEffect(() => {
+    if (!hashTargetId) {
       return;
     }
-    const targetId = window.location.hash.replace("#", "");
-    let animationFrameId = 0;
+    const targetId = hashTargetId;
     let attempts = 0;
-    const maxAttempts = 45;
+    const maxAttempts = 80;
+    let timeoutId = null;
     const scrollToSectionWhenReady = () => {
       const sectionElement = document.getElementById(targetId);
       if (sectionElement) {
         sectionElement.scrollIntoView({ behavior: "smooth" });
+        window.history.replaceState(null, "", `/#${targetId}`);
         return;
       }
       attempts += 1;
       if (attempts < maxAttempts) {
-        animationFrameId = window.requestAnimationFrame(
-          scrollToSectionWhenReady
-        );
+        timeoutId = window.setTimeout(scrollToSectionWhenReady, 100);
       }
     };
-    animationFrameId = window.requestAnimationFrame(scrollToSectionWhenReady);
+    scrollToSectionWhenReady();
     return () => {
-      window.cancelAnimationFrame(animationFrameId);
+      if (timeoutId !== null) {
+        window.clearTimeout(timeoutId);
+      }
     };
-  }, []);
+  }, [hashNavigationVersion, hashTargetId]);
+  const shouldForceRenderDeferredSections = hashTargetId.length > 0;
   return /* @__PURE__ */ jsxs("main", { id: "main-content", className: "relative z-0 bg-primary", children: [
     /* @__PURE__ */ jsx(Hero, {}),
     /* @__PURE__ */ jsx(AboutSection, {}),
-    /* @__PURE__ */ jsx(DeferredSection, { placeholderClassName: "h-24", rootMargin: "120px", children: /* @__PURE__ */ jsx(Experience, {}) }),
-    /* @__PURE__ */ jsx(DeferredSection, { placeholderClassName: "h-24", rootMargin: "120px", children: /* @__PURE__ */ jsx(Tech, {}) }),
-    /* @__PURE__ */ jsx(DeferredSection, { placeholderClassName: "h-24", rootMargin: "120px", children: /* @__PURE__ */ jsx(Works, {}) }),
+    /* @__PURE__ */ jsx(
+      DeferredSection,
+      {
+        placeholderClassName: "h-24",
+        rootMargin: "120px",
+        forceRender: shouldForceRenderDeferredSections,
+        children: /* @__PURE__ */ jsx(Experience, {})
+      }
+    ),
+    /* @__PURE__ */ jsx(
+      DeferredSection,
+      {
+        placeholderClassName: "h-24",
+        rootMargin: "120px",
+        forceRender: shouldForceRenderDeferredSections,
+        children: /* @__PURE__ */ jsx(Tech, {})
+      }
+    ),
+    /* @__PURE__ */ jsx(
+      DeferredSection,
+      {
+        placeholderClassName: "h-24",
+        rootMargin: "120px",
+        forceRender: shouldForceRenderDeferredSections,
+        children: /* @__PURE__ */ jsx(Works, {})
+      }
+    ),
     /* @__PURE__ */ jsxs("div", { className: "relative z-0", children: [
-      /* @__PURE__ */ jsx(DeferredSection, { placeholderClassName: "h-24", rootMargin: "180px", children: /* @__PURE__ */ jsx(Contact, {}) }),
-      /* @__PURE__ */ jsx(DeferredSection, { placeholderClassName: "h-0", rootMargin: "180px", children: /* @__PURE__ */ jsx(StarsCanvas, {}) })
+      /* @__PURE__ */ jsx(
+        DeferredSection,
+        {
+          placeholderClassName: "h-24",
+          rootMargin: "180px",
+          forceRender: shouldForceRenderDeferredSections,
+          children: /* @__PURE__ */ jsx(Contact, {})
+        }
+      ),
+      /* @__PURE__ */ jsx(
+        DeferredSection,
+        {
+          placeholderClassName: "h-0",
+          rootMargin: "180px",
+          forceRender: shouldForceRenderDeferredSections,
+          children: /* @__PURE__ */ jsx(StarsCanvas, {})
+        }
+      )
     ] })
   ] });
 };
@@ -407,7 +467,20 @@ const $$Index = createComponent(($$result, $$props, $$slots) => {
       }
     ]
   };
-  return renderTemplate`${renderComponent($$result, "BaseLayout", $$BaseLayout, { "title": "Alistair Alva | Technology Consultant & Software Developer", "description": "Explore Alistair Alva's portfolio, software engineering experience, and featured projects across web, backend, and cloud systems.", "canonicalPath": "/", "socialImage": "/og/home.svg", "socialImageAlt": "Alistair Alva technology consultant and software developer portfolio", "keywords": "technology consultant, software developer, backend engineer, cloud architecture, full stack developer, portfolio", "structuredData": structuredData }, { "default": ($$result2) => renderTemplate` ${renderComponent($$result2, "AstroNavbar", AstroNavbar, { "client:load": true, "client:component-hydration": "load", "client:component-path": "C:/Users/Alistair/source/PersonalPortfolio/My_Portfolio/src/components/AstroNavbar", "client:component-export": "default" })} ${renderComponent($$result2, "HomeSections", HomeSections, { "client:load": true, "client:component-hydration": "load", "client:component-path": "C:/Users/Alistair/source/PersonalPortfolio/My_Portfolio/src/components/HomeSections", "client:component-export": "default" })} ${renderComponent($$result2, "ToastHost", ToastHost, { "client:load": true, "client:component-hydration": "load", "client:component-path": "C:/Users/Alistair/source/PersonalPortfolio/My_Portfolio/src/components/ToastHost", "client:component-export": "default" })} ` })}`;
+  return renderTemplate`${renderComponent($$result, "BaseLayout", $$BaseLayout, { "title": "Alistair Alva | Technology Consultant & Software Developer", "description": "Explore Alistair Alva's portfolio, software engineering experience, and featured projects across web, backend, and cloud systems.", "canonicalPath": "/", "socialImage": "/og/home.svg", "socialImageAlt": "Alistair Alva technology consultant and software developer portfolio", "keywords": "technology consultant, software developer, backend engineer, cloud architecture, full stack developer, portfolio", "preloadImages": [
+    {
+      href: heroBg.src,
+      media: "(min-width: 769px)",
+      type: "image/webp",
+      fetchPriority: "high"
+    },
+    {
+      href: heroBgMobile.src,
+      media: "(max-width: 768px)",
+      type: "image/webp",
+      fetchPriority: "high"
+    }
+  ], "structuredData": structuredData }, { "default": ($$result2) => renderTemplate` ${renderComponent($$result2, "AstroNavbar", AstroNavbar, { "client:load": true, "client:component-hydration": "load", "client:component-path": "C:/Users/Alistair/source/PersonalPortfolio/My_Portfolio/src/components/AstroNavbar", "client:component-export": "default" })} ${renderComponent($$result2, "HomeSections", HomeSections, { "client:load": true, "client:component-hydration": "load", "client:component-path": "C:/Users/Alistair/source/PersonalPortfolio/My_Portfolio/src/components/HomeSections", "client:component-export": "default" })} ${renderComponent($$result2, "ToastHost", ToastHost, { "client:idle": true, "client:component-hydration": "idle", "client:component-path": "C:/Users/Alistair/source/PersonalPortfolio/My_Portfolio/src/components/ToastHost", "client:component-export": "default" })} ` })}`;
 }, "C:/Users/Alistair/source/PersonalPortfolio/My_Portfolio/src/pages/index.astro", void 0);
 
 const $$file = "C:/Users/Alistair/source/PersonalPortfolio/My_Portfolio/src/pages/index.astro";

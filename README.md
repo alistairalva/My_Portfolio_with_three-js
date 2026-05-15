@@ -6,7 +6,7 @@ This repository hosts alistairalva.com and is now built with Astro plus React is
 
 - Astro 6
 - React 19 (islands only)
-- Tailwind CSS 4
+- Tailwind CSS 3
 - TypeScript 6
 - Vercel server adapter
 
@@ -32,3 +32,10 @@ For Google Sheets setup details, see:
 For deployment details, see:
 
 - docs/vercel-deployment-guide.md
+
+## Performance and SEO Notes
+
+- Hero background images are preloaded in the base layout for faster LCP on home.
+- Vercel Analytics, Speed Insights, and toast container hydration are deferred to idle.
+- Vercel headers enforce long-term immutable caching for static assets and no-store caching for API routes.
+- Canonical host redirects from `www.alistairalva.com` to `alistairalva.com` are enforced in `vercel.json`.

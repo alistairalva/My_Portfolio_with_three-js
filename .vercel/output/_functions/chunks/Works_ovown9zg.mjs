@@ -1,8 +1,8 @@
 import { jsxs, Fragment, jsx } from 'react/jsx-runtime';
 import Tilt from 'react-parallax-tilt';
-import { a as styles, p as projects, g as githubSrc } from './AstroNavbar_BSu_1M8D.mjs';
+import { a as styles, p as projects, g as githubSrc } from './AstroNavbar_C3Ux8xkL.mjs';
 import { motion } from 'framer-motion';
-import { S as SectionWrapper } from './index_CexM5_QM.mjs';
+import { S as SectionWrapper } from './index_SKvDXMQQ.mjs';
 import { t as textVariant, f as fadeIn } from './ToastHost_DnYxOdd8.mjs';
 
 const ProjectCard = ({ index, project }) => {
