@@ -39,6 +39,11 @@ const AstroNavbar: React.FC = () => {
         return;
       }
 
+      if (scrollTop < 100) {
+        setActive("");
+        return;
+      }
+
       let activeSection = "";
       for (const link of navLinks) {
         const section = document.getElementById(link.id);
@@ -74,18 +79,36 @@ const AstroNavbar: React.FC = () => {
     }
   };
 
-  const handleSectionNavigation = (sectionId: string) => {
-    setActive(sectionId);
+  const handleSectionNavigation = (
+    event: React.MouseEvent<HTMLAnchorElement>,
+    sectionId: string,
+  ) => {
     setToggle(false);
 
     if (isHomeRoute) {
-      document
-        .getElementById(sectionId)
-        ?.scrollIntoView({ behavior: "smooth" });
+      event.preventDefault();
+      const sectionElement = document.getElementById(sectionId);
+
+      if (sectionElement) {
+        sectionElement.scrollIntoView({ behavior: "smooth" });
+
+        if (window.location.hash !== `#${sectionId}`) {
+          window.history.replaceState(null, "", `/#${sectionId}`);
+        }
+
+        return;
+      }
+
+      if (window.location.hash !== `#${sectionId}`) {
+        window.location.hash = sectionId;
+      } else {
+        window.dispatchEvent(new Event("hashchange"));
+      }
+
       return;
     }
 
-    window.location.assign(`/#${sectionId}`);
+    setActive(sectionId);
   };
 
   const handleAuditClick = () => {
@@ -138,13 +161,13 @@ const AstroNavbar: React.FC = () => {
                   active === nav.id ? "text-white" : "text-secondary"
                 } hover:text-white text-[18px] font-medium cursor-pointer`}
               >
-                <button
-                  type="button"
-                  onClick={() => handleSectionNavigation(nav.id)}
+                <a
+                  href={`/#${nav.id}`}
+                  onClick={(event) => handleSectionNavigation(event, nav.id)}
                   className="text-inherit rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#915eff] focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
                 >
                   {nav.title}
-                </button>
+                </a>
               </li>
             </React.Fragment>
           ))}
@@ -197,13 +220,15 @@ const AstroNavbar: React.FC = () => {
                       active === nav.id ? "text-white" : "text-secondary"
                     } font-poppins font-medium cursor-pointer text-[16px]`}
                   >
-                    <button
-                      type="button"
-                      onClick={() => handleSectionNavigation(nav.id)}
+                    <a
+                      href={`/#${nav.id}`}
+                      onClick={(event) =>
+                        handleSectionNavigation(event, nav.id)
+                      }
                       className="text-inherit rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#915eff] focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
                     >
                       {nav.title}
-                    </button>
+                    </a>
                   </li>
                 </React.Fragment>
               ))}
