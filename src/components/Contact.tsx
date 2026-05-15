@@ -72,12 +72,20 @@ const Contact: React.FC = () => {
 
     setLoading(true);
     try {
-      await email.sendForm(
-        import.meta.env.VITE_APP_EMAILJS_SERVICE_ID!,
-        import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID!,
-        formRef.current!,
-        import.meta.env.VITE_APP_EMAILJS_PUBLIC_API_KEY!,
-      );
+      const env = import.meta.env as Record<string, string | undefined>;
+      const serviceId =
+        env.PUBLIC_EMAILJS_SERVICE_ID || env.VITE_APP_EMAILJS_SERVICE_ID;
+      const templateId =
+        env.PUBLIC_EMAILJS_TEMPLATE_ID || env.VITE_APP_EMAILJS_TEMPLATE_ID;
+      const publicKey =
+        env.PUBLIC_EMAILJS_PUBLIC_API_KEY ||
+        env.VITE_APP_EMAILJS_PUBLIC_API_KEY;
+
+      if (!serviceId || !templateId || !publicKey) {
+        throw new Error("EmailJS environment variables are not configured");
+      }
+
+      await email.sendForm(serviceId, templateId, formRef.current!, publicKey);
 
       setForm({ user_name: "", user_email: "", message: "" });
       formRef.current?.reset();
