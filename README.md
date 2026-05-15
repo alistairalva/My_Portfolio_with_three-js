@@ -1,43 +1,34 @@
-# React + TypeScript + Vite
+# Astro Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This repository hosts alistairalva.com and is now built with Astro plus React islands for interactive sections such as forms and Three.js canvases.
 
-Currently, two official plugins are available:
+## Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Astro 6
+- React 19 (islands only)
+- Tailwind CSS 4
+- TypeScript 6
+- Vercel server adapter
 
-## Expanding the ESLint configuration
+## Scripts
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- npm run dev: start local Astro dev server
+- npm run build: production build
+- npm run preview: preview built output
+- npm run check: Astro type and diagnostics
+- npm run lint: ESLint 10 flat-config lint for source TypeScript files
+- npm run optimize:images: image optimization helper
+- npm run optimize:model: Three.js model optimization helper
 
-- Configure the top-level `parserOptions` property like this:
+## SEO Audit Backend
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: "latest",
-    sourceType: "module",
-    project: ["./tsconfig.json", "./tsconfig.node.json"],
-    tsconfigRootDir: __dirname,
-  },
-};
-```
+The free SEO audit form posts to /api/audit-requests.
+That Astro API route forwards validated submissions to the Google Apps Script endpoint set in AUDIT_APPS_SCRIPT_URL.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+For Google Sheets setup details, see:
 
-## SEO Audit Form Backend
+- docs/seo-audit-google-sheet-setup.md
 
-The `/free-seo-audit` page posts submissions to `/api/audit-requests`.
-That Vercel API route forwards requests to your Google Apps Script endpoint configured by `AUDIT_APPS_SCRIPT_URL`.
+For deployment details, see:
 
-For Google Sheets storage using Google Apps Script, follow:
-
-- [docs/seo-audit-google-sheet-setup.md](docs/seo-audit-google-sheet-setup.md)
-
-For Vercel deployment details (including route rewrites and environment variables), follow:
-
-- [docs/vercel-deployment-guide.md](docs/vercel-deployment-guide.md)
+- docs/vercel-deployment-guide.md

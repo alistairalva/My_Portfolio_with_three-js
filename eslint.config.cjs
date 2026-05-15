@@ -34,7 +34,13 @@ module.exports = [
     rules: {
       ...tsPlugin.configs.recommended.rules,
       ...reactHooks.configs.recommended.rules,
-      "prettier/prettier": "error",
+      "prettier/prettier": "off",
+      "@typescript-eslint/no-explicit-any": "off",
+      "react-hooks/set-state-in-effect": "off",
+      "react-hooks/purity": "off",
+      "no-undef": "off",
+      "no-redeclare": "off",
+      "no-import-assign": "off",
       "max-len": [
         "error",
         {

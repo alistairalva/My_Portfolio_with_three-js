@@ -1,7 +1,7 @@
-import { c as createComponent } from './astro-component_UNYrH44a.mjs';
+import { c as createComponent } from './astro-component_D2Nf2q6N.mjs';
 import 'piccolore';
-import { r as renderComponent, t as renderTemplate } from './entrypoint_NAxb33b7.mjs';
-import { a as styles, s as services, p as projects, $ as $$BaseLayout, A as AstroNavbar } from './AstroNavbar_gwgbQUY6.mjs';
+import { r as renderComponent, t as renderTemplate } from './entrypoint_CrvsPcLY.mjs';
+import { a as styles, s as services, p as projects, $ as $$BaseLayout, A as AstroNavbar } from './AstroNavbar_0JLaRSFt.mjs';
 import { jsx, jsxs, Fragment } from 'react/jsx-runtime';
 import { lazy, useState, useEffect, Suspense, useRef } from 'react';
 import Tilt from 'react-parallax-tilt';
@@ -227,10 +227,10 @@ const Hero = () => {
   );
 };
 
-const Experience = lazy(() => import('./Experience_Bqu2ue-6.mjs'));
-const Tech = lazy(() => import('./Tech_CU_UmGnY.mjs'));
-const Works = lazy(() => import('./Works_4qOs3pc3.mjs'));
-const Contact = lazy(() => import('./Contact_Bmxzkp_I.mjs'));
+const Experience = lazy(() => import('./Experience_1yOrcpcu.mjs'));
+const Tech = lazy(() => import('./Tech_BXQiYR0n.mjs'));
+const Works = lazy(() => import('./Works_Ch3vN2Km.mjs'));
+const Contact = lazy(() => import('./Contact_D3fRwoNn.mjs'));
 const StarsCanvas = lazy(() => import('./Stars_Cls4BoDU.mjs'));
 const DeferredSection = ({
   children,

@@ -24,7 +24,6 @@ declare module "*.svg" {
 }
 
 declare module "maath/random/dist/maath-random.esm" {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const value: any;
   export = value;
 }
