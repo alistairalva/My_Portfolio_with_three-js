@@ -13,7 +13,7 @@ import Works from "./Works";
 import Feedbacks from "./Feedbacks";
 import Contact from "./Contact";
 import SeoAudit from "./SeoAudit";
-import ThankYou from "./ThankYou.tsx";
+import ThankYou from "./ThankYou";
 
 export {
   Hero,
