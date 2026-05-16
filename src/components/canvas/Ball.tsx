@@ -1,12 +1,6 @@
 import React, { Suspense, useEffect, useState } from "react";
 import { Canvas } from "@react-three/fiber";
-import {
-  Decal,
-  Float,
-  OrbitControls,
-  useTexture,
-  // MeshProps,
-} from "@react-three/drei";
+import { Decal, Float, useTexture } from "@react-three/drei";
 
 import CanvasLoader from "../Loader";
 
@@ -43,28 +37,49 @@ interface BallCanvasProps {
 }
 
 const BallCanvas: React.FC<BallCanvasProps> = ({ icon }) => {
-  const [isMobile, setIsMobile] = useState(false);
-  const mediaQuery = window.matchMedia("(max-width: 560px)");
+  const [renderStaticIcon, setRenderStaticIcon] = useState(false);
 
   useEffect(() => {
-    setIsMobile(mediaQuery.matches);
+    const mobileQuery = window.matchMedia("(max-width: 768px)");
+    const reducedMotionQuery = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    );
+    const connection = (
+      navigator as Navigator & {
+        connection?: { saveData?: boolean; effectiveType?: string };
+      }
+    ).connection;
 
-    const handleMediaQueryChange = (e: MediaQueryListEvent) => {
-      setIsMobile(e.matches);
+    const updateRenderMode = () => {
+      const shouldUseStatic =
+        mobileQuery.matches ||
+        reducedMotionQuery.matches ||
+        Boolean(connection?.saveData) ||
+        connection?.effectiveType === "2g" ||
+        connection?.effectiveType === "slow-2g";
+
+      setRenderStaticIcon(shouldUseStatic);
     };
-    mediaQuery.addEventListener("change", handleMediaQueryChange);
+
+    updateRenderMode();
+    mobileQuery.addEventListener("change", updateRenderMode);
+    reducedMotionQuery.addEventListener("change", updateRenderMode);
 
     return () => {
-      mediaQuery.removeEventListener("change", handleMediaQueryChange);
+      mobileQuery.removeEventListener("change", updateRenderMode);
+      reducedMotionQuery.removeEventListener("change", updateRenderMode);
     };
-  }, [mediaQuery]);
+  }, []);
 
-  return isMobile ? (
-    <img src={icon} alt="icon" />
+  return renderStaticIcon ? (
+    <img src={icon} alt="icon" loading="lazy" decoding="async" />
   ) : (
-    <Canvas frameloop="demand" gl={{ preserveDrawingBuffer: true }}>
+    <Canvas
+      frameloop="demand"
+      dpr={[1, 1.25]}
+      gl={{ antialias: false, powerPreference: "high-performance" }}
+    >
       <Suspense fallback={<CanvasLoader />}>
-        <OrbitControls enableZoom={false} />
         <Ball imgUrl={icon} />
       </Suspense>
     </Canvas>

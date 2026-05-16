@@ -4,6 +4,37 @@ import { styles } from "../styles";
 import heroBg from "../assets/herobg.webp";
 import heroBgMobile from "../assets/herobg-mobile.webp";
 
+type AssetModule =
+  | string
+  | { src?: string; default?: string | { src?: string } };
+
+const toAssetUrl = (asset: AssetModule): string => {
+  if (typeof asset === "string") {
+    return asset;
+  }
+
+  if (typeof asset?.src === "string") {
+    return asset.src;
+  }
+
+  if (typeof asset?.default === "string") {
+    return asset.default;
+  }
+
+  if (
+    asset?.default &&
+    typeof asset.default === "object" &&
+    typeof asset.default.src === "string"
+  ) {
+    return asset.default.src;
+  }
+
+  return "";
+};
+
+const heroBgUrl = toAssetUrl(heroBg);
+const heroBgMobileUrl = toAssetUrl(heroBgMobile);
+
 const ComputersCanvas = lazy(() => import("./canvas/Computers"));
 
 type NavigatorConnection = {
@@ -81,9 +112,9 @@ const Hero: React.FC = () => {
       className={`relative w-full mx-auto min-h-[72vh] md:h-screen overflow-hidden`}
     >
       <picture className="absolute inset-0 z-0">
-        <source media="(max-width: 768px)" srcSet={heroBgMobile} />
+        <source media="(max-width: 768px)" srcSet={heroBgMobileUrl} />
         <img
-          src={heroBg}
+          src={heroBgUrl}
           alt=""
           aria-hidden="true"
           fetchPriority="high"

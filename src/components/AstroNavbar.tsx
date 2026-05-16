@@ -1,39 +1,34 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { styles } from "../styles";
 import { navLinks } from "../constants";
 import { logo, menu, close } from "../assets";
 
-let homePagePrefetchPromise: Promise<unknown> | null = null;
-
-const prefetchHomePage = () => {
-  if (!homePagePrefetchPromise) {
-    homePagePrefetchPromise = import("../pages/HomePage");
-  }
-
-  return homePagePrefetchPromise;
-};
-
-const Navbar: React.FC = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const { pathname } = location;
-  const isHomeRoute = pathname === "/";
+const AstroNavbar: React.FC = () => {
   const [active, setActive] = useState("");
   const [toggle, setToggle] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isHomeRoute, setIsHomeRoute] = useState(false);
 
   useEffect(() => {
-    if (pathname === "/free-seo-audit") {
+    setIsHomeRoute(window.location.pathname === "/");
+  }, []);
+
+  useEffect(() => {
+    const currentPath = window.location.pathname;
+
+    if (currentPath === "/free-seo-audit") {
       setActive("seo-audit");
       return;
     }
 
-    if (pathname === "/thank-you") {
+    if (currentPath === "/thank-you") {
       setActive("");
+      return;
     }
-  }, [pathname]);
+
+    setActive("");
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -41,6 +36,11 @@ const Navbar: React.FC = () => {
       setScrolled(scrollTop > 100);
 
       if (!isHomeRoute) {
+        return;
+      }
+
+      if (scrollTop < 100) {
+        setActive("");
         return;
       }
 
@@ -65,74 +65,50 @@ const Navbar: React.FC = () => {
 
     handleScroll();
     window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [isHomeRoute]);
 
-  useEffect(() => {
-    setToggle(false);
-  }, [pathname]);
-
-  useEffect(() => {
-    const targetSection = (location.state as { targetSection?: string } | null)
-      ?.targetSection;
-
-    if (!isHomeRoute || !targetSection) {
-      return;
-    }
-
-    let animationFrameId = 0;
-    let attempts = 0;
-    const maxAttempts = 45;
-
-    const scrollToSectionWhenReady = () => {
-      const sectionElement = document.getElementById(targetSection);
-
-      if (sectionElement) {
-        sectionElement.scrollIntoView({ behavior: "smooth" });
-        navigate(pathname, { replace: true, state: null });
-        return;
-      }
-
-      attempts += 1;
-      if (attempts < maxAttempts) {
-        animationFrameId = window.requestAnimationFrame(
-          scrollToSectionWhenReady,
-        );
-        return;
-      }
-
-      navigate(pathname, { replace: true, state: null });
-    };
-
-    animationFrameId = window.requestAnimationFrame(scrollToSectionWhenReady);
-
-    return () => {
-      window.cancelAnimationFrame(animationFrameId);
-    };
-  }, [isHomeRoute, location.state, navigate, pathname]);
-
-  const handleBrandClick = () => {
-    prefetchHomePage();
+  const handleBrandClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
     setActive("");
-    setToggle(false);
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  const handleSectionNavigation = (sectionId: string) => {
-    prefetchHomePage();
-    setActive(sectionId);
     setToggle(false);
 
     if (isHomeRoute) {
-      document
-        .getElementById(sectionId)
-        ?.scrollIntoView({ behavior: "smooth" });
+      event.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
+  const handleSectionNavigation = (
+    event: React.MouseEvent<HTMLAnchorElement>,
+    sectionId: string,
+  ) => {
+    setToggle(false);
+
+    if (isHomeRoute) {
+      event.preventDefault();
+      const sectionElement = document.getElementById(sectionId);
+
+      if (sectionElement) {
+        sectionElement.scrollIntoView({ behavior: "smooth" });
+
+        if (window.location.hash !== `#${sectionId}`) {
+          window.history.replaceState(null, "", `/#${sectionId}`);
+        }
+
+        return;
+      }
+
+      if (window.location.hash !== `#${sectionId}`) {
+        window.location.hash = sectionId;
+      } else {
+        window.dispatchEvent(new Event("hashchange"));
+      }
+
       return;
     }
 
-    navigate("/", { state: { targetSection: sectionId } });
+    setActive(sectionId);
   };
 
   const handleAuditClick = () => {
@@ -143,17 +119,15 @@ const Navbar: React.FC = () => {
   return (
     <nav
       aria-label="Primary navigation"
-      className={`${styles.paddingX} w-full flex items-center py-5 fixed top-0 z-20 
-      ${scrolled ? "bg-primary" : "bg-transparent"}`}
+      className={`${styles.paddingX} w-full flex items-center py-5 fixed top-0 z-20 ${
+        scrolled ? "bg-primary" : "bg-transparent"
+      }`}
     >
       <div className="w-full flex justify-between items-center max-w-7xl mx-auto">
-        <Link
-          to="/"
+        <a
+          href="/"
           className="flex items-center gap-2 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#915eff] focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
           onClick={handleBrandClick}
-          onMouseEnter={prefetchHomePage}
-          onFocus={prefetchHomePage}
-          onTouchStart={prefetchHomePage}
         >
           <img src={logo} alt="logo" className="w-9 h-9 object-contain" />
           <span className="text-white text-[18px] font-bold cursor-pointer flex">
@@ -162,40 +136,38 @@ const Navbar: React.FC = () => {
               | Technology & Software Solutions
             </span>
           </span>
-        </Link>
+        </a>
+
         <ul className="list-none hidden sm:flex flex-row gap-10">
           {navLinks.map((nav) => (
             <React.Fragment key={nav.id}>
-              {nav.id === "contact" && (
+              {nav.id === "contact" ? (
                 <li
                   className={`${
                     active === "seo-audit" ? "text-white" : "text-secondary"
                   } hover:text-white text-[18px] font-medium cursor-pointer`}
                 >
-                  <Link
-                    to="/free-seo-audit"
+                  <a
+                    href="/free-seo-audit"
                     onClick={handleAuditClick}
                     className="rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#915eff] focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
                   >
                     Free SEO Audit
-                  </Link>
+                  </a>
                 </li>
-              )}
+              ) : null}
               <li
                 className={`${
                   active === nav.id ? "text-white" : "text-secondary"
                 } hover:text-white text-[18px] font-medium cursor-pointer`}
               >
-                <button
-                  type="button"
-                  onClick={() => handleSectionNavigation(nav.id)}
-                  onMouseEnter={prefetchHomePage}
-                  onFocus={prefetchHomePage}
-                  onTouchStart={prefetchHomePage}
+                <a
+                  href={`/#${nav.id}`}
+                  onClick={(event) => handleSectionNavigation(event, nav.id)}
                   className="text-inherit rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#915eff] focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
                 >
                   {nav.title}
-                </button>
+                </a>
               </li>
             </React.Fragment>
           ))}
@@ -204,7 +176,7 @@ const Navbar: React.FC = () => {
         <div className="sm:hidden flex flex-1 justify-end items-center">
           <button
             type="button"
-            onClick={() => setToggle(!toggle)}
+            onClick={() => setToggle((previous) => !previous)}
             className="w-[28px] h-[28px] rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#915eff] focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
             aria-label={toggle ? "Close menu" : "Open menu"}
             aria-expanded={toggle}
@@ -221,41 +193,42 @@ const Navbar: React.FC = () => {
           <nav
             id="mobile-navigation-menu"
             aria-label="Mobile navigation"
-            className={`${!toggle ? "hidden" : "flex"} p-6 black-gradient absolute top-20 
-          right-0 mx-4 my-2 min-w-[140px] z-10 rounded-xl`}
+            className={`${
+              !toggle ? "hidden" : "flex"
+            } p-6 black-gradient absolute top-20 right-0 mx-4 my-2 min-w-[140px] z-10 rounded-xl`}
           >
             <ul className="list-none flex justify-end items-start flex-col gap-4">
               {navLinks.map((nav) => (
                 <React.Fragment key={nav.id}>
-                  {nav.id === "contact" && (
+                  {nav.id === "contact" ? (
                     <li
                       className={`${
                         active === "seo-audit" ? "text-white" : "text-secondary"
                       } font-poppins font-medium cursor-pointer text-[16px]`}
                     >
-                      <Link
-                        to="/free-seo-audit"
+                      <a
+                        href="/free-seo-audit"
                         onClick={handleAuditClick}
                         className="rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#915eff] focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
                       >
                         Free SEO Audit
-                      </Link>
+                      </a>
                     </li>
-                  )}
+                  ) : null}
                   <li
-                    className={`${active === nav.id ? "text-white" : "text-secondary"} 
-                font-poppins font-medium cursor-pointer text-[16px]`}
+                    className={`${
+                      active === nav.id ? "text-white" : "text-secondary"
+                    } font-poppins font-medium cursor-pointer text-[16px]`}
                   >
-                    <button
-                      type="button"
-                      onClick={() => handleSectionNavigation(nav.id)}
-                      onMouseEnter={prefetchHomePage}
-                      onFocus={prefetchHomePage}
-                      onTouchStart={prefetchHomePage}
+                    <a
+                      href={`/#${nav.id}`}
+                      onClick={(event) =>
+                        handleSectionNavigation(event, nav.id)
+                      }
                       className="text-inherit rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#915eff] focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
                     >
                       {nav.title}
-                    </button>
+                    </a>
                   </li>
                 </React.Fragment>
               ))}
@@ -267,4 +240,4 @@ const Navbar: React.FC = () => {
   );
 };
 
-export default Navbar;
+export default AstroNavbar;

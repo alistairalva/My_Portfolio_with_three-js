@@ -3,14 +3,27 @@ declare module "*.png" {
   export = value;
 }
 
-declare module "react-tilt" {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const value: any;
+declare module "*.webp" {
+  const value: string;
+  export = value;
+}
+
+declare module "*.jpg" {
+  const value: string;
+  export = value;
+}
+
+declare module "*.jpeg" {
+  const value: string;
+  export = value;
+}
+
+declare module "*.svg" {
+  const value: string;
   export = value;
 }
 
 declare module "maath/random/dist/maath-random.esm" {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const value: any;
   export = value;
 }

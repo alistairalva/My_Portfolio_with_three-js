@@ -1,6 +1,6 @@
 # Vercel Deployment Guide (Portfolio + SEO Audit Form)
 
-This app is deployed as a Vite static site on Vercel, while SEO audit submissions are relayed through a Vercel API route to a Google Apps Script endpoint.
+This app is deployed as an Astro server build on Vercel, and SEO audit submissions are relayed through an Astro API route to a Google Apps Script endpoint.
 
 ## 1) Prerequisites
 
@@ -12,9 +12,9 @@ This app is deployed as a Vite static site on Vercel, while SEO audit submission
 
 Use these defaults in Vercel:
 
-- Framework Preset: `Vite`
+- Framework Preset: `Astro`
 - Build Command: `npm run build`
-- Output Directory: `dist`
+- Output Directory: leave default for Astro
 - Install Command: `npm install`
 
 ## 3) Environment variables (Vercel)
@@ -23,22 +23,25 @@ In `Project Settings -> Environment Variables`, add:
 
 - `AUDIT_APPS_SCRIPT_URL`: your Google Apps Script `.../exec` URL
 - `AUDIT_ALLOWED_ORIGINS`: comma-separated trusted origins (for example `https://your-domain.com,https://www.your-domain.com`)
-- `VITE_APP_EMAILJS_SERVICE_ID`
-- `VITE_APP_EMAILJS_TEMPLATE_ID`
-- `VITE_APP_EMAILJS_PUBLIC_API_KEY`
-- `VITE_APP_EMAIL`
+- `PUBLIC_EMAILJS_SERVICE_ID`
+- `PUBLIC_EMAILJS_TEMPLATE_ID`
+- `PUBLIC_EMAILJS_PUBLIC_API_KEY`
+
+Compatibility note:
+
+- The current form code also accepts legacy VITE*APP_EMAILJS*\* variable names during migration.
 
 After changing env vars, redeploy.
 
 Notes:
 
-- Do not expose the Apps Script URL in a `VITE_` variable in production.
-- The frontend posts to `/api/audit-requests` and the Vercel function forwards to Apps Script.
+- Do not expose the Apps Script URL as a client variable in production.
+- The frontend posts to `/api/audit-requests` and the Astro API route forwards to Apps Script.
 - Optional for local development: set `AUDIT_APPS_SCRIPT_URL` only in local `.env` if you are using `npm run dev` instead of `vercel dev`.
 
 ## 4) Client-side route support
 
-This repo includes [vercel.json](../vercel.json) with SPA rewrites so direct visits work for:
+Astro uses file-based routing and server output, so direct visits work without SPA rewrites for:
 
 - `/free-seo-audit`
 - `/thank-you`
@@ -71,4 +74,4 @@ This repo includes [vercel.json](../vercel.json) with SPA rewrites so direct vis
   - Confirm the Spreadsheet ID in Apps Script.
   - Confirm script deployment is the latest version after edits.
 - If route refresh shows 404:
-  - Confirm [vercel.json](../vercel.json) exists in repo root and redeploy.
+  - Confirm Astro build completed successfully and redeploy.
