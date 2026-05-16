@@ -1,7 +1,7 @@
 import { Suspense, useState, useEffect, FC } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, useGLTF } from "@react-three/drei";
-import { GLTF } from "three-stdlib";
+import type { GLTF } from "three-stdlib";
 
 import CanvasLoader from "../Loader";
 

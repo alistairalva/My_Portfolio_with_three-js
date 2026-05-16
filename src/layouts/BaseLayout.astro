@@ -1,0 +1,139 @@
+---
+import VercelInstrumentation from "../components/VercelInstrumentation";
+import "../index.css";
+
+type Props = {
+  title: string;
+  description: string;
+  canonicalPath: string;
+  socialImage: string;
+  socialImageAlt: string;
+  keywords?: string;
+  noIndex?: boolean;
+  preloadImages?: {
+    href: string;
+    media?: string;
+    type?: string;
+    fetchPriority?: "high" | "low" | "auto";
+  }[];
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
+};
+
+const {
+  title,
+  description,
+  canonicalPath,
+  socialImage,
+  socialImageAlt,
+  keywords,
+  noIndex = false,
+  preloadImages = [],
+  structuredData,
+} = Astro.props;
+
+const siteUrl = "https://alistairalva.com";
+const canonicalUrl = new URL(canonicalPath, siteUrl).toString();
+const socialImageUrl = socialImage.startsWith("http")
+  ? socialImage
+  : new URL(socialImage, siteUrl).toString();
+const robotsDirective = noIndex ? "noindex, nofollow" : "index, follow";
+const structuredDataText = structuredData ? JSON.stringify(structuredData) : "";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    {keywords ? <meta name="keywords" content={keywords} /> : null}
+    <meta name="author" content="Alistair Alva" />
+    <meta name="robots" content={robotsDirective} />
+    <meta name="googlebot" content={robotsDirective} />
+    <meta name="theme-color" content="#050816" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Alistair Alva Portfolio" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={socialImageUrl} />
+    <meta property="og:image:type" content="image/svg+xml" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={socialImageAlt} />
+    <meta property="og:locale" content="en_US" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImageUrl} />
+    <meta name="twitter:image:alt" content={socialImageAlt} />
+    <meta name="twitter:url" content={canonicalUrl} />
+
+    {preloadImages.map((image) => (
+      <link
+        rel="preload"
+        as="image"
+        href={image.href}
+        media={image.media}
+        type={image.type}
+        fetchpriority={image.fetchPriority}
+      />
+    ))}
+
+    <link rel="alternate" type="text/markdown" title="llms.txt" href="/llms.txt" />
+    <link
+      rel="alternate"
+      type="text/markdown"
+      title="llms-full.txt"
+      href="/llms-full.txt"
+    />
+    <link
+      rel="alternate"
+      type="text/markdown"
+      title="content-index"
+      href="/content-index.md"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      />
+    </noscript>
+
+    {structuredDataText ? (
+      <script type="application/ld+json" set:html={structuredDataText} is:inline />
+    ) : null}
+
+    <title>{title}</title>
+  </head>
+  <body>
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:top-4 focus:left-4 focus:px-4 focus:py-2 focus:bg-black focus:text-white"
+    >
+      Skip to main content
+    </a>
+    <slot />
+    <VercelInstrumentation client:idle />
+  </body>
+</html>

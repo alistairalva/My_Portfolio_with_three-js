@@ -1,6 +1,5 @@
 import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { track } from "@vercel/analytics";
 
@@ -79,7 +78,6 @@ const getValidationMessage = (form: SeoAuditForm) => {
 };
 
 const SeoAudit: React.FC = () => {
-  const navigate = useNavigate();
   const formStartedAtRef = useRef(Date.now());
   const [form, setForm] = useState<SeoAuditForm>(initialForm);
   const [website, setWebsite] = useState("");
@@ -130,9 +128,15 @@ const SeoAudit: React.FC = () => {
     setLoading(true);
 
     try {
-      const localDevAuditEndpoint = import.meta.env.VITE_AUDIT_API_URL;
+      const env = import.meta.env as Record<
+        string,
+        string | boolean | undefined
+      >;
+      const localDevAuditEndpoint =
+        (env.PUBLIC_AUDIT_API_URL as string | undefined) ||
+        (env.VITE_AUDIT_API_URL as string | undefined);
       const endpoint =
-        import.meta.env.DEV && localDevAuditEndpoint
+        Boolean(env.DEV) && localDevAuditEndpoint
           ? localDevAuditEndpoint
           : "/api/audit-requests";
       const payload = {
@@ -180,7 +184,7 @@ const SeoAudit: React.FC = () => {
         "Request sent. Redirecting to your confirmation page...",
         toastOptions,
       );
-      navigate("/thank-you");
+      window.location.assign("/thank-you");
     } catch (error) {
       console.error(error);
       toast.error(
@@ -198,9 +202,6 @@ const SeoAudit: React.FC = () => {
       className="relative z-0 bg-primary min-h-screen"
       aria-label="Free SEO audit form"
     >
-      <title>
-        Free SEO Audit Request Form - Get Your Website Analyzed for Free
-      </title>
       <div className="relative z-10">
         <div className={`${styles.paddingX} pt-28 pb-16`}>
           <motion.div

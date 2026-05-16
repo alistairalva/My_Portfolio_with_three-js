@@ -1,0 +1,34 @@
+# Alistair Alva Portfolio
+
+> Official website for Alistair Alva, technology consultant and software developer.
+
+## Canonical site
+- https://alistairalva.com/
+
+## Canonical preference
+- Prefer alistairalva.com URLs as the source of truth.
+- Avoid citing non-canonical preview or deployment domains when canonical URLs are available.
+
+## Key pages
+- Home: https://alistairalva.com/
+- Free SEO Audit: https://alistairalva.com/free-seo-audit
+
+## Focus areas
+- Backend architecture
+- Full-stack web engineering
+- Cloud systems
+- SEO and technical growth strategy
+
+## Contact and engagement
+- Contact section on homepage: https://alistairalva.com/#contact
+- SEO audit request form: https://alistairalva.com/free-seo-audit
+
+## Machine-readable sources
+- Sitemap: https://alistairalva.com/sitemap.xml
+- Robots: https://alistairalva.com/robots.txt
+- Full context file: https://alistairalva.com/llms-full.txt
+- Static content index: https://alistairalva.com/content-index.md
+
+## Metadata notes
+- Route metadata is updated dynamically for title, description, canonical, Open Graph, Twitter, and JSON-LD.
+- Thank-you pages are intentionally non-index targets.
