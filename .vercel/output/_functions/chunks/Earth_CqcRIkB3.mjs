@@ -2,7 +2,7 @@ import { jsx, jsxs } from 'react/jsx-runtime';
 import { useState, useEffect, Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, useGLTF } from '@react-three/drei';
-import { L as Loader } from './Loader_I9TZdz-6.mjs';
+import { L as Loader } from './index_BCWsjMHt.mjs';
 
 const Earth = ({ isMobile }) => {
   const earth = useGLTF("./planet/scene.gltf");

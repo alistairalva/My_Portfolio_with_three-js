@@ -9,6 +9,19 @@ import heroBgMobile from "../assets/herobg-mobile.webp";
 
 const baseUrl = "https://alistairalva.com";
 
+type AssetModule = string | { src?: string };
+
+const toAssetUrl = (asset: AssetModule): string => {
+  if (typeof asset === "string") {
+    return asset;
+  }
+
+  return typeof asset?.src === "string" ? asset.src : "";
+};
+
+const heroBgUrl = toAssetUrl(heroBg as AssetModule);
+const heroBgMobileUrl = toAssetUrl(heroBgMobile as AssetModule);
+
 const structuredData = {
   "@context": "https://schema.org",
   "@graph": [
@@ -29,9 +42,9 @@ const structuredData = {
       "@type": "WebPage",
       "@id": `${baseUrl}/#webpage`,
       url: `${baseUrl}/`,
-      name: "Alistair Alva | Technology Consultant & Software Developer",
+      name: "Software Developer in Tanzania and London, Ontario | Alistair Alva",
       description:
-        "Explore Alistair Alva's portfolio, software engineering experience, and featured projects across web, backend, and cloud systems.",
+        "Software developer and technology consultant serving businesses in Tanzania and London, Ontario with backend architecture, web platforms, and cloud engineering.",
       isPartOf: {
         "@id": `${baseUrl}/#website`,
       },
@@ -45,17 +58,59 @@ const structuredData = {
       url: `${baseUrl}/`,
       jobTitle: "Technology Consultant & Software Developer",
       description:
-        "Technology consultant and software developer focused on backend systems, cloud architecture, and growth-oriented web delivery.",
+        "Technology consultant and software developer focused on backend systems, cloud architecture, and growth-oriented web delivery in Tanzania and London, Ontario.",
       image: `${baseUrl}/logo.svg`,
       sameAs: ["https://github.com/alistairalva"],
       mainEntityOfPage: {
         "@id": `${baseUrl}/#webpage`,
       },
+      areaServed: [
+        {
+          "@type": "Country",
+          name: "Tanzania",
+        },
+        {
+          "@type": "AdministrativeArea",
+          name: "London, Ontario",
+          containedInPlace: {
+            "@type": "Country",
+            name: "Canada",
+          },
+        },
+      ],
       knowsAbout: [
         "Backend Development",
         "Web Development",
         "Cloud Architecture",
         "SEO",
+      ],
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": `${baseUrl}/#software-development-service`,
+      name: "Software Development and Technology Consulting",
+      url: `${baseUrl}/`,
+      provider: {
+        "@id": `${baseUrl}/#person`,
+      },
+      serviceType: [
+        "Software Development",
+        "Backend Engineering",
+        "Technology Consulting",
+      ],
+      areaServed: [
+        {
+          "@type": "Country",
+          name: "Tanzania",
+        },
+        {
+          "@type": "AdministrativeArea",
+          name: "London, Ontario",
+          containedInPlace: {
+            "@type": "Country",
+            name: "Canada",
+          },
+        },
       ],
     },
     {
@@ -96,21 +151,21 @@ const structuredData = {
 ---
 
 <BaseLayout
-  title="Alistair Alva | Technology Consultant & Software Developer"
-  description="Explore Alistair Alva's portfolio, software engineering experience, and featured projects across web, backend, and cloud systems."
+  title="Software Developer in Tanzania and London, Ontario | Alistair Alva"
+  description="Software developer and technology consultant serving businesses in Tanzania and London, Ontario with backend architecture, web platforms, and cloud engineering."
   canonicalPath="/"
   socialImage="/og/home.svg"
   socialImageAlt="Alistair Alva technology consultant and software developer portfolio"
-  keywords="technology consultant, software developer, backend engineer, cloud architecture, full stack developer, portfolio"
+  keywords="software developer tanzania, software developer london ontario, backend developer tanzania, web developer london ontario, technology consultant tanzania, software engineer london ontario"
   preloadImages={[
     {
-      href: heroBg.src,
+      href: heroBgUrl,
       media: "(min-width: 769px)",
       type: "image/webp",
       fetchPriority: "high",
     },
     {
-      href: heroBgMobile.src,
+      href: heroBgMobileUrl,
       media: "(max-width: 768px)",
       type: "image/webp",
       fetchPriority: "high",
@@ -119,6 +174,6 @@ const structuredData = {
   structuredData={structuredData}
 >
   <AstroNavbar client:load />
-  <HomeSections client:load />
+  <HomeSections client:idle />
   <ToastHost client:idle />
 </BaseLayout>
