@@ -32,35 +32,97 @@ import restaurantMobile from "./restaurant-mobile.webp";
 import youtubecharts from "./youtubecharts.webp";
 import youtubechartsMobile from "./youtubecharts-mobile.webp";
 
+type AssetModule =
+  | string
+  | { src?: string; default?: string | { src?: string } };
+
+const toAssetUrl = (asset: AssetModule): string => {
+  if (typeof asset === "string") {
+    return asset;
+  }
+
+  if (typeof asset?.src === "string") {
+    return asset.src;
+  }
+
+  if (typeof asset?.default === "string") {
+    return asset.default;
+  }
+
+  if (
+    asset?.default &&
+    typeof asset.default === "object" &&
+    typeof asset.default.src === "string"
+  ) {
+    return asset.default.src;
+  }
+
+  return "";
+};
+
+const logoSrc = toAssetUrl(logo);
+const backendSrc = toAssetUrl(backend);
+const creatorSrc = toAssetUrl(creator);
+const mobileSrc = toAssetUrl(mobile);
+const webSrc = toAssetUrl(web);
+const githubSrc = toAssetUrl(github);
+const menuSrc = toAssetUrl(menu);
+const closeSrc = toAssetUrl(close);
+
+const linuxSrc = toAssetUrl(linux);
+const dockerSrc = toAssetUrl(docker);
+const gitSrc = toAssetUrl(git);
+const azureSrc = toAssetUrl(azure);
+const javascriptSrc = toAssetUrl(javascript);
+const firebaseSrc = toAssetUrl(firebase);
+const nodejsSrc = toAssetUrl(nodejs);
+const reactjsSrc = toAssetUrl(reactjs);
+const javaSrc = toAssetUrl(java);
+const dotnetSrc = toAssetUrl(dotnet);
+const tailwindSrc = toAssetUrl(tailwind);
+const typescriptSrc = toAssetUrl(typescript);
+const csharpSrc = toAssetUrl(csharp);
+
+const reddingDesignsSrc = toAssetUrl(redding_designs);
+const goodLifeSrc = toAssetUrl(goodLife);
+const krachiSpaceSrc = toAssetUrl(krachi_space);
+
+const emergencyappSrc = toAssetUrl(emergencyapp);
+const emergencyappMobileSrc = toAssetUrl(emergencyappMobile);
+const restaurantSrc = toAssetUrl(restaurant);
+const restaurantMobileSrc = toAssetUrl(restaurantMobile);
+const youtubechartsSrc = toAssetUrl(youtubecharts);
+const youtubechartsMobileSrc = toAssetUrl(youtubechartsMobile);
+
 export {
-  logo,
-  backend,
-  creator,
-  mobile,
-  web,
-  github,
-  menu,
-  close,
-  linux,
-  docker,
-  dotnet,
-  git,
-  azure,
-  javascript,
-  firebase,
-  nodejs,
-  reactjs,
-  java,
-  tailwind,
-  typescript,
-  csharp,
-  redding_designs,
-  goodLife,
-  krachi_space,
-  emergencyapp,
-  emergencyappMobile,
-  restaurant,
-  restaurantMobile,
-  youtubecharts,
-  youtubechartsMobile,
+  logoSrc as logo,
+  backendSrc as backend,
+  creatorSrc as creator,
+  mobileSrc as mobile,
+  webSrc as web,
+  githubSrc as github,
+  menuSrc as menu,
+  closeSrc as close,
+  linuxSrc as linux,
+  dockerSrc as docker,
+  dotnetSrc as dotnet,
+  gitSrc as git,
+  azureSrc as azure,
+  javascriptSrc as javascript,
+  firebaseSrc as firebase,
+  nodejsSrc as nodejs,
+  reactjsSrc as reactjs,
+  javaSrc as java,
+  tailwindSrc as tailwind,
+  typescriptSrc as typescript,
+  csharpSrc as csharp,
+  reddingDesignsSrc as redding_designs,
+  goodLifeSrc as goodLife,
+  krachiSpaceSrc as krachi_space,
+  emergencyappSrc as emergencyapp,
+  emergencyappMobileSrc as emergencyappMobile,
+  restaurantSrc as restaurant,
+  restaurantMobileSrc as restaurantMobile,
+  youtubechartsSrc as youtubecharts,
+  youtubechartsMobileSrc as youtubechartsMobile,
 };

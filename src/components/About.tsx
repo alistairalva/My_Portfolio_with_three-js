@@ -1,5 +1,5 @@
 import React from "react";
-import { Tilt } from "react-tilt";
+import Tilt from "react-parallax-tilt";
 import { motion } from "framer-motion";
 
 import { styles } from "../styles";
@@ -16,7 +16,10 @@ interface ServiceCardProps {
 const ServiceCard: React.FC<ServiceCardProps> = ({ index, title, icon }) => {
   return (
     <Tilt
-      options={{ max: 45, scale: 1, speed: 450 }}
+      tiltMaxAngleX={45}
+      tiltMaxAngleY={45}
+      scale={1}
+      transitionSpeed={450}
       className="xs:w-[250px] w-full"
     >
       <motion.div
@@ -60,10 +63,29 @@ const About: React.FC = () => {
         infrastructure. I've also consulted on business operations and helped
         teams improve efficiency, reduce costs, and build strong technical
         foundations. I'm a quick learner, passionate about clean code, and
-        always exploring new technologies. My goal is to build meaningful
-        software that drives results — and to collaborate with teams that care
-        about impact and craftsmanship. Let's build something great together! 🚀
+        always exploring new technologies. I work with startups and growth-stage
+        teams in Tanzania and London, Ontario to ship software that drives
+        measurable business outcomes. My goal is to build meaningful software
+        that drives results and to collaborate with teams that care about impact
+        and craftsmanship. Let's build something great together! 🚀
       </motion.p>
+      <motion.div
+        variants={fadeIn("", "", 0.2, 1)}
+        className="mt-6 flex flex-wrap gap-4"
+      >
+        <a
+          href="/software-developer-tanzania"
+          className="text-[#915eff] underline underline-offset-4 hover:text-white transition-colors"
+        >
+          Software Developer in Tanzania
+        </a>
+        <a
+          href="/software-developer-london-ontario"
+          className="text-[#915eff] underline underline-offset-4 hover:text-white transition-colors"
+        >
+          Software Developer in London, Ontario
+        </a>
+      </motion.div>
       <ul className="mt-20 flex flex-wrap gap-10 list-none">
         {services.map((service, index) => (
           <li key={service.title}>
