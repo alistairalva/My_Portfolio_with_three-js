@@ -1,12 +1,14 @@
 {
-  "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
     "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
     "jsx": "react-jsx",
-    "moduleResolution": "bundler",
+    "jsxImportSource": "react",
+    "types": ["astro/client", "node"],
+    "skipLibCheck": true,
     "resolveJsonModule": true,
     "verbatimModuleSyntax": false,
-    "skipLibCheck": true,
 
     /* Linting */
     "strict": true,

@@ -12,43 +12,30 @@
     "optimize:images": "node scripts/optimize-images.mjs",
     "optimize:model": "gltf-transform optimize tools/model-source/desktop_pc/scene.gltf public/desktop_pc/scene.optimized.glb --compress draco --texture-compress webp --texture-size 1024 --meshopt-level high"
   },
-  "overrides": {
-    "vite": "^7.1.12"
-  },
   "dependencies": {
     "@astrojs/react": "^5.0.5",
     "@astrojs/vercel": "^10.0.7",
-    "@emailjs/browser": "^4.4.1",
-    "@emotion/react": "^11.14.0",
-    "@emotion/styled": "^11.14.1",
-    "@mui/icons-material": "^9.0.1",
-    "@mui/lab": "^9.0.0-beta.3",
-    "@mui/material": "^9.0.1",
-    "@react-three/drei": "^10.7.7",
-    "@react-three/fiber": "^9.6.1",
+    "@emailjs/browser": "^4.3.3",
+    "@react-three/drei": "^9.108.3",
+    "@react-three/fiber": "^8.16.8",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
-    "emailjs": "^5.0.0",
-    "framer-motion": "^12.38.0",
-    "maath": "^0.10.8",
-    "react": "^19.2.6",
-    "react-dom": "^19.2.6",
-    "react-horizontal-scrolling-menu": "^8.2.0",
-    "react-parallax-tilt": "^1.7.327",
-    "react-scroll": "^1.9.3",
-    "react-toastify": "^11.1.0",
-    "react-vertical-timeline-component": "^4.0.0",
-    "styled-components": "^6.4.1",
-    "three": "^0.184.0",
-    "typewriter-effect": "^2.22.0"
+    "framer-motion": "^11.1.7",
+    "maath": "^0.10.7",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-parallax-tilt": "^1.7.227",
+    "react-toastify": "^10.0.5",
+    "react-vertical-timeline-component": "^3.6.0",
+    "three": "^0.164.1",
+    "three-stdlib": "^2.36.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
     "@eslint/js": "^10.0.1",
-    "@gltf-transform/cli": "^4.3.0",
-    "@types/node": "^25.8.0",
-    "@types/react": "^19.2.14",
-    "@types/react-dom": "^19.2.3",
+    "@types/node": "^22.15.19",
+    "@types/react": "^18.2.66",
+    "@types/react-dom": "^18.2.22",
     "@types/react-vertical-timeline-component": "^3.3.6",
     "@typescript-eslint/eslint-plugin": "^8.59.3",
     "@typescript-eslint/parser": "^8.59.3",
@@ -61,7 +48,7 @@
     "postcss": "^8.5.14",
     "prettier": "^3.8.3",
     "sharp": "^0.34.5",
-    "tailwindcss": "^3.4.19",
-    "typescript": "^6.0.3"
+    "tailwindcss": "^3.4.3",
+    "typescript": "^5.9.3"
   }
 }
