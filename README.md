@@ -5,9 +5,9 @@ This repository hosts alistairalva.com and is now built with Astro plus React is
 ## Stack
 
 - Astro 6
-- React 19 (islands only)
+- React 18 (islands only)
 - Tailwind CSS 3
-- TypeScript 6
+- TypeScript 5
 - Vercel server adapter
 
 ## Scripts
