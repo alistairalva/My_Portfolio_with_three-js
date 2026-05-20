@@ -2,12 +2,11 @@ import { FC, Suspense, lazy, useEffect, useMemo, useState } from "react";
 import type { ReactNode } from "react";
 
 import About from "./About";
+import Contact from "./Contact";
+import Experience from "./Experience";
 import Hero from "./Hero";
-
-const Experience = lazy(() => import("./Experience"));
-const Tech = lazy(() => import("./Tech"));
-const Works = lazy(() => import("./Works"));
-const Contact = lazy(() => import("./Contact"));
+import Tech from "./Tech";
+import Works from "./Works";
 const StarsCanvas = lazy(() => import("./canvas/Stars"));
 
 type DeferredSectionProps = {
@@ -16,7 +15,7 @@ type DeferredSectionProps = {
   forceRender?: boolean;
 };
 
-const DeferredSection: FC = ({
+const DeferredSection: FC<DeferredSectionProps> = ({
   children,
   rootMargin = "280px 0px",
   forceRender = false,
@@ -112,22 +111,20 @@ const HomeSections: FC = () => {
     <main id="main-content" className="relative z-0 bg-primary">
       <Hero />
       <About />
-      <Suspense fallback={null}>
-        <DeferredSection forceRender={forceDeferredSections}>
-          <Experience />
-        </DeferredSection>
-        <DeferredSection forceRender={forceDeferredSections}>
-          <Tech />
-        </DeferredSection>
-        <DeferredSection forceRender={forceDeferredSections}>
-          <Works />
-        </DeferredSection>
-      </Suspense>
+      <DeferredSection forceRender={forceDeferredSections}>
+        <Experience />
+      </DeferredSection>
+      <DeferredSection forceRender={forceDeferredSections}>
+        <Tech />
+      </DeferredSection>
+      <DeferredSection forceRender={forceDeferredSections}>
+        <Works />
+      </DeferredSection>
       <div className="relative z-0">
+        <DeferredSection forceRender={forceDeferredSections}>
+          <Contact />
+        </DeferredSection>
         <Suspense fallback={null}>
-          <DeferredSection forceRender={forceDeferredSections}>
-            <Contact />
-          </DeferredSection>
           <StarsCanvas />
         </Suspense>
       </div>
