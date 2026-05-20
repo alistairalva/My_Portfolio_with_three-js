@@ -1,4 +1,4 @@
-import { FC, Suspense, lazy, useEffect, useMemo, useState } from "react";
+import { Suspense, lazy, useEffect, useMemo, useState } from "react";
 import type { ReactNode } from "react";
 
 import About from "./About";
@@ -15,11 +15,11 @@ type DeferredSectionProps = {
   forceRender?: boolean;
 };
 
-const DeferredSection: FC<DeferredSectionProps> = ({
+function DeferredSection({
   children,
   rootMargin = "280px 0px",
   forceRender = false,
-}) => {
+}: DeferredSectionProps) {
   const [visible, setVisible] = useState(forceRender);
   const [node, setNode] = useState<HTMLDivElement | null>(null);
 
@@ -49,9 +49,9 @@ const DeferredSection: FC<DeferredSectionProps> = ({
   }, [forceRender, node, rootMargin, visible]);
 
   return <div ref={setNode}>{visible ? children : null}</div>;
-};
+}
 
-const HomeSections: FC = () => {
+function HomeSections() {
   const [forceDeferredSections, setForceDeferredSections] = useState(false);
   const [pendingHashSection, setPendingHashSection] = useState<string | null>(
     null,
@@ -130,6 +130,6 @@ const HomeSections: FC = () => {
       </div>
     </main>
   );
-};
+}
 
 export default HomeSections;
