@@ -75,7 +75,7 @@ const Hero: React.FC = () => {
 
     const scheduleRender = () => setShouldRenderCanvas(true);
     const idleWindow = window as WindowWithIdle;
-    let timeoutId: ReturnType | undefined;
+    let timeoutId: ReturnType<typeof setTimeout> | undefined;
     let idleId: number | undefined;
 
     const startDeferredRender = () => {
