@@ -75,7 +75,7 @@ const Hero: React.FC = () => {
 
     const scheduleRender = () => setShouldRenderCanvas(true);
     const idleWindow = window as WindowWithIdle;
-    let timeoutId: ReturnType<typeof setTimeout> | undefined;
+    let timeoutId: ReturnType | undefined;
     let idleId: number | undefined;
 
     const startDeferredRender = () => {
@@ -117,7 +117,6 @@ const Hero: React.FC = () => {
           src={heroBgUrl}
           alt=""
           aria-hidden="true"
-          fetchPriority="high"
           loading="eager"
           decoding="async"
           width={1920}

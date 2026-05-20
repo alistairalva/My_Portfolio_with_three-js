@@ -6,9 +6,16 @@ import * as THREE from "three";
 
 const Stars: React.FC = () => {
   const ref = useRef<THREE.Points>(null!);
-  const [sphere] = useState(() =>
-    random.inSphere(new Float32Array(2500), { radius: 1.2 }),
-  );
+  const [sphere] = useState(() => {
+    // Use 3-component stride-safe data and guard against malformed float output.
+    const points = random.inSphere(new Float32Array(3000), { radius: 1.2 });
+    for (let i = 0; i < points.length; i += 1) {
+      if (!Number.isFinite(points[i])) {
+        points[i] = 0;
+      }
+    }
+    return points;
+  });
 
   useFrame((_, delta) => {
     if (ref.current) {
