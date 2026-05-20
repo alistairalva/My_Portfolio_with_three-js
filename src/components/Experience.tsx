@@ -16,7 +16,7 @@ type ExperienceCardProps = {
   experience: Experience;
 };
 
-const ExperienceCard: React.FC = ({ experience }) => {
+const ExperienceCard: React.FC<ExperienceCardProps> = ({ experience }) => {
   return (
     <VerticalTimelineElement
       contentStyle={{ background: "#1d1836", color: "#fff" }}
